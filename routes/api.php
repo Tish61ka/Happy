@@ -25,5 +25,5 @@ Route::middleware('user')->group(function () {
 });
 
 // Пользователи
-Route::get('/users', [UserController::class, 'all']);
-Route::get('/users/{id}', [UserController::class, 'show']);
+//Route::get('/users', [UserController::class, 'all']);
+//Route::get('/users/{id}', [UserController::class, 'show']);

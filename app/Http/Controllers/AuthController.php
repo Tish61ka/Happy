@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SignInRequest;
+use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function signUp(Request $request): \Illuminate\Http\JsonResponse
+    public function signUp(SignUpRequest $request): \Illuminate\Http\JsonResponse
     {
         if(Auth::attempt($request->all())){
             return response()->json([
@@ -21,7 +23,7 @@ class AuthController extends Controller
             'name' =>  $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'role' => 0
+            'avatar' => '/default-avatar.png',
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
@@ -30,7 +32,7 @@ class AuthController extends Controller
             'code' => 200,
         ]);
     }
-    public function signIn(Request $request): \Illuminate\Http\JsonResponse
+    public function signIn(SignInRequest $request): \Illuminate\Http\JsonResponse
     {
         if(!Auth::attempt($request->all())){
             return response()->json([
