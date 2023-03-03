@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductEditRequest;
 use App\Http\Requests\ProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,14 +15,14 @@ class ProductController extends Controller
     {
         return response()->json([
             'message' => 'Все товары',
-            'content' => Product::all()
+            'content' => ProductResource::collection(Product::all())
         ], 200);
     }
     public function index($id): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'message' => 'Вывод товара',
-            'content' => Product::find($id)
+            'content' => new ProductResource(Product::find($id))
         ], 200);
     }
     public function store(ProductRequest $request): \Illuminate\Http\JsonResponse
@@ -39,7 +40,7 @@ class ProductController extends Controller
 
         return response()->json([
             'message' => 'Товар создан',
-            'content' => $product
+            'content' => new ProductResource($product)
         ], 200);
     }
     public function update(ProductEditRequest $request, $id): \Illuminate\Http\JsonResponse
@@ -63,7 +64,7 @@ class ProductController extends Controller
 
         return response()->json([
             'content' => [
-                'content' => $product,
+                'content' => new ProductResource($product),
                 'message' => 'Данные обновлены'
             ]
         ], 200);
