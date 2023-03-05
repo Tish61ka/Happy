@@ -22,7 +22,7 @@ class ReviewController extends Controller
     public function index($id): \Illuminate\Http\JsonResponse
     {
         $user = Auth::guard('sanctum')->user();
-        $reviews = Review::all()->where('product_id', $id)->where('user_id', $user->id);
+        $reviews = Review::all()->where('user_id', $user->id);
 
         return response()->json([
             'message' => 'Все отзывы пол-ля',
@@ -35,7 +35,7 @@ class ReviewController extends Controller
         $review = Review::create([
             'user_id' => $user->id,
             'product_id' => $request->input('product_id'),
-            'content' => $request->input('text')
+            'content' => $request->input('content')
         ]);
         return response()->json([
             'message' => 'Отзыв создан',

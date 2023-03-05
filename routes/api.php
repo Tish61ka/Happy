@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserEditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -27,6 +28,10 @@ Route::middleware('user')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
+    // Редактирование данных о доставке
+    Route::patch('/me/delivery', [UserEditController::class, 'delivery']);
+    // Редактирование данных
+    Route::patch('/me/edit', [UserEditController::class, 'editAboutMe']);
     // Добавление товара в корзину
     Route::post('/cart/add', [CartController::class, 'store']);
     // Просмотр корзины
@@ -49,10 +54,9 @@ Route::middleware('user')->group(function () {
     Route::patch('/orders/{id}', [OrderController::class, 'update']);
     // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
-    // ДОБАВИТЬ В POSTMAN
     // Все отзывы определенного продукта
     Route::get('/reviews/{id}', [ReviewController::class, 'all']);
-    // Все отзывы пол-ля определенного продукта
+    // Все отзывы пол-ля
     Route::get('/reviews/my/{id}', [ReviewController::class, 'index']);
     // Создание отзыва
     Route::post('/reviews', [ReviewController::class, 'store']);
