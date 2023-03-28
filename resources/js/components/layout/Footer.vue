@@ -1,5 +1,5 @@
 <template>
-    <footer>
+    <footer id="footer">
         <div>
             <router-link :to="{name: 'Index'}">Политика конфедициальности</router-link>
         <p>Оставить заявку</p>
@@ -26,7 +26,7 @@ export default {
         
 
         return {}
-    }
+    },
 }
 </script>
 
@@ -34,7 +34,6 @@ export default {
     footer{
         width: 100vw;
         height: 150px;
-        background-color: #FF95D7;
     }
     footer div{
         width: 1560px;

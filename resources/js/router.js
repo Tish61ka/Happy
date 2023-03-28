@@ -4,6 +4,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Index from "./components/Index.vue";
 import Login from "./components/Login.vue";
 import Profile from "./components/Profile.vue";
+import AboutUs from "./components/AboutUs.vue";
 
 export default createRouter({
     history: createWebHistory(),
@@ -22,6 +23,11 @@ export default createRouter({
             path: "/profile",
             name: "Profile",
             component: Profile,
+        },
+        {
+            path: "/aboutus",
+            name: "AboutUs",
+            component: AboutUs,
         },
     ],
 });

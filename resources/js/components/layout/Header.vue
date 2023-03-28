@@ -13,7 +13,7 @@ use api;
             <router-link :to="{name: 'Index'}">Главная</router-link>
             <router-link :to="{name: 'Index'}">Каталог</router-link>
             <router-link :to="{name: 'Index'}">Обратная связь</router-link>
-            <router-link :to="{name: 'Index'}">О нас</router-link>
+            <router-link :to="{name: 'AboutUs'}">О нас</router-link>
             <div>
                 <input type="text" placeholder="Поиск">
                 <button>

@@ -19,12 +19,23 @@ export default {
         }
     },
     mounted(){
+        
         console.log(this.$route.path);
+    },
+    watch:{
+        $route(){
+            if(this.$route.path != '/'){
+                document.getElementById('footer').style.background = '#D2BEFF'
+            }
+            else{
+                document.getElementById('footer').style.background = '#FF95D7'
+            }
+        }
     },
     components: {
         Header,
         Footer,
-    }
+    },
 }
 </script>
 
