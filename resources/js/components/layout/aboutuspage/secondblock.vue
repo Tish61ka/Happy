@@ -1,5 +1,15 @@
 <template>
     <section class="about-us-slider">
+        <img
+            class="left-back"
+            src="/img/backgroundabout1.png"
+            alt="No Ethernet"
+        />
+        <img
+            class="right-back"
+            src="/img/backgroundabout2.png"
+            alt="No Ethernet"
+        />
         <h2>Наши партнеры</h2>
         <div class="container">
             <Carousel
@@ -90,6 +100,7 @@ export default defineComponent({
 
 <style lang="css" scoped>
 .about-us-slider {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,5 +113,18 @@ export default defineComponent({
     flex-direction: row;
     align-items: center;
     margin-bottom: 40px;
+}
+.left-back {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: 200px;
+}
+.right-back {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    width: 200px;
 }
 </style>
