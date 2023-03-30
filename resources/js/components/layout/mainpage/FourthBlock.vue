@@ -1,5 +1,5 @@
 <template>
-  <section class="reviews container" id="3">
+  <section class="reviews container">
     <h1>Популярные отзывы</h1>
     <div class="contain-slider">
       <div id="carousel" class="carousel">
@@ -24,9 +24,9 @@
                 <div></div>
                 <h2>Руслан Кромеев</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation
                 </p>
               </div>
             </li>
@@ -35,9 +35,9 @@
                 <div></div>
                 <h2>Руслан Кромеев</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation
                 </p>
               </div>
             </li>
@@ -46,9 +46,9 @@
                 <div></div>
                 <h2>Руслан Кромеев</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation
                 </p>
               </div>
             </li>
@@ -57,9 +57,9 @@
                 <div></div>
                 <h2>Руслан Кромеев</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation
                 </p>
               </div>
             </li>
@@ -68,9 +68,9 @@
                 <div></div>
                 <h2>Руслан Кромеев</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation
                 </p>
               </div>
             </li>
@@ -79,9 +79,9 @@
                 <div></div>
                 <h2>Руслан Кромеев</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation
                 </p>
               </div>
             </li>
@@ -90,9 +90,9 @@
                 <div></div>
                 <h2>Руслан Кромеев</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation
                 </p>
               </div>
             </li>
@@ -193,7 +193,6 @@ export default {
   align-items: center;
   width: 1300px;
 }
-
 .gallery li {
   width: 381px;
   height: 408px;
@@ -259,21 +258,21 @@ export default {
 }
 
 .prev {
-  left: 7px;
+  left: -100px;
 }
 
 .next {
-  right: 7px;
+  right: -100px;
   transform: rotate(180deg);
 }
 
 .gallery {
-  width: 1300px;
+  width: 1500px;
   overflow: hidden;
 }
 
 .gallery ul {
-  width: 9999px;
+  width: 3178px;
   font-size: 0;
   transition: margin-left 250ms;
 }
