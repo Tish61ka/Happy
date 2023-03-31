@@ -2,23 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderEditRequest;
+use App\Http\Requests\OrderRequest;
 use App\Http\Resources\CartResource;
 use App\Http\Resources\OrderResource;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function all(): \Illuminate\Http\JsonResponse
+    public function allOrders(): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
         return response()->json([
-           'message' => 'Все заказы',
-           'content' => OrderResource::collection(Order::all()
+            'message' => 'Все заказы пол-лей',
+            'content' => OrderResource::collection(Order::all())
+        ]);
+    }
+    public function all($id): \Illuminate\Http\JsonResponse
+    {
+        $user = User::find($id);
+        return response()->json([
+            'message' => 'Все заказы',
+            'content' => OrderResource::collection(Order::all()
                 ->where('user_id', $user->id))
         ]);
     }
@@ -36,9 +44,9 @@ class OrderController extends Controller
             ], 200);
         }
     }
-    public function countDone(): \Illuminate\Http\JsonResponse
+    public function countDone($id): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
+        $user = User::find($id);
         return response()->json([
             'message' => 'Кол-во завершенных заказов',
             'content' => OrderResource::collection(Order::all()
@@ -46,9 +54,9 @@ class OrderController extends Controller
                 ->where('status', 'Завершено'))->count()
         ]);
     }
-    public function countProcess(): \Illuminate\Http\JsonResponse
+    public function countProcess($id): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
+        $user = User::find($id);
         return response()->json([
             'message' => 'Кол-во заказов в обработке',
             'content' => OrderResource::collection(Order::all()
@@ -56,9 +64,9 @@ class OrderController extends Controller
                 ->where('status', 'В обработке'))->count()
         ]);
     }
-    public function store(): \Illuminate\Http\JsonResponse
+    public function store($id): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
+        $user = User::find($id);
         $myCart = CartResource::collection(Cart::all()->where('user_id', $user->id));
 
         if($myCart->count() == 0){
@@ -94,7 +102,7 @@ class OrderController extends Controller
             ]);
         }
     }
-    public function update(OrderEditRequest $request, $id): \Illuminate\Http\JsonResponse
+    public function update(OrderRequest $request, $id): \Illuminate\Http\JsonResponse
     {
         $order = Order::find($id);
         if(!$order){

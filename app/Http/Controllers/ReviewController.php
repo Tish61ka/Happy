@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReviewRequest;
 use App\Http\Resources\ReviewResource;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,8 +22,7 @@ class ReviewController extends Controller
     }
     public function index($id): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
-        $reviews = Review::all()->where('user_id', $user->id);
+        $reviews = Review::all()->where('user_id', $id);
 
         return response()->json([
             'message' => 'Все отзывы пол-ля',
@@ -31,7 +31,7 @@ class ReviewController extends Controller
     }
     public function store(ReviewRequest $request): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
+        $user = User::find($request->user_id);
         $review = Review::create([
             'user_id' => $user->id,
             'product_id' => $request->input('product_id'),

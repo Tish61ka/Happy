@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserEditRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -19,15 +17,16 @@ class UserEditRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
-            'tel' => ['numeric'],
-            'email' => ['email'],
-            'name' => ['string'],
-            'avatar' => ['file']
+            'title' => ['required'],
+            'description' => ['required'],
+            'price' => ['required', 'numeric'],
+            'structure' => ['required'],
+            'image' => ['required']
         ];
     }
 }

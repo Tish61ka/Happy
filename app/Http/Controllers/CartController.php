@@ -6,14 +6,15 @@ use App\Http\Requests\CartRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function all(): \Illuminate\Http\JsonResponse
+    public function all($id): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
+        $user = User::find($id);
         $myCart = Cart::all()->where('user_id', $user->id);
 
         return response()->json([
@@ -24,7 +25,7 @@ class CartController extends Controller
     public function store(CartRequest $request): \Illuminate\Http\JsonResponse
     {
         $product = Product::find($request->input('product_id'));
-        $user = Auth::guard('sanctum')->user();
+        $user = User::find($request->user_id);
         $cartItem = Cart::where('product_id', $request->input('product_id'))
             ->where('user_id', $user->id)->first();
 

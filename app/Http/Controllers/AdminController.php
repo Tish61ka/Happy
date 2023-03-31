@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SignInRequest;
-use App\Http\Requests\SignUpRequest;
-use App\Models\User;
+use App\Http\Requests\Auth\SignInRequest;
+use App\Http\Requests\Auth\SignUpRequest;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class AdminController extends Controller
 {
     public function signUp(SignUpRequest $request): \Illuminate\Http\JsonResponse
     {
@@ -19,7 +19,7 @@ class AuthController extends Controller
                 'code' => 200,
             ]);
         }
-        $user = User::create([
+        $user = Admin::create([
             'name' =>  $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
@@ -48,9 +48,12 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
-    public function me(): ?\Illuminate\Contracts\Auth\Authenticatable
+    public function me()
     {
-        return Auth::guard('sanctum')->user();
+        return response()->json([
+            'message' => 'Данные',
+            'content' => Auth::guard('sanctum')->user()
+        ]);
     }
     public function logout(): \Illuminate\Http\JsonResponse
     {
