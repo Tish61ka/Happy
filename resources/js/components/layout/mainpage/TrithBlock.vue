@@ -1,5 +1,5 @@
 <template>
-  <section class="application container" id="3">
+  <section class="application container" id="goreview">
     <div>
       <h1>Здесь вы можете оставить свой отзыв</h1>
       <p>

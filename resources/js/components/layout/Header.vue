@@ -24,7 +24,10 @@ use api;
     </router-link>
     <router-link :to="{ name: 'Index' }">Главная</router-link>
     <router-link :to="{ name: 'Index' }">Каталог</router-link>
-    <router-link :to="{ name: 'Index' }">Обратная связь</router-link>
+    <!-- <router-link :to="{ name: 'Index' }">Обратная связь</router-link> -->
+    <a href="#goreview"
+      ><router-link :to="{ name: 'Index' }">Обратная связь</router-link></a
+    >
     <router-link :to="{ name: 'AboutUs' }">О нас</router-link>
     <div>
       <input type="text" placeholder="Поиск" />
@@ -71,6 +74,18 @@ export default {
     this.getUser();
     if (window.localStorage.getItem("token")) {
       this.$store.state.isAuth = true;
+    }
+    const anchors = document.querySelectorAll('a[href*="#"]');
+    for (let anchor of anchors) {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        let blockID = anchor.getAttribute("href").substr(1);
+        blockID = blockID.toString();
+        document.getElementById(blockID).scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
     }
   },
 };
