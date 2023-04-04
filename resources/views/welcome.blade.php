@@ -30,7 +30,9 @@
     h3,
     h4,
     p,
-    a {
+    a,
+    span,
+    div {
       font-family: "Comfortaa", sans-serif;
     }
 
@@ -81,5 +83,7 @@
 <body id="app">
   @vite('resources/js/app.js')
 </body>
+
+<script src="//widget.time.is/t.js"></script>
 
 </html>

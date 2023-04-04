@@ -1,9 +1,21 @@
 <template>
-    <Header v-show="this.$route.path != '/login'"></Header>
-    <main> 
+    <Header
+        v-show="
+            this.$route.path != '/login' &&
+            this.$route.path != '/cart' &&
+            this.$route.path != '/order'
+        "
+    ></Header>
+    <main>
         <router-view></router-view>
     </main>
-    <Footer v-show="this.$route.path != '/login'"></Footer> 
+    <Footer
+        v-show="
+            this.$route.path != '/login' &&
+            this.$route.path != '/cart' &&
+            this.$route.path != '/order'
+        "
+    ></Footer>
 </template>
 
 <script>
@@ -13,32 +25,26 @@ import Header from "./layout/Header.vue";
 
 export default {
     name: "Main",
-    data(){
-        return {
-
-        }
+    data() {
+        return {};
     },
-    mounted(){
-        
+    mounted() {
         console.log(this.$route.path);
     },
-    watch:{
-        $route(){
-            if(this.$route.path != '/'){
-                document.getElementById('footer').style.background = '#D2BEFF'
+    watch: {
+        $route() {
+            if (this.$route.path != "/") {
+                document.getElementById("footer").style.background = "#D2BEFF";
+            } else {
+                document.getElementById("footer").style.background = "#FF95D7";
             }
-            else{
-                document.getElementById('footer').style.background = '#FF95D7'
-            }
-        }
+        },
     },
     components: {
         Header,
         Footer,
     },
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
