@@ -1,95 +1,93 @@
 <template>
-    <div class="main">
-        <div class="topbar">
-            <div class="toggle">
-                <svg
-                    width="38"
-                    height="24"
-                    viewBox="0 0 38 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <rect width="38" height="5" rx="2.5" fill="black" />
-                    <rect y="19" width="38" height="5" rx="2.5" fill="black" />
-                    <rect y="9" width="38" height="5" rx="2.5" fill="black" />
-                </svg>
-            </div>
+    <div class="topbar">
+        <div class="toggle">
+            <svg
+                width="38"
+                height="24"
+                viewBox="0 0 38 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <rect width="38" height="5" rx="2.5" fill="black" />
+                <rect y="19" width="38" height="5" rx="2.5" fill="black" />
+                <rect y="9" width="38" height="5" rx="2.5" fill="black" />
+            </svg>
         </div>
-        <h1 class="h1">Мои заказы</h1>
-        <!--Bot-->
-        <div class="details">
-            <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>Список заказов</h2>
-                    <a href="#" class="all-views">Посмотреть все</a>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Название</td>
-                            <td>Количество</td>
-                            <td>Стоимость</td>
-                            <td>Статус</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                        <tr>
-                            <td>Заказ №32</td>
-                            <td>1</td>
-                            <td>330</td>
-                            <td>В обработке</td>
-                        </tr>
-                    </tbody>
-                </table>
+    </div>
+    <h1 class="h1">Мои заказы</h1>
+    <!--Bot-->
+    <div class="details">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>Список заказов</h2>
+                <a href="#" class="all-views">Посмотреть все</a>
             </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Название</td>
+                        <td>Количество</td>
+                        <td>Стоимость</td>
+                        <td>Статус</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                    <tr>
+                        <td>Заказ №32</td>
+                        <td>1</td>
+                        <td>330</td>
+                        <td>В обработке</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
