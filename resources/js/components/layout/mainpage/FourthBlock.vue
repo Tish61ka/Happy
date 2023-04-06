@@ -2,7 +2,24 @@
   <section class="reviews container">
     <h1>Популярные отзывы</h1>
     <div class="contain-slider">
-      <div id="carousel" class="carousel">
+      <Carousel :items-to-show="3" :wrap-around="true">
+        <Slide v-for="slide in 10" :key="slide">
+          <div class="carousel__item">
+            <div></div>
+            <h2>Руслан Кромеев</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation
+            </p>
+          </div>
+        </Slide>
+
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
+      <!-- <div id="carousel" class="carousel">
         <button class="arrow prev">
           <svg
             width="41"
@@ -112,54 +129,26 @@
             />
           </svg>
         </button>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
 
 <script>
-export default {
-  setup() {
-    return {};
+import { defineComponent } from "vue";
+import { Carousel, Navigation, Slide } from "vue3-carousel";
+// import styleforslider from "./styleforslider.vue";
+
+import "vue3-carousel/dist/carousel.css";
+export default defineComponent({
+  name: "WrapAround",
+  components: {
+    Carousel,
+    Slide,
+    Navigation,
+    // styleforslider,
   },
-  mounted() {
-    /* этот код помечает картинки, для удобства разработки */
-    let i = 1;
-    for (let li of carousel.querySelectorAll("li")) {
-      li.style.position = "relative";
-      li.insertAdjacentHTML(
-        "beforeend",
-        `<span style="position:absolute;left:0;top:0">${i}</span>`
-      );
-      i++;
-    }
-
-    /* конфигурация */
-    let width = 450; // ширина картинки
-    let count = 3; // видимое количество изображений
-
-    let list = carousel.querySelector("ul");
-    let listElems = carousel.querySelectorAll("li");
-
-    let position = 0; // положение ленты прокрутки
-
-    carousel.querySelector(".prev").onclick = function () {
-      // сдвиг влево
-      position += width * count;
-      // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
-      position = Math.min(position, 0);
-      list.style.marginLeft = position + "px";
-    };
-
-    carousel.querySelector(".next").onclick = function () {
-      // сдвиг вправо
-      position -= width * count;
-      // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
-      position = Math.max(position, -width * (listElems.length - count));
-      list.style.marginLeft = position + "px";
-    };
-  },
-};
+});
 </script>
 
 <style lang="css" scoped>
@@ -193,24 +182,22 @@ export default {
   align-items: center;
   width: 1300px;
 }
-.gallery li {
-  width: 381px;
-  height: 408px;
-  background: #ece4fe;
-  box-shadow: 0px 0px 6px #ece4fe;
-  border-radius: 50px;
-  display: block;
-  margin-right: 73px;
-}
 
-.gallery li > div {
+.carousel__item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 381px;
+  height: 408px;
   padding: 30px 25px;
+  background: #ece4fe;
+  box-shadow: 0px 0px 6px #ece4fe;
+  border-radius: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
-.gallery li div div {
+.carousel__item div {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -219,7 +206,7 @@ export default {
   background-position: center;
 }
 
-.gallery li div h2 {
+.carousel__item h2 {
   font-family: "Roboto";
   font-style: normal;
   text-align: center;
@@ -229,7 +216,7 @@ export default {
   margin-top: 10px;
 }
 
-.gallery li div p {
+.carousel__item p {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -240,44 +227,41 @@ export default {
   margin-top: 25px;
 }
 
-.arrow {
-  position: absolute;
-  padding: 0;
-  background: transparent;
-  border-radius: 50%;
-  border: 3px solid #000000;
-  padding: 27px 20px;
-}
-
-.arrow:focus {
-  outline: none;
-}
-
-.arrow:hover {
-  cursor: pointer;
-}
-
-.prev {
-  left: -100px;
-}
-
-.next {
-  right: -100px;
-  transform: rotate(180deg);
-}
-
-.gallery {
-  width: 1500px;
-  overflow: hidden;
-}
-
-.gallery ul {
-  width: 3178px;
-  font-size: 0;
-  transition: margin-left 250ms;
-}
-
 .gallery li {
   display: inline-block;
+}
+@media screen and (min-width: 1200px) and (max-width: 1590px) {
+  .reviews {
+    position: relative;
+    margin-bottom: 100px;
+  }
+  .reviews h1 {
+    font-size: 40px;
+    margin-bottom: 50px;
+  }
+
+  .carousel {
+    width: 1000px;
+  }
+  .carousel__item {
+    width: 306px;
+    height: 327px;
+    padding: 20px 20px;
+  }
+
+  .carousel__item div {
+    width: 85px;
+    height: 85px;
+  }
+
+  .carousel__item h2 {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .carousel__item p {
+    font-size: 16px;
+    margin-top: 20px;
+  }
 }
 </style>
