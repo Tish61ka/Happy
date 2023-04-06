@@ -63,6 +63,12 @@
       padding-top: 25px;
     }
 
+    @media screen and (min-width: 1200px) and (max-width: 1590px) {
+      .container {
+        width: 1200px;
+      }
+    }
+
     @media screen and (max-width: 450px) {
       .container {
         width: 100vw;

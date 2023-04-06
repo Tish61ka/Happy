@@ -85,4 +85,32 @@ export default {
   margin-top: -150px;
   margin-left: 100px;
 }
+@media screen and (min-width: 1200px) and (max-width: 1590px) {
+  .preview {
+    height: 480px;
+    width: 100vw;
+    margin-bottom: 50px;
+  }
+  .content-in-review div h1 {
+    width: 460px;
+    font-size: 150px;
+  }
+  .content-in-review div h2 {
+    width: 460px;
+    font-size: 100px;
+    margin-top: 40px;
+  }
+  .content-in-review div button {
+    width: 350px;
+    height: 60px;
+    font-size: 18px;
+    margin-top: 40px;
+    margin-left: 60px;
+  }
+  .content-in-review div:last-child img {
+    width: 800px;
+    height: 700px;
+    margin-top: -100px;
+  }
+}
 </style>

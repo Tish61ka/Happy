@@ -138,4 +138,52 @@ export default {
   margin-bottom: 100px;
   cursor: pointer;
 }
+@media screen and (min-width: 1200px) and (max-width: 1590px) {
+  .application {
+    margin-bottom: 100px;
+  }
+  .application div:first-child {
+    margin-top: 0px;
+  }
+  .application div h1 {
+    width: 620px;
+    font-size: 48px;
+  }
+  .application div p {
+    width: 470px;
+    font-size: 16px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+  }
+  .application div form {
+    width: 450px;
+    height: 550px;
+    background-size: cover;
+  }
+  .application div form input {
+    width: 80%;
+    height: 50px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    font-size: 16px;
+  }
+  .application div form input::placeholder,
+  .application div form textarea::placeholder {
+    font-size: 16px;
+  }
+  .application div form textarea {
+    width: 80%;
+    height: 100px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-size: 16px;
+  }
+  .application div form button {
+    width: 190px;
+    height: 50px;
+    font-size: 18px;
+    margin-bottom: 80px;
+  }
+}
 </style>
