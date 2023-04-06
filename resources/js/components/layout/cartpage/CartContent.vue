@@ -18,76 +18,138 @@
     <!--Bot-->
     <div class="details">
         <div class="recentOrders">
-            <div class="cardHeader">
-                <h2>Список заказов</h2>
-                <a href="#" class="all-views">Посмотреть все</a>
-            </div>
             <table>
                 <thead>
                     <tr>
+                        <td>Фото</td>
                         <td>Название</td>
                         <td>Количество</td>
                         <td>Стоимость</td>
-                        <td>Статус</td>
+                        <td>Действия</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
+                        <td class="img-td">
+                            <div>
+                                <img src="/img/caramel.png" alt="No Ethernet" />
+                            </div>
+                        </td>
+                        <td>Карамельное мороженное</td>
+                        <td class="count-td">
+                            <div>
+                                <button>+</button>
+                                <p>1</p>
+                                <button>-</button>
+                            </div>
+                        </td>
                         <td>330</td>
-                        <td>В обработке</td>
+                        <td class="btn-td">
+                            <button>Убрать</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
+                        <td class="img-td">
+                            <div>
+                                <img src="/img/caramel.png" alt="No Ethernet" />
+                            </div>
+                        </td>
+                        <td>Карамельное мороженное</td>
+                        <td class="count-td">
+                            <div>
+                                <button>+</button>
+                                <p>1</p>
+                                <button>-</button>
+                            </div>
+                        </td>
                         <td>330</td>
-                        <td>В обработке</td>
+                        <td class="btn-td">
+                            <button>Убрать</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
+                        <td class="img-td">
+                            <div>
+                                <img src="/img/caramel.png" alt="No Ethernet" />
+                            </div>
+                        </td>
+                        <td>Карамельное мороженное</td>
+                        <td class="count-td">
+                            <div>
+                                <button>+</button>
+                                <p>1</p>
+                                <button>-</button>
+                            </div>
+                        </td>
                         <td>330</td>
-                        <td>В обработке</td>
+                        <td class="btn-td">
+                            <button>Убрать</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
+                        <td class="img-td">
+                            <div>
+                                <img src="/img/caramel.png" alt="No Ethernet" />
+                            </div>
+                        </td>
+                        <td>Карамельное мороженное</td>
+                        <td class="count-td">
+                            <div>
+                                <button>+</button>
+                                <p>1</p>
+                                <button>-</button>
+                            </div>
+                        </td>
                         <td>330</td>
-                        <td>В обработке</td>
+                        <td class="btn-td">
+                            <button>Убрать</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
+                        <td class="img-td">
+                            <div>
+                                <img src="/img/caramel.png" alt="No Ethernet" />
+                            </div>
+                        </td>
+                        <td>Карамельное мороженное</td>
+                        <td class="count-td">
+                            <div>
+                                <button>+</button>
+                                <p>1</p>
+                                <button>-</button>
+                            </div>
+                        </td>
                         <td>330</td>
-                        <td>В обработке</td>
+                        <td class="btn-td">
+                            <button>Убрать</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
+                        <td class="img-td">
+                            <div>
+                                <img src="/img/caramel.png" alt="No Ethernet" />
+                            </div>
+                        </td>
+                        <td>Карамельное мороженное</td>
+                        <td class="count-td">
+                            <div>
+                                <button>+</button>
+                                <p>1</p>
+                                <button>-</button>
+                            </div>
+                        </td>
                         <td>330</td>
-                        <td>В обработке</td>
-                    </tr>
-                    <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
-                        <td>330</td>
-                        <td>В обработке</td>
-                    </tr>
-                    <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
-                        <td>330</td>
-                        <td>В обработке</td>
-                    </tr>
-                    <tr>
-                        <td>Заказ №32</td>
-                        <td>1</td>
-                        <td>330</td>
-                        <td>В обработке</td>
+                        <td class="btn-td">
+                            <button>Убрать</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="all-cost">
+                <button>Очистить все</button>
+                <button>Оформить заказ</button>
+                <p>Итоговая сумма: 880 руб</p>
+            </div>
         </div>
     </div>
 </template>
@@ -155,24 +217,11 @@ export default {
 
 .details .recentOrders {
     position: relative;
-    display: grid;
     min-height: 500px;
     background-color: white;
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
-}
-
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.cardHeader h2 {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
 }
 
 .all-views {
@@ -186,7 +235,6 @@ export default {
 .details table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
 
 .details table thead td {
@@ -195,21 +243,18 @@ export default {
     font-weight: 700;
     font-size: 20px;
 }
-
 .details table tbody td {
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
 }
-
+.details table tbody tr td:not(:last-child) {
+    border-right: 2px solid #d9d9d9;
+}
 .details .recentOrders table tr {
     color: black;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.details .recentOrders table tr:last-child {
-    border-bottom: none;
 }
 
 .details .recentOrders table td {
@@ -217,59 +262,82 @@ export default {
 }
 
 .details .recentOrders table td:nth-child(2),
-.details .recentOrders table td:nth-child(3) {
+.details .recentOrders table td:nth-child(3),
+.details .recentOrders table td:nth-child(4) {
     text-align: center;
 }
 
-.details .recentOrders table td:last-child {
+.details .recentOrders table thead td:last-child {
     text-align-last: right;
 }
-
-.recentCustomers {
-    position: relative;
-    min-height: 500px;
-    padding: 20px;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-    background: white;
+.img-td div {
+    width: 120px;
+    padding: 3px 19px;
+    border: 2px solid #ededed;
+    border-radius: 25px;
 }
-
-.recentCustomers .imgBx {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
+.img-td div img {
+    width: 75px;
+    height: 120px;
 }
-
-.recentCustomers .imgBx img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.count-td div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 10px;
 }
-
-.recentCustomers table tr td {
-    padding: 12px 10px;
-}
-
-.recentCustomers table tr td h4 {
+.count-td div button {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: transparent;
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 22px;
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: -8px;
 }
-
-.recentCustomers table tr td h4 span {
+.count-td div button:last-child {
+    margin-top: -11px;
+}
+.btn-td button {
+    width: 155.35px;
+    height: 28px;
+    background: rgba(249, 58, 58, 0.5);
+    border-radius: 12px;
     font-family: "Comfortaa";
     font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    color: #9c96a9;
-    line-height: 16px;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+.details .recentOrders table tbody td:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 170px;
+}
+.all-cost {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.all-cost button {
+    width: 205.29px;
+    height: 37px;
+    border-radius: 12px;
+    border: none;
+    margin-right: 40px;
+}
+.all-cost p {
+    font-size: 24px;
 }
 
 /* adaptive */
