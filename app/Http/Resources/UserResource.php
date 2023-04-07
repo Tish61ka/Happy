@@ -9,24 +9,20 @@ use JsonSerializable;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  Request  $request
-     * @return array|Arrayable|JsonSerializable
-     */
-    public function toArray($request): array|JsonSerializable|Arrayable
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'tel' => $this->tel,
-            'email' => $this->email,
-            'avatar' => $this->avatar,
-            'city' => $this->city,
-            'address' => $this->address,
-            'postal_code' => $this->postal_code,
-            'role' => $this->role,
-        ];
-    }
+  /**
+   * Transform the resource into an array.
+   *
+   * @param  Request  $request
+   * @return array|Arrayable|JsonSerializable
+   */
+  public function toArray($request): array
+  {
+    return [
+      'id' => $this->id,
+      'name' => $this->name,
+      'tel' => $this->tel,
+      'email' => $this->email,
+      'address' => $this->address,
+    ];
+  }
 }

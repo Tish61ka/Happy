@@ -9,21 +9,21 @@ use JsonSerializable;
 
 class ProductResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  Request  $request
-     * @return array|Arrayable|JsonSerializable
-     */
-    public function toArray($request): array|JsonSerializable|Arrayable
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'price' => $this->price,
-            'structure' => $this->structure,
-            'image' => $this->image
-        ];
-    }
+  /**
+   * Transform the resource into an array.
+   *
+   * @param  Request  $request
+   * @return array|Arrayable|JsonSerializable
+   */
+  public function toArray($request): array|JsonSerializable|Arrayable
+  {
+    return [
+      'id' => $this->id,
+      'title' => $this->title,
+      'description' => $this->description,
+      'price' => $this->price,
+      'structure' => $this->structure,
+      'image' => $this->image
+    ];
+  }
 }

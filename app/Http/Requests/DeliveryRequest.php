@@ -6,28 +6,28 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DeliveryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+  /**
+   * Determine if the user is authorized to make this request.
+   *
+   * @return bool
+   */
+  public function authorize(): bool
+  {
+    return true;
+  }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
-    public function rules(): array
-    {
-        return [
-            'city' => ['required', 'string'],
-            'address' => ['required'],
-            'postal_code' => ['required', 'numeric'],
-            'email' => ['required', 'email']
-        ];
-    }
+  /**
+   * Get the validation rules that apply to the request.
+   *
+   * @return array<string, mixed>
+   */
+  public function rules(): array
+  {
+    return [
+      'address' => ['required'],
+      'tel' => ['required', 'numeric'],
+      'email' => ['required', 'email'],
+      'name' => ['required', 'string']
+    ];
+  }
 }

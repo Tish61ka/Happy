@@ -39,12 +39,51 @@
             </div>
         </div>
     </section>
+    <form style="display: flex; flex-direction: column">
+        <label for="">Имя</label>
+        <input type="text" v-model="name" />
+        <label for="">Адрес</label>
+        <input type="text" v-model="address" />
+        <label for="">Телефон</label>
+        <input type="text" v-model="tel" />
+        <label for="">Почта</label>
+        <input type="text" v-model="email" />
+        <button @click.prevent="deliveryCreate()">отправить</button>
+        {{ message }}
+    </form>
 </template>
 
 <script>
+import axios from "axios";
 export default {
     data() {
-        return {};
+        return {
+            name: "",
+            address: "",
+            tel: "",
+            email: "",
+            message: "",
+        };
+    },
+    methods: {
+        deliveryCreate() {
+            axios
+                .post("/api/delivery/create", {
+                    name: this.name,
+                    address: this.address,
+                    tel: this.tel,
+                    email: this.email,
+                })
+                .then((res) => {
+                    this.message = res.data.message;
+                    localStorage.setItem("id_user", res.data.content.id);
+                    (this.name = ""),
+                        (this.address = ""),
+                        (this.tel = ""),
+                        (this.email = ""),
+                        (this.message = "");
+                });
+        },
     },
 };
 </script>
