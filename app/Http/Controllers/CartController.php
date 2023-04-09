@@ -41,11 +41,8 @@ class CartController extends Controller
         'content' => new CartResource($cart)
       ]);
     } else {
-
-      $count = $cartItem->count;
-      $count++;
       $cartItem->update([
-        'count' => $count
+        'count' => $request->input('count')
       ]);
 
       return response()->json([

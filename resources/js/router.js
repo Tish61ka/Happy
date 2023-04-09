@@ -6,6 +6,7 @@ import Profile from "./components/Profile.vue";
 import AboutUs from "./components/AboutUs.vue";
 import Cart from "./components/Cart.vue";
 import Catalog from "./components/Catalog.vue";
+import Product from './components/Product.vue';
 
 export default createRouter({
     history: createWebHistory(),
@@ -44,6 +45,11 @@ export default createRouter({
             path: "/catalog",
             name: "Catalog",
             component: Catalog,
+        },
+        {
+            path: "/product/:id",
+            name: "Product",
+            component: Product,
         },
     ],
 });

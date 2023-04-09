@@ -54,9 +54,23 @@
             <td>{{ product.product.title }}</td>
             <td class="count-td">
               <div>
-                <button @click="AddToCart(product.product.id)">+</button>
+                <button
+                  @click="
+                    product.count++;
+                    AddToCart(product.id, product.count);
+                  "
+                >
+                  +
+                </button>
                 <p>{{ product.count }}</p>
-                <button>-</button>
+                <button
+                  @click="
+                    product.count > 1 ? product.count-- : (product.count += 0);
+                    AddToCart(product.id, product.count);
+                  "
+                >
+                  -
+                </button>
               </div>
             </td>
             <td>{{ product.product.price }}</td>
@@ -126,13 +140,13 @@ export default {
         this.AllCart();
       });
     },
-    AddToCart(product_id) {
+    AddToCart(product_id, count) {
       axios
         .post("/api/add/to/cart", {
           _method: "PATCH",
           product_id: product_id,
           user_id: this.user_id,
-          count: 1,
+          count: count,
         })
         .then((res) => {
           this.AllCart();

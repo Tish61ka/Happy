@@ -138,7 +138,93 @@
         </ul>
       </div>
     </div>
-    <div class="wafer"></div>
+    <div class="wafer">
+      <div class="dropdown">
+        <div>
+          <h2 class="icon">Вафля</h2>
+          <span
+            ><svg
+              width="22"
+              height="12"
+              viewBox="0 0 22 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.6055 0L11.8533 1.21777L1.2467 11.5688L-0.00113258 10.351L10.6055 0Z"
+                fill="black"
+              />
+              <path
+                d="M9.35763 1.21777L10.6055 0L21.2121 10.351L19.9642 11.5688L9.35763 1.21777Z"
+                fill="black"
+              />
+            </svg>
+          </span>
+        </div>
+        <ul class="menu">
+          <li>
+            <input
+              class="custom-checkbox"
+              type="checkbox"
+              id="color-9"
+              name="color-9"
+              value="indigo"
+            />
+            <label for="color-9">Шоколадный рожок</label>
+          </li>
+          <li>
+            <input
+              class="custom-checkbox"
+              type="checkbox"
+              id="color-10"
+              name="color-10"
+              value="indigo"
+            />
+            <label for="color-10">Сахарный рожок</label>
+          </li>
+          <li>
+            <input
+              class="custom-checkbox"
+              type="checkbox"
+              id="color-11"
+              name="color-11"
+              value="indigo"
+            />
+            <label for="color-11">Итальянские вафли</label>
+          </li>
+          <li>
+            <input
+              class="custom-checkbox"
+              type="checkbox"
+              id="color-12"
+              name="color-12"
+              value="indigo"
+            />
+            <label for="color-12">Шведские вафели</label>
+          </li>
+          <li>
+            <input
+              class="custom-checkbox"
+              type="checkbox"
+              id="color-13"
+              name="color-13"
+              value="indigo"
+            />
+            <label for="color-13">Голландские вафли</label>
+          </li>
+          <li>
+            <input
+              class="custom-checkbox"
+              type="checkbox"
+              id="color-14"
+              name="color-14"
+              value="indigo"
+            />
+            <label for="color-14">Австрийские вафли</label>
+          </li>
+        </ul>
+      </div>
+    </div>
   </aside>
 </template>
 
@@ -191,15 +277,17 @@ export default {
       });
     })();
 
-    let dropdowndiv = document.querySelector(".dropdown div");
-    let dropdown = document.querySelector(".dropdown");
-    dropdowndiv.addEventListener("click", (e) => {
-      if (dropdown.classList.contains("closed")) {
-        dropdown.classList.remove("closed");
-      } else {
-        dropdown.classList.add("closed");
-      }
-    });
+    let dropdowndiv = document.querySelectorAll(".dropdown div");
+    let dropdown = document.querySelectorAll(".dropdown");
+    for (let i = 0; i < dropdown.length; i++) {
+      dropdowndiv[i].addEventListener("click", (e) => {
+        if (dropdown[i].classList.contains("closed")) {
+          dropdown[i].classList.remove("closed");
+        } else {
+          dropdown[i].classList.add("closed");
+        }
+      });
+    }
   },
 };
 </script>
@@ -409,6 +497,7 @@ export default {
   flex-direction: column;
   border-bottom: 1px solid #d9d9d9;
   width: 80%;
+  margin-bottom: 30px;
 }
 .taste h2 {
   font-family: "Roboto";
@@ -485,5 +574,18 @@ export default {
 
 .checkbox {
   margin-bottom: 1em;
+}
+
+.wafer {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #d9d9d9;
+  width: 80%;
+}
+.wafer h2 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
 }
 </style>

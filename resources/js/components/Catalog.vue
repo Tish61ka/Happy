@@ -15,7 +15,7 @@
       <div class="orbit"></div>
     </div>
   </div>
-  <div class="container">
+  <div class="container content-cat">
     <Filter></Filter>
     <CatalogContent></CatalogContent>
   </div>
@@ -135,5 +135,9 @@ export default {
     border-top-color: inherit;
     transform: scale(1);
   }
+}
+.content-cat {
+  display: flex;
+  flex-direction: row;
 }
 </style>
