@@ -52,7 +52,7 @@ use api;
                 </svg>
             </button>
         </div>
-        <router-link :to="{ name: 'Cart' }" v-show="!this.$store.state.isAuth"
+        <router-link :to="{ name: 'Admin' }" v-show="!this.$store.state.isAuth"
             ><button class="log-in">Корзина</button></router-link
         >
     </header>

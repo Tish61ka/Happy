@@ -6,7 +6,8 @@ import Profile from "./components/Profile.vue";
 import AboutUs from "./components/AboutUs.vue";
 import Cart from "./components/Cart.vue";
 import Catalog from "./components/Catalog.vue";
-import Product from './components/Product.vue';
+import Product from "./components/Product.vue";
+import Admin from "./components/Admin.vue";
 
 export default createRouter({
     history: createWebHistory(),
@@ -50,6 +51,16 @@ export default createRouter({
             path: "/product/:id",
             name: "Product",
             component: Product,
+        },
+        {
+            path: "/admin",
+            name: "Admin",
+            component: Admin,
+        },
+        {
+            path: "/adminhome",
+            name: "HomeAdmin",
+            component: Admin,
         },
     ],
 });

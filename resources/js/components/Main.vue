@@ -3,7 +3,9 @@
         v-show="
             this.$route.path != '/login' &&
             this.$route.path != '/cart' &&
-            this.$route.path != '/order'
+            this.$route.path != '/order' &&
+            this.$route.path != '/admin' &&
+            this.$route.path != '/adminhome'
         "
     ></Header>
     <main>
@@ -13,7 +15,9 @@
         v-show="
             this.$route.path != '/login' &&
             this.$route.path != '/cart' &&
-            this.$route.path != '/order'
+            this.$route.path != '/order' &&
+            this.$route.path != '/admin' &&
+            this.$route.path != '/adminhome'
         "
     ></Footer>
 </template>
