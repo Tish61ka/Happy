@@ -8,19 +8,19 @@
           <div class="range-group">
             <input
               class="range-input"
-              value="0"
               min="1"
               max="600"
               step="1"
               type="range"
+              v-model.number="minPrice"
             />
             <input
               class="range-input"
-              value="600"
               min="1"
               max="600"
               step="1"
               type="range"
+              v-model.number="maxPrice"
             />
           </div>
           <div class="number-group">
@@ -229,10 +229,13 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       load: true,
+      minPrice: 0,
+      maxPrice: 1000,
     };
   },
   mounted() {
@@ -289,6 +292,7 @@ export default {
       });
     }
   },
+  methods: {},
 };
 </script>
 

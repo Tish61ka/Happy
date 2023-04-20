@@ -62,5 +62,10 @@ export default createRouter({
             name: "HomeAdmin",
             component: Admin,
         },
+        {
+            path: "/catalog/:page",
+            name: "catalog",
+            component: Catalog,
+        },
     ],
 });

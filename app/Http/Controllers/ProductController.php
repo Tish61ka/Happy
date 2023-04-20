@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Product\StoreRequest;
-use App\Http\Requests\Product\UpdateRequest;
-use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Product\StoreRequest;
+use App\Http\Requests\Product\UpdateRequest;
 
 class ProductController extends Controller
 {
+  public function catalog()
+  {
+    $pagination = DB::table('products')->paginate(6);
+    $items = $pagination->items();
+    $products = [];
+    foreach ($items as $item) {
+      $products[] = Product::find($item->id);
+    }
+    return response()->json([
+      'message' => 'Для Каталога',
+      'content' => $pagination,
+      'products' => ProductResource::collection($products)
+    ]);
+  }
   public function all(): \Illuminate\Http\JsonResponse
   {
     return response()->json([
