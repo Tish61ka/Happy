@@ -20,6 +20,8 @@ return new class extends Migration
       $table->integer('price');
       $table->text('structure');
       $table->string('image');
+      $table->unsignedBigInteger('type');
+      $table->foreign('type')->references('id')->on('types')->onDelete('cascade');
       $table->timestamps();
     });
   }

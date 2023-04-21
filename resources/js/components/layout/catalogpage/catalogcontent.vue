@@ -55,17 +55,22 @@
           </span>
         </div>
         <ul class="menu">
-          <li>
+          <li v-for="type in types" :key="type">
             <input
+              @click="
+                sort_on.includes(type.type)
+                  ? this.sort_on.splice(type.id, 1)
+                  : this.sort_on.push(type.type)
+              "
               class="custom-checkbox"
               type="checkbox"
-              id="color-1"
-              name="color-1"
+              :id="'color-' + type.id"
+              :name="'name-' + type.id"
               value="indigo"
             />
-            <label for="color-1">Клубничное</label>
+            <label :for="'color-' + type.id">{{ type.type }}</label>
           </li>
-          <li>
+          <!-- <li>
             <input
               class="custom-checkbox"
               type="checkbox"
@@ -134,7 +139,7 @@
               value="indigo"
             />
             <label for="color-8">Шоколадное</label>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -233,10 +238,11 @@
     <h1>Каталог</h1>
     <p class="shown">Показано {{ products.length }}</p>
     <div class="active-filter">
-      <div class="filter-1">
+      <div class="filter-1" v-for="sort in sort_on" :key="sort">
         <p>Вкус:</p>
-        <p>Шоколадный</p>
+        <p>{{ sort }}</p>
         <svg
+          @click="sort_on.splice(index, 1)"
           width="13"
           height="15"
           viewBox="0 0 13 15"
@@ -262,7 +268,7 @@
           />
         </svg>
       </div>
-      <div class="filter-1">
+      <!-- <div class="filter-1">
         <p>Вафля:</p>
         <p>Итальянские вафли</p>
         <svg
@@ -290,7 +296,7 @@
             fill="black"
           />
         </svg>
-      </div>
+      </div> -->
       <p class="clear-filter">Очистить фильтр</p>
     </div>
     <div class="catalog-product">
@@ -330,6 +336,7 @@ export default {
   data() {
     return {
       products: [],
+      types: [],
       // sort_on: [],
       id_user: localStorage.getItem("id_user"),
       count: 1,
@@ -338,10 +345,14 @@ export default {
       load: true,
       minPrice: 0,
       maxPrice: 1000,
+      sort_on: [],
     };
   },
   mounted() {
     this.getFilms();
+    this.alltypes();
+
+    console.log(this.sort_on);
     (function () {
       var parent = document.querySelector("#rangeSlider");
       if (!parent) return;
@@ -421,7 +432,6 @@ export default {
       axios
         .get(`/api/catalog?page=${this.page}`)
         .then((response) => {
-          console.log(response.data);
           this.products = response.data.products;
           this.pagination = this.changeUrl(response.data.content);
         })
@@ -448,6 +458,11 @@ export default {
     //         console.log(this.sort_on.includes(parse));
     //     }
     // },
+    alltypes() {
+      axios.get(`/api/alltypes`).then((res) => {
+        this.types = res.data;
+      });
+    },
   },
 };
 </script>

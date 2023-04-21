@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\UserEditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserEditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,3 +88,4 @@ Route::post('/delivery/create', [UserController::class, 'delivery']);
 Route::get('/all/products', [ProductController::class, 'all']);
 Route::get('/catalog', [ProductController::class, 'catalog']);
 Route::patch('/add/to/cart', [CartController::class, 'store']);
+Route::get('/alltypes', [TypeController::class, 'show']);

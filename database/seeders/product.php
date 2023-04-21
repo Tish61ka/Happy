@@ -15,6 +15,38 @@ class product extends Seeder
    */
   public function run()
   {
+    \App\Models\Type::factory()->create([
+      'id' => 1,
+      'type' => 'Клубничное',
+    ]);
+    \App\Models\Type::factory()->create([
+      'id' => 2,
+      'type' => 'Фисташковое',
+    ]);
+    \App\Models\Type::factory()->create([
+      'id' => 3,
+      'type' => 'Ванильное',
+    ]);
+    \App\Models\Type::factory()->create([
+      'id' => 4,
+      'type' => 'Шоколадное',
+    ]);
+    \App\Models\Type::factory()->create([
+      'id' => 5,
+      'type' => 'Банановое',
+    ]);
+    \App\Models\Type::factory()->create([
+      'id' => 6,
+      'type' => 'Мятное',
+    ]);
+    \App\Models\Type::factory()->create([
+      'id' => 7,
+      'type' => 'Карамельное',
+    ]);
+    \App\Models\Type::factory()->create([
+      'id' => 8,
+      'type' => 'Ореховое',
+    ]);
     \App\Models\Product::factory()->create([
       'title' => 'Клубничное мороженое в вафельным стаканчиком',
       'price' => 300,
@@ -24,6 +56,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 1,
     ]);
     \App\Models\Product::factory()->create([
       'title' => 'Банановое мороженое в вафельным стаканчиком',
@@ -34,6 +67,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 5,
     ]);
     \App\Models\Product::factory()->create([
       'title' => 'Фисташковое мороженое с вафельным стаканчиком',
@@ -44,6 +78,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 2,
     ]);
     \App\Models\Product::factory()->create([
       'title' => 'Ванильное мороженое с вафельным стаканчиком',
@@ -54,6 +89,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 3,
     ]);
     \App\Models\Product::factory()->create([
       'title' => 'Шоколадное мороженое с вафельным стаканчиком',
@@ -64,6 +100,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 4,
     ]);
     \App\Models\Product::factory()->create([
       'title' => 'Банановое мороженое с вафельным стаканчиком',
@@ -74,9 +111,10 @@ class product extends Seeder
                       Сахар:    50г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 5,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Шоколадное мороженое с вафельным стаканчиком',
+      'title' => 'Мятное мороженое с вафельным стаканчиком',
       'price' => 450,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
       'image' => '/img/minticecream.png',
@@ -84,6 +122,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 6,
     ]);
     \App\Models\Product::factory()->create([
       'title' => 'Карамельное мороженое с пластиковым стаканчиком',
@@ -94,6 +133,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 7,
     ]);
     \App\Models\Product::factory()->create([
       'title' => 'Мороженое с маслом ореха пекан в вафельном стаканчике',
@@ -104,6 +144,7 @@ class product extends Seeder
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
+      'type' => 8,
     ]);
   }
 }

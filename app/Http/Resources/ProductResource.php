@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Type;
 use JsonSerializable;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
 {
@@ -23,7 +24,8 @@ class ProductResource extends JsonResource
       'description' => $this->description,
       'price' => $this->price,
       'structure' => $this->structure,
-      'image' => $this->image
+      'image' => $this->image,
+      'type' => Type::find($this->type),
     ];
   }
 }
