@@ -8,25 +8,37 @@
           <div class="range-group">
             <input
               class="range-input"
-              min="1"
-              max="600"
+              :min="min"
+              :max="max"
               step="1"
               type="range"
               v-model.number="minPrice"
             />
             <input
               class="range-input"
-              min="1"
-              max="600"
+              :min="min"
+              :max="max"
               step="1"
               type="range"
               v-model.number="maxPrice"
             />
           </div>
           <div class="number-group">
-            <input class="number-input" type="number" value="0" min="0" max="600" />
+            <input
+              class="number-input"
+              type="number"
+              v-model.number="min"
+              :min="min"
+              :max="max"
+            />
             <p>-</p>
-            <input class="number-input" type="number" value="600" min="0" max="600" />
+            <input
+              class="number-input"
+              type="number"
+              v-model.number="max"
+              :min="min"
+              :max="max"
+            />
           </div>
         </div>
       </div>
@@ -297,7 +309,8 @@
           />
         </svg>
       </div> -->
-      <p class="clear-filter">Очистить фильтр</p>
+      <p class="clear-filter" @click="clear_sort()">Очистить фильтр</p>
+      <input type="search" v-model="search" />
     </div>
     <div class="catalog-product">
       <div v-for="product in products" :key="product" class="card-item">
@@ -308,7 +321,27 @@
           <h3>{{ product.title }}</h3>
         </router-link>
         <div class="bot-flex-card">
-          <button v-if="id_user" @click="AddToCart(product.id)">Добавить +</button>
+          <button v-if="id_user" @click="AddToCart(product.id)">
+            Добавить +
+          </button>
+          <div class="flex-cost">
+            <p>{{ product.price }}p</p>
+            <p>100 g</p>
+          </div>
+        </div>
+      </div>
+
+      <div v-for="product in filteredList" :key="product" class="card-item">
+        <div class="border-img">
+          <img :src="product.image" alt="No Ethernet" />
+        </div>
+        <router-link :to="{ path: '/product/' + product.id }">
+          <h3>{{ product.title }}</h3>
+        </router-link>
+        <div class="bot-flex-card">
+          <button v-if="id_user" @click="AddToCart(product.id)">
+            Добавить +
+          </button>
           <div class="flex-cost">
             <p>{{ product.price }}p</p>
             <p>100 g</p>
@@ -316,9 +349,11 @@
         </div>
       </div>
     </div>
+
     <div class="pagination-page">
       <router-link
         v-for="link in pagination.links"
+        :key="link"
         :to="
           link.url == null
             ? { name: 'catalog', params: { page: pagination.current_page } }
@@ -336,6 +371,7 @@ export default {
   data() {
     return {
       products: [],
+      products_all: [],
       types: [],
       // sort_on: [],
       id_user: localStorage.getItem("id_user"),
@@ -344,15 +380,19 @@ export default {
       pagination: {},
       load: true,
       minPrice: 0,
-      maxPrice: 1000,
+      maxPrice: 0,
+      min: 0,
+      max: 0,
       sort_on: [],
+      price: [],
+      search: "",
     };
   },
   mounted() {
     this.getFilms();
     this.alltypes();
+    this.AllProducts();
 
-    console.log(this.sort_on);
     (function () {
       var parent = document.querySelector("#rangeSlider");
       if (!parent) return;
@@ -406,6 +446,65 @@ export default {
       });
     }
   },
+  computed: {
+    filteredList() {
+      let sort = this.sort_on;
+      const min_const = this.min;
+      const max_const = this.max;
+      let min = this.minPrice;
+      let max = this.maxPrice;
+      let search = this.search;
+      return this.products_all.filter(function (elem) {
+        let name_product = elem.title;
+        name_product = name_product.toLowerCase();
+        let result = search.toLocaleLowerCase();
+        if (sort == "") {
+          if (max_const == max && min_const == min) {
+            // document.querySelector(".catalog-product").style.opacity = 1;
+            // document.querySelector(".catalog-product").style.position =
+            //   "relative";
+            // document.querySelector(".pagination-page").style.opacity = 1;
+            // document.querySelector(".pagination-page").style.position =
+            //   "relative";
+            if (search != "") {
+              // document.querySelector(".catalog-product").style.opacity = 0;
+              // document.querySelector(".catalog-product").style.position =
+              //   "absolute";
+              // document.querySelector(".pagination-page").style.opacity = 0;
+              // document.querySelector(".pagination-page").style.position =
+              //   "absolute";
+              return name_product.indexOf(result) > -1;
+            }
+            // document.querySelector(".catalog-product").style.opacity = 1;
+            // document.querySelector(".catalog-product").style.position =
+            //   "relative";
+            // document.querySelector(".pagination-page").style.opacity = 1;
+            // document.querySelector(".pagination-page").style.position =
+            //   "relative";
+            return false;
+          }
+          // document.querySelector(".catalog-product").style.opacity = 0;
+          // document.querySelector(".catalog-product").style.position =
+          //   "absolute";
+          // document.querySelector(".pagination-page").style.opacity = 0;
+          // document.querySelector(".pagination-page").style.position =
+          //   "absolute";
+          return (
+            elem.price >= min &&
+            elem.price <= max &&
+            name_product.indexOf(result) > -1
+          );
+        } else if (sort != "") {
+          return (
+            sort.includes(elem.type.type) &&
+            elem.price >= min &&
+            elem.price <= max &&
+            name_product.indexOf(result) > -1
+          );
+        }
+      });
+    },
+  },
   watch: {
     $route() {
       this.page = this.$route.params.page;
@@ -414,9 +513,25 @@ export default {
     },
   },
   methods: {
+    clear_sort() {
+      this.search = "";
+      this.minPrice = this.min;
+      this.maxPrice = this.max;
+      this.sort_on = [];
+    },
     AllProducts() {
       axios.get("/api/all/products").then((res) => {
-        this.products = res.data.content;
+        this.products_all = res.data.content;
+
+        for (let index = 0; index < this.products_all.length; index++) {
+          this.price.push(this.products_all[index]["price"]);
+        }
+        this.minPrice = Math.min.apply(null, this.price);
+        this.maxPrice = Math.max.apply(null, this.price);
+
+        this.max = Math.max.apply(null, this.price);
+        this.min = Math.min.apply(null, this.price);
+
         this.load = false;
       });
     },
