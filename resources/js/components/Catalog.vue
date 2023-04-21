@@ -16,21 +16,18 @@
     </div>
   </div>
   <div class="container content-cat">
-    <Filter></Filter>
     <CatalogContent></CatalogContent>
   </div>
 </template>
 
 <script>
 import CatalogContent from "./layout/catalogpage/catalogcontent.vue";
-import Filter from "./layout/catalogpage/filter.vue";
 export default {
   return: {
     load: true,
   },
   components: {
     CatalogContent,
-    Filter,
   },
 };
 </script>
