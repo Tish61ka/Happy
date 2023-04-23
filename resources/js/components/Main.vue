@@ -1,25 +1,27 @@
 <template>
-    <Header
-        v-show="
-            this.$route.path != '/login' &&
-            this.$route.path != '/cart' &&
-            this.$route.path != '/order' &&
-            this.$route.path != '/admin' &&
-            this.$route.path != '/adminhome'
-        "
-    ></Header>
-    <main>
-        <router-view></router-view>
-    </main>
-    <Footer
-        v-show="
-            this.$route.path != '/login' &&
-            this.$route.path != '/cart' &&
-            this.$route.path != '/order' &&
-            this.$route.path != '/admin' &&
-            this.$route.path != '/adminhome'
-        "
-    ></Footer>
+  <Header
+    v-show="
+      this.$route.path != '/login' &&
+      this.$route.path != '/cart' &&
+      this.$route.path != '/order' &&
+      this.$route.path != '/admin' &&
+      this.$route.path != '/adminhome' &&
+      this.$route.path != '/adminusers'
+    "
+  ></Header>
+  <main>
+    <router-view></router-view>
+  </main>
+  <Footer
+    v-show="
+      this.$route.path != '/login' &&
+      this.$route.path != '/cart' &&
+      this.$route.path != '/order' &&
+      this.$route.path != '/admin' &&
+      this.$route.path != '/adminhome' &&
+      this.$route.path != '/adminusers'
+    "
+  ></Footer>
 </template>
 
 <script>
@@ -28,26 +30,26 @@ import Footer from "./layout/Footer.vue";
 import Header from "./layout/Header.vue";
 
 export default {
-    name: "Main",
-    data() {
-        return {};
+  name: "Main",
+  data() {
+    return {};
+  },
+  mounted() {
+    console.log(this.$route.path);
+  },
+  watch: {
+    $route() {
+      if (this.$route.path != "/") {
+        document.getElementById("footer").style.background = "#D2BEFF";
+      } else {
+        document.getElementById("footer").style.background = "#FF95D7";
+      }
     },
-    mounted() {
-        console.log(this.$route.path);
-    },
-    watch: {
-        $route() {
-            if (this.$route.path != "/") {
-                document.getElementById("footer").style.background = "#D2BEFF";
-            } else {
-                document.getElementById("footer").style.background = "#FF95D7";
-            }
-        },
-    },
-    components: {
-        Header,
-        Footer,
-    },
+  },
+  components: {
+    Header,
+    Footer,
+  },
 };
 </script>
 

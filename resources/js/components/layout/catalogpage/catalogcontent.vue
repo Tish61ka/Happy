@@ -69,11 +69,7 @@
         <ul class="menu">
           <li v-for="type in types" :key="type">
             <input
-              @click="
-                sort_on.includes(type.type)
-                  ? this.sort_on.splice(type.id, 1)
-                  : this.sort_on.push(type.type)
-              "
+              @click="sort_on.includes(type.type) ? {} : this.sort_on.push(type.type)"
               class="custom-checkbox"
               type="checkbox"
               :id="'color-' + type.id"
@@ -82,76 +78,6 @@
             />
             <label :for="'color-' + type.id">{{ type.type }}</label>
           </li>
-          <!-- <li>
-            <input
-              class="custom-checkbox"
-              type="checkbox"
-              id="color-2"
-              name="color-2"
-              value="indigo"
-            />
-            <label for="color-2">Фисташковое</label>
-          </li>
-          <li>
-            <input
-              class="custom-checkbox"
-              type="checkbox"
-              id="color-3"
-              name="color-3"
-              value="indigo"
-            />
-            <label for="color-3">Ванильное</label>
-          </li>
-          <li>
-            <input
-              class="custom-checkbox"
-              type="checkbox"
-              id="color-4"
-              name="color-4"
-              value="indigo"
-            />
-            <label for="color-4">Шоколадное</label>
-          </li>
-          <li>
-            <input
-              class="custom-checkbox"
-              type="checkbox"
-              id="color-5"
-              name="color-5"
-              value="indigo"
-            />
-            <label for="color-5">Банановое</label>
-          </li>
-          <li>
-            <input
-              class="custom-checkbox"
-              type="checkbox"
-              id="color-6"
-              name="color-6"
-              value="indigo"
-            />
-            <label for="color-6">Мятное</label>
-          </li>
-          <li>
-            <input
-              class="custom-checkbox"
-              type="checkbox"
-              id="color-7"
-              name="color-7"
-              value="indigo"
-            />
-            <label for="color-7">Карамельное</label>
-          </li>
-          <li>
-            <input
-              class="custom-checkbox"
-              type="checkbox"
-              id="color-8"
-              name="color-8"
-              value="indigo"
-            />
-            <label for="color-8">Шоколадное</label>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -312,7 +238,7 @@
       <p class="clear-filter" @click="clear_sort()">Очистить фильтр</p>
       <input type="search" v-model="search" />
     </div>
-    <div class="catalog-product">
+    <div class="catalog-product all">
       <div v-for="product in products" :key="product" class="card-item">
         <div class="border-img">
           <img :src="product.image" alt="No Ethernet" />
@@ -321,27 +247,7 @@
           <h3>{{ product.title }}</h3>
         </router-link>
         <div class="bot-flex-card">
-          <button v-if="id_user" @click="AddToCart(product.id)">
-            Добавить +
-          </button>
-          <div class="flex-cost">
-            <p>{{ product.price }}p</p>
-            <p>100 g</p>
-          </div>
-        </div>
-      </div>
-
-      <div v-for="product in filteredList" :key="product" class="card-item">
-        <div class="border-img">
-          <img :src="product.image" alt="No Ethernet" />
-        </div>
-        <router-link :to="{ path: '/product/' + product.id }">
-          <h3>{{ product.title }}</h3>
-        </router-link>
-        <div class="bot-flex-card">
-          <button v-if="id_user" @click="AddToCart(product.id)">
-            Добавить +
-          </button>
+          <button v-if="id_user" @click="AddToCart(product.id)">Добавить +</button>
           <div class="flex-cost">
             <p>{{ product.price }}p</p>
             <p>100 g</p>
@@ -349,7 +255,26 @@
         </div>
       </div>
     </div>
-
+    <div class="catalog-product filtered on-filter">
+      <div v-if="filteredList.length == 0 && this.ih == true">
+        По вашему запросу ничего не найдено
+      </div>
+      <div v-else v-for="product in filteredList" :key="product" class="card-item">
+        <div class="border-img">
+          <img :src="product.image" alt="No Ethernet" />
+        </div>
+        <router-link :to="{ path: '/product/' + product.id }">
+          <h3>{{ product.title }}</h3>
+        </router-link>
+        <div class="bot-flex-card">
+          <button v-if="id_user" @click="AddToCart(product.id)">Добавить +</button>
+          <div class="flex-cost">
+            <p>{{ product.price }}p</p>
+            <p>100 g</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="pagination-page">
       <router-link
         v-for="link in pagination.links"
@@ -386,13 +311,13 @@ export default {
       sort_on: [],
       price: [],
       search: "",
+      ih: null,
     };
   },
   mounted() {
     this.getFilms();
     this.alltypes();
     this.AllProducts();
-
     (function () {
       var parent = document.querySelector("#rangeSlider");
       if (!parent) return;
@@ -446,6 +371,9 @@ export default {
       });
     }
   },
+  updated() {
+    this.ih = document.querySelector(".all").classList.contains("filtered");
+  },
   computed: {
     filteredList() {
       let sort = this.sort_on;
@@ -460,41 +388,32 @@ export default {
         let result = search.toLocaleLowerCase();
         if (sort == "") {
           if (max_const == max && min_const == min) {
-            // document.querySelector(".catalog-product").style.opacity = 1;
-            // document.querySelector(".catalog-product").style.position =
-            //   "relative";
-            // document.querySelector(".pagination-page").style.opacity = 1;
-            // document.querySelector(".pagination-page").style.position =
-            //   "relative";
+            document.querySelector(".all").classList.remove("filtered");
+            document.querySelector(".pagination-page").style.opacity = 1;
+            document.querySelector(".pagination-page").style.position = "relative";
             if (search != "") {
-              // document.querySelector(".catalog-product").style.opacity = 0;
-              // document.querySelector(".catalog-product").style.position =
-              //   "absolute";
-              // document.querySelector(".pagination-page").style.opacity = 0;
-              // document.querySelector(".pagination-page").style.position =
-              //   "absolute";
+              document.querySelector(".all").classList.add("filtered");
+              document.querySelector(".pagination-page").style.opacity = 0;
+              document.querySelector(".pagination-page").style.position = "absolute";
               return name_product.indexOf(result) > -1;
             }
-            // document.querySelector(".catalog-product").style.opacity = 1;
-            // document.querySelector(".catalog-product").style.position =
-            //   "relative";
-            // document.querySelector(".pagination-page").style.opacity = 1;
-            // document.querySelector(".pagination-page").style.position =
-            //   "relative";
+            document.querySelector(".on-filter").classList.remove("filtered");
+            document.querySelector(".pagination-page").style.opacity = 1;
+            document.querySelector(".pagination-page").style.position = "relative";
             return false;
           }
-          // document.querySelector(".catalog-product").style.opacity = 0;
-          // document.querySelector(".catalog-product").style.position =
-          //   "absolute";
-          // document.querySelector(".pagination-page").style.opacity = 0;
-          // document.querySelector(".pagination-page").style.position =
-          //   "absolute";
+
+          document.querySelector(".all").classList.add("filtered");
+          document.querySelector(".pagination-page").style.opacity = 0;
+          document.querySelector(".pagination-page").style.position = "absolute";
           return (
-            elem.price >= min &&
-            elem.price <= max &&
-            name_product.indexOf(result) > -1
+            elem.price >= min && elem.price <= max && name_product.indexOf(result) > -1
           );
         } else if (sort != "") {
+          document.querySelector(".all").classList.add("filtered");
+          document.querySelector(".on-filter").classList.remove("filtered");
+          document.querySelector(".pagination-page").style.opacity = 0;
+          document.querySelector(".pagination-page").style.position = "absolute";
           return (
             sort.includes(elem.type.type) &&
             elem.price >= min &&
@@ -616,6 +535,10 @@ export default {
   align-items: center;
   width: 100%;
   margin-bottom: 30px;
+}
+.catalog-product.filtered {
+  opacity: 0;
+  position: absolute;
 }
 .range-slider .number-group {
   display: flex;
@@ -956,7 +879,6 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 
   flex-wrap: wrap;
   margin-top: 50px;
@@ -972,6 +894,7 @@ export default {
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+  margin-right: 20px;
   margin-bottom: 50px;
 }
 .border-img {

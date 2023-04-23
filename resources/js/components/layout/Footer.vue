@@ -25,7 +25,7 @@
           />
         </svg>
       </router-link>
-      <router-link :to="{ name: 'Index' }">Авторизация для администратора</router-link>
+      <router-link :to="{ name: 'Admin' }">Авторизация для администратора</router-link>
       <router-link :to="{ name: 'Index' }">Партнёры</router-link>
       <router-link :to="{ name: 'Index' }">Каталог</router-link>
     </div>
