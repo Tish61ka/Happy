@@ -41,7 +41,13 @@ use api;
             xmlns="http://www.w3.org/2000/svg"
           >
             <circle cx="10" cy="10" r="9.5" stroke="#B09CD7" />
-            <line x1="16.3737" y1="16.6678" x2="24.3737" y2="25.6678" stroke="#B09CD7" />
+            <line
+              x1="16.3737"
+              y1="16.6678"
+              x2="24.3737"
+              y2="25.6678"
+              stroke="#B09CD7"
+            />
           </svg>
         </button>
       </div>
@@ -92,9 +98,13 @@ use api;
           </div>
           <p>
             Информацию о доставке вы можете прочитать на странице
-            <router-link :to="{ name: 'Admin' }">“Доставка и оплата”</router-link>
+            <router-link :to="{ name: 'Admin' }"
+              >“Доставка и оплата”</router-link
+            >
           </p>
-          <button @click.prevent="this.deliveryCreate()">Подтвердить данные</button>
+          <button @click.prevent="this.deliveryCreate()">
+            Подтвердить данные
+          </button>
           {{ message }}
         </form>
       </div>
@@ -138,6 +148,8 @@ export default {
           address: this.address,
           tel: this.tel,
           email: this.email,
+          email_verified_at: "123",
+          remember_token: "123",
         })
         .then((res) => {
           this.message = res.data.message;

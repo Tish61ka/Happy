@@ -1,7 +1,9 @@
 <template>
   <footer id="footer">
     <div>
-      <router-link :to="{ name: 'Index' }">Политика конфедициальности</router-link>
+      <router-link :to="{ name: 'Index' }"
+        >Политика конфедициальности</router-link
+      >
       <p>Оставить заявку</p>
       <p>О компании</p>
       <router-link :to="{ name: 'Index' }">
@@ -25,7 +27,9 @@
           />
         </svg>
       </router-link>
-      <router-link :to="{ name: 'Admin' }">Авторизация для администратора</router-link>
+      <router-link :to="{ name: 'Login' }"
+        >Авторизация для администратора</router-link
+      >
       <router-link :to="{ name: 'Index' }">Партнёры</router-link>
       <router-link :to="{ name: 'Index' }">Каталог</router-link>
     </div>

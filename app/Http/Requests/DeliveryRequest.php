@@ -25,6 +25,8 @@ class DeliveryRequest extends FormRequest
   {
     return [
       'address' => ['required'],
+      'email_verified_at' => ['required'],
+      'remember_token' => ['required'],
       'tel' => ['required', 'numeric'],
       'email' => ['required', 'email'],
       'name' => ['required', 'string']

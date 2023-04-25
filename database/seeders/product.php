@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Faker\Core\File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class product extends Seeder
 {
@@ -15,6 +16,15 @@ class product extends Seeder
    */
   public function run()
   {
+    \App\Models\User::factory()->create([
+      'id' => 1,
+      'name' => 'Admin',
+      'password' => Hash::make('admin'),
+      'tel' => '8967331276',
+      'address' => 'admin))',
+      'email' => 'danchik.kun@mail.ru',
+      'role' => 1
+    ]);
     \App\Models\Type::factory()->create([
       'id' => 1,
       'type' => 'Клубничное',

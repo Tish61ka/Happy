@@ -90,7 +90,7 @@ export default {
     if (localStorage.getItem("token")) {
       this.getMe();
       this.$router.push({
-        name: "Profile",
+        name: "Admin",
       });
     }
   },
@@ -101,11 +101,11 @@ export default {
         if (localStorage.getItem("token")) {
           (this.$store.state.isAuth = true),
             this.$router.push({
-              name: "Profile",
+              name: "Admin",
             });
         }
         api
-          .post("http://127.0.0.1:8000/api/signIn", {
+          .post("/api/signIn", {
             email: this.login.email,
             password: this.login.password,
           })
@@ -117,7 +117,7 @@ export default {
             this.getMe();
             (this.$store.state.isAuth = true),
               this.$router.push({
-                name: "Profile",
+                name: "Admin",
               });
           });
       });
@@ -143,11 +143,14 @@ export default {
                 if (response.data.status === false) {
                   console.log(response.data.msg);
                 } else {
-                  window.localStorage.setItem("token", response.data["access_token"]);
+                  window.localStorage.setItem(
+                    "token",
+                    response.data["access_token"]
+                  );
                   this.getMe();
                   (this.$store.state.isAuth = true),
                     this.$router.push({
-                      name: "Profile",
+                      name: "Admin",
                     });
                 }
               });
