@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SignInController;
 use App\Http\Controllers\UserEditController;
 
 /*
@@ -23,7 +24,7 @@ use App\Http\Controllers\UserEditController;
 */
 
 Route::post('/signUp', [AuthController::class, 'signUp']);
-Route::post('/signIn', [AuthController::class, 'signIn']);
+Route::post('/signIn', [SignInController::class, 'signIn']);
 
 // Авторизация
 Route::middleware('user')->group(function () {
