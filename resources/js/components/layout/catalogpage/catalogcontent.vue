@@ -168,6 +168,10 @@
         </ul>
       </div>
     </div>
+    <div class="to-construct">
+      <p>Не можете выбрать?</p>
+      <router-link :to="{ name: 'Construct' }">Создайте свое</router-link>
+    </div>
   </aside>
   <section class="catalog-content">
     <p class="pagination">
@@ -731,6 +735,15 @@ export default {
   position: absolute;
   z-index: -1;
   opacity: 0;
+}
+.wafer {
+  margin-bottom: 30px;
+}
+.to-construct p {
+  margin-bottom: 5px;
+}
+.to-construct a {
+  color: #6a4ba7;
 }
 
 /* для элемента label, связанного с .custom-checkbox */

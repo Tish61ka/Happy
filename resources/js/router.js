@@ -8,6 +8,7 @@ import Cart from "./components/Cart.vue";
 import Catalog from "./components/Catalog.vue";
 import Product from "./components/Product.vue";
 import Admin from "./components/Admin.vue";
+import Construct from "./components/Construct.vue"
 
 export default createRouter({
     history: createWebHistory(),
@@ -71,6 +72,10 @@ export default createRouter({
             path: "/catalog/:page",
             name: "catalog",
             component: Catalog,
+        }, {
+            path: "/constructor",
+            name: "Construct",
+            component: Construct,
         },
     ],
 });
