@@ -3,14 +3,15 @@
     <h1>Популярные отзывы</h1>
     <div class="contain-slider">
       <Carousel :items-to-show="3" :wrap-around="true">
-        <Slide v-for="slide in 10" :key="slide">
+        <Slide v-for="slide in reviews" :key="slide">
           <div class="carousel__item">
-            <div></div>
-            <h2>Руслан Кромеев</h2>
+            <!-- <div></div> -->
+            <h2>{{ slide.name }}</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation
+              {{ slide.content }}
+            </p>
+            <p>
+              Отзыв о: <strong>{{ slide.product_id.title }}</strong>
             </p>
           </div>
         </Slide>
@@ -135,6 +136,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { defineComponent } from "vue";
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 // import styleforslider from "./styleforslider.vue";
@@ -147,6 +149,22 @@ export default defineComponent({
     Slide,
     Navigation,
     // styleforslider,
+  },
+  data() {
+    return {
+      reviews: [],
+    };
+  },
+  mounted() {
+    this.allReviews();
+  },
+  methods: {
+    allReviews() {
+      axios.get("/api/all/reviews").then((res) => {
+        this.reviews = res.data.data;
+        console.log(this.reviews);
+      });
+    },
   },
 });
 </script>

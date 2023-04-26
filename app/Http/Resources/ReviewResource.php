@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,8 +20,8 @@ class ReviewResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
-            'product_id' => $this->product_id,
+            'name' => $this->name,
+            'product_id' => Product::find($this->product_id),
             'content' => $this->content,
         ];
     }

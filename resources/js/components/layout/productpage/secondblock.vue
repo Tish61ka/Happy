@@ -3,23 +3,44 @@
     <div>
       <h1>Оставить отзыв о товаре:</h1>
       <div>
-        <input type="text" placeholder="Введите имя" required />
+        <input type="text" placeholder="Введите имя" v-model="name" required />
         <textarea
           cols="30"
           rows="10"
           placeholder="Введите комментарий"
           required
+          v-model="content"
         ></textarea>
-        <button type="submit">Отправить</button>
+        <button type="submit" @click="createReview()">Отправить</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      name: "",
+      content: "",
+      id_product: window.location.pathname.split("/")[2],
+    };
+  },
+  mounted() {},
+  methods: {
+    createReview() {
+      axios
+        .post("/api/create/review", {
+          name: this.name,
+          content: this.content,
+          id_product: this.id_product,
+        })
+        .then((res) => {
+          this.name = "";
+          this.content = "";
+        });
+    },
   },
 };
 </script>

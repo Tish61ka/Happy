@@ -58,13 +58,13 @@ Route::middleware('user')->group(function () {
   // ------------------------------------------------------------------------
   // ------------------------------------------------------------------------
   // Все отзывы определенного продукта
-  Route::get('/reviews/{id}', [ReviewController::class, 'all']);
-  // Все отзывы пол-ля
-  Route::get('/reviews/my/{id}', [ReviewController::class, 'index']);
-  // Создание отзыва
-  Route::post('/reviews', [ReviewController::class, 'store']);
-  // Удаление отзыва
-  Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
+  // Route::get('/reviews/{id}', [ReviewController::class, 'all']);
+  // // Все отзывы пол-ля
+  // Route::get('/reviews/my/{id}', [ReviewController::class, 'index']);
+  // // Создание отзыва
+  // Route::post('/reviews', [ReviewController::class, 'store']);
+  // // Удаление отзыва
+  // Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
   // ------------------------------------------------------------------------
 
 });
@@ -77,7 +77,8 @@ Route::patch('/product/{id}', [ProductController::class, 'update']);
 Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 
 
-
+Route::post('/create/review/', [ReviewController::class, 'create']);
+Route::get('/all/reviews', [ReviewController::class, 'all']);
 
 // Пользователи
 //Route::get('/users', [UserController::class, 'all']);
