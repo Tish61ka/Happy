@@ -20,7 +20,7 @@
   <div class="details">
     <div class="recentOrders">
       <div>
-        <div class="item">
+        <!-- <div class="item">
           <div>
             <img src="/img/strawberry.png" alt="No Ethernet" />
           </div>
@@ -44,8 +44,8 @@
               fill="#F93A3A"
             />
           </svg>
-        </div>
-        <form class="item-v2">
+        </div> -->
+        <form class="item-v2 no-edit">
           <div>
             <img src="/img/strawberry.png" alt="No Ethernet" />
             <input type="file" />
@@ -54,15 +54,55 @@
           <h2>Клубничное мороженное с вафельным стаканчиком</h2>
           <input type="text" value="Клубничное мороженное с вафельным стаканчиком" />
           <div>
-            <button class="edit">
+            <button class="edit" @click.prevent="GoEdit()">
               Редактировать
               <img src="/img/edit.png" alt="No Ethernet" />
             </button>
-            <button type="submit" class="save">
+            <button type="submit" class="save" @click.prevent="GoBehind()">
               Сохранить
               <img src="/img/save.png" alt="No Ethernet" />
             </button>
-            <div><input type="text" value="300" /> р</div>
+            <div>
+              <input type="text" value="300" />
+              <p>300</p>
+              р
+            </div>
+          </div>
+          <svg
+            width="37"
+            height="37"
+            viewBox="0 0 37 37"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.2487 29.2917C9.2487 30.9875 10.6362 32.375 12.332 32.375H24.6654C26.3612 32.375 27.7487 30.9875 27.7487 29.2917V10.7917H9.2487V29.2917ZM12.332 13.875H24.6654V29.2917H12.332V13.875ZM23.8945 6.16667L2.3529 4.625H14.6445L13.1029 6.16667H7.70703V9.25H29.2904V6.16667H23.8945Z"
+              fill="#F93A3A"
+            />
+          </svg>
+        </form>
+        <form class="item-v2 no-edit">
+          <div>
+            <img src="/img/strawberry.png" alt="No Ethernet" />
+            <input type="file" />
+            <p>Выберите файл</p>
+          </div>
+          <h2>Клубничное мороженное с вафельным стаканчиком</h2>
+          <input type="text" value="Клубничное мороженное с вафельным стаканчиком" />
+          <div>
+            <button class="edit" @click.prevent="GoEdit()">
+              Редактировать
+              <img src="/img/edit.png" alt="No Ethernet" />
+            </button>
+            <button type="submit" class="save" @click.prevent="GoBehind()">
+              Сохранить
+              <img src="/img/save.png" alt="No Ethernet" />
+            </button>
+            <div>
+              <input type="text" value="300" />
+              <p>300</p>
+              р
+            </div>
           </div>
           <svg
             width="37"
@@ -122,6 +162,12 @@ export default {
       axios.get(`/api/all/products`).then((res) => {
         this.products = res.data.content;
       });
+    },
+    GoEdit() {
+      document.querySelector(".item-v2").classList.remove("no-edit");
+    },
+    GoBehind() {
+      document.querySelector(".item-v2").classList.add("no-edit");
     },
   },
 };
@@ -251,7 +297,11 @@ export default {
   border: 1px solid #000000;
   border-radius: 9px;
   padding-left: 15px;
+  padding-right: 5px;
   outline: none;
+}
+.details .recentOrders .item-v2 > div:nth-child(4) > div p {
+  display: none;
 }
 .details .recentOrders .item-v2 > h2 {
   display: none;
@@ -304,6 +354,38 @@ export default {
   border-radius: 8px;
 }
 
+.details .recentOrders .item-v2.no-edit > div:first-child img {
+  display: block;
+}
+.details .recentOrders .item-v2.no-edit input[type="file"] {
+  display: none;
+}
+.details .recentOrders .item-v2.no-edit > div:first-child p {
+  display: none;
+}
+.details .recentOrders .item-v2.no-edit > input {
+  display: none;
+}
+.details .recentOrders .item-v2.no-edit > div:nth-child(4) > div {
+  display: flex;
+  flex-direction: row;
+}
+.details .recentOrders .item-v2.no-edit > div:nth-child(4) > div p {
+  display: block;
+}
+.details .recentOrders .item-v2.no-edit > h2 {
+  display: block;
+}
+.details .recentOrders .item-v2.no-edit > div:nth-child(4) button:first-child {
+  display: block;
+}
+.details .recentOrders .item-v2.no-edit > div:nth-child(4) button:nth-child(2) {
+  display: none;
+}
+.details .recentOrders .item-v2.no-edit > div:nth-child(4) input {
+  display: none;
+}
+/*
 .details .recentOrders .item {
   position: relative;
   display: flex;
@@ -373,7 +455,7 @@ export default {
   font-style: normal;
   font-weight: 400;
   font-size: 25px;
-}
+}*/
 
 .cardHeader {
   display: flex;
