@@ -109,7 +109,6 @@
     <div class="recentOrders">
       <div class="cardHeader">
         <h2>Список заказов</h2>
-        <a href="#" class="all-views">Посмотреть все</a>
       </div>
       <table>
         <thead>
@@ -312,9 +311,7 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(
-      ".navigation-cart li:not(:first-child)"
-    );
+    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");

@@ -69,6 +69,16 @@ export default createRouter({
             component: Admin,
         },
         {
+            path: "/adminreviews",
+            name: "ReviewAdmin",
+            component: Admin,
+        },
+        {
+            path: "/adminproducts",
+            name: "ProductAdmin",
+            component: Admin,
+        },
+        {
             path: "/catalog/:page",
             name: "catalog",
             component: Catalog,

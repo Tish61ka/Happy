@@ -14,6 +14,8 @@
       </svg>
     </div>
   </div>
+
+  <h1 class="h1-top">Пользователи</h1>
   <!--Bot-->
   <div class="details">
     <div class="recentOrders">
@@ -180,7 +182,15 @@ export default {
   width: 50px;
   cursor: pointer;
 }
-
+.h1-top {
+  width: 100%;
+  text-align: center;
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  margin-bottom: 30px;
+}
 .details {
   position: relative;
   width: 100%;

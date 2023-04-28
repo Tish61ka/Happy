@@ -6,6 +6,8 @@
         v-if="this.$route.fullPath === '/admin' || this.$route.fullPath === '/adminhome'"
       ></HomeAdmin>
       <UserAdmin v-if="this.$route.fullPath === '/adminusers'"></UserAdmin>
+      <ReviewAdmin v-if="this.$route.fullPath === '/adminreviews'"></ReviewAdmin>
+      <ProductAdmin v-if="this.$route.fullPath === '/adminproducts'"></ProductAdmin>
     </div>
   </div>
 </template>
@@ -14,6 +16,8 @@
 import AsideAdmin from "./layout/adminpage/asideAdmin.vue";
 import HomeAdmin from "./layout/adminpage/HomeAdmin.vue";
 import UserAdmin from "./layout/adminpage/UserAdmin.vue";
+import ReviewAdmin from "./layout/adminpage/ReviewAdmin.vue";
+import ProductAdmin from "./layout/adminpage/ProductAdmin.vue";
 
 export default {
   data() {
@@ -25,6 +29,8 @@ export default {
     AsideAdmin,
     HomeAdmin,
     UserAdmin,
+    ReviewAdmin,
+    ProductAdmin,
   },
   mounted() {},
 };
@@ -48,6 +54,7 @@ export default {
   width: calc(100% - 80px);
   left: 80px;
 }
+
 /*main*/
 @media (max-width: 1590px) {
   .main {

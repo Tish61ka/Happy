@@ -30,10 +30,13 @@
         <router-link :to="{ name: 'Index' }"> Home </router-link> /
         <router-link :to="{ name: 'Catalog' }"> Catalog </router-link>/ Constructor
       </p>
-      <h1>Создай свое мороженное</h1>
-      <div v-if="showDanger == true">
-        <p>{{ messageDanger }}</p>
+      <div class="h1-danger">
+        <h1>Создай свое мороженное</h1>
+        <div v-if="showDanger == true" class="danger">
+          <p>{{ messageDanger }}</p>
+        </div>
       </div>
+
       <div class="created-ice-cream">
         <div class="field">
           <div>
@@ -421,11 +424,28 @@ export default {
   width: 80%;
   margin-left: 130px;
 }
+.h1-danger {
+  width: 1056px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 .main-content h1 {
   font-family: "Comfortaa";
   font-style: normal;
   font-weight: 400;
   font-size: 36px;
+}
+.danger {
+  display: inline-block;
+  padding: 8px 10px;
+  background: rgba(249, 58, 58, 0.5);
+  border-radius: 8px;
+}
+.danger p {
+  font-size: 18px;
+  color: white;
 }
 .created-ice-cream {
   position: relative;
@@ -433,7 +453,7 @@ export default {
   height: 726px;
   background: #ffffff;
   box-shadow: 0px 0px 27px rgba(0, 0, 0, 0.25);
-  border-radius: 97px;
+  border-radius: 57px;
   margin-top: 50px;
   margin-bottom: 50px;
 }

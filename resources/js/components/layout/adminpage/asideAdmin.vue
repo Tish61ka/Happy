@@ -85,7 +85,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'UserAdmin' }">
+        <router-link :to="{ name: 'ReviewAdmin' }">
           <span class="icon-cart">
             <svg
               width="48"
@@ -123,7 +123,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'UserAdmin' }">
+        <router-link :to="{ name: 'ProductAdmin' }">
           <span class="icon-cart">
             <svg
               width="50"

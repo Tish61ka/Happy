@@ -6,7 +6,9 @@
       this.$route.path != '/order' &&
       this.$route.path != '/admin' &&
       this.$route.path != '/adminhome' &&
-      this.$route.path != '/adminusers'
+      this.$route.path != '/adminusers' &&
+      this.$route.path != '/adminreviews' &&
+      this.$route.path != '/adminproducts'
     "
   ></Header>
   <main>
@@ -19,7 +21,9 @@
       this.$route.path != '/order' &&
       this.$route.path != '/admin' &&
       this.$route.path != '/adminhome' &&
-      this.$route.path != '/adminusers'
+      this.$route.path != '/adminusers' &&
+      this.$route.path != '/adminreviews' &&
+      this.$route.path != '/adminproducts'
     "
   ></Footer>
 </template>
