@@ -25,11 +25,10 @@ use App\Http\Controllers\UserEditController;
 
 Route::post('/signUp', [AuthController::class, 'signUp']);
 Route::post('/signIn', [SignInController::class, 'signIn']);
-
 // Авторизация
 Route::middleware('user')->group(function () {
-  Route::get('/me', [AuthController::class, 'me']);
-  Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [SignInController::class, 'me']);
+  Route::get('/logout', [SignInController::class, 'logout']);
 
   // Редактирование данных о доставке
   Route::patch('/me/delivery', [UserEditController::class, 'delivery']);

@@ -142,7 +142,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'UserAdmin' }">
+        <a @click.prevent="logout">
           <span class="icon-cart">
             <svg
               width="44"
@@ -162,17 +162,31 @@
             </svg>
           </span>
           <span class="title-cart">Выйти</span>
-        </router-link>
+        </a>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {};
   },
+    methods: {
+      logout(){
+        axios.get('/api/logout',{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(r => {
+            this.$router.push({
+                name: 'Index'
+            })
+        })
+      }
+    },
   mounted() {},
 };
 </script>

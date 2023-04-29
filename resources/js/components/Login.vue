@@ -102,13 +102,7 @@ export default {
     signIn() {
       console.log(this.login);
       axios.get("/sanctum/csrf-cookie").then((r) => {
-        if (localStorage.getItem("token")) {
-          (this.$store.state.isAuth = true),
-            this.$router.push({
-              name: "Admin",
-            });
-        }
-        api
+        axios
           .post("/api/signIn", {
             email: this.login.email,
             password: this.login.password,
@@ -117,7 +111,7 @@ export default {
             this.login.email = "";
             this.login.password = "";
             console.log(response);
-            window.localStorage.setItem("token", response.data["access_token"]);
+            window.localStorage.setItem("token", response.data["token"]);
             this.getMe();
             (this.$store.state.isAuth = true),
               this.$router.push({

@@ -15,7 +15,6 @@ class SignInController extends Controller
                 'message' => 'Неверные данные',
             ], 401);
         }
-
         $user = Auth::user();
         // ВНЕДРИТЬ ПРОВЕРКУ НА БАН
 
@@ -24,6 +23,19 @@ class SignInController extends Controller
         return response()->json([
             'message' => 'Вы успешно вошли',
             'content' => $token,
+        ], 200);
+    }
+    public function me(){
+        return response()->json([
+            'content' => Auth::guard('sanctum')->user()
+        ]);
+    }
+    public function logout(): \Illuminate\Http\JsonResponse
+    {
+        //Удаление токенов
+        auth('sanctum')->user()->tokens()->delete();
+        return response()->json([
+            'message' => 'Вы вышли'
         ], 200);
     }
 }
