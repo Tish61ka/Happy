@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Review;
 use Faker\Core\File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -156,5 +157,6 @@ class product extends Seeder
                       Сливки 10-20%:    250г',
       'type' => 8,
     ]);
+    Review::factory(4)->create();
   }
 }

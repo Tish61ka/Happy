@@ -5,7 +5,7 @@
       <Carousel :items-to-show="3" :wrap-around="true">
         <Slide v-for="slide in reviews" :key="slide">
           <div class="carousel__item">
-            <!-- <div></div> -->
+              <img :src="getPhoto()" alt="">
             <h2>{{ slide.name }}</h2>
             <p>
               {{ slide.content }}
@@ -153,6 +153,11 @@ export default defineComponent({
   data() {
     return {
       reviews: [],
+        photos: [
+            '/img/strawberryball.png',
+            '/img/bananaball.png',
+            '/img/mintball.png',
+        ],
     };
   },
   mounted() {
@@ -165,6 +170,12 @@ export default defineComponent({
         console.log(this.reviews);
       });
     },
+      getPhoto(){
+          let i = this.photos.length;
+          let index =Math.floor(Math.random() * (i - 0 + 1) + 0);
+          console.log(index);
+          return this.photos[index];
+      }
   },
 });
 </script>
@@ -219,7 +230,7 @@ export default defineComponent({
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-image: url("/img/test.jpg");
+  /*background-image: url("/img/test.jpg");*/
   background-size: cover;
   background-position: center;
 }

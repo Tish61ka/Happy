@@ -181,7 +181,7 @@ export default {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then(r => {
-            localStorage.removeItem('token');
+            localStorage.removeItem('token');``
             this.$router.push({
                 name: 'Index'
             })
