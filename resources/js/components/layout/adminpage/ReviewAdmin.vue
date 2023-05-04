@@ -21,26 +21,17 @@
     <div class="recentOrders">
       <div class="review-content">
         <!--Каждый отзыв отдельно от сюда-->
-        <div>
+        <div v-for="review in reviews" :key="review">
           <div>
             <div>
               <p>Комментарий оставил пользователь:</p>
-              <h2>Куничкин Данилка</h2>
+              <h2>{{ review.name }}</h2>
             </div>
             <button>Удалить</button>
           </div>
           <div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation
+              {{ review.content }}
             </p>
           </div>
         </div>
@@ -50,11 +41,15 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      reviews: [],
+    };
   },
   mounted() {
+    this.allReviews();
     let toggle = document.querySelector(".toggle");
     let navigationCart = document.querySelector(".navigation-cart");
     let main = document.querySelector(".main");
@@ -72,6 +67,19 @@ export default {
     }
     list.forEach((item) => item.addEventListener("click", activeLink));
     time_is_widget.init({ Moscow_z71d: {} });
+  },
+  methods: {
+    allReviews() {
+      axios
+        .get(`/api/reviews`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          this.reviews = res.data.content;
+        });
+    },
   },
 };
 </script>

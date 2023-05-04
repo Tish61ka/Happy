@@ -111,7 +111,7 @@ export default {
             this.login.email = "";
             this.login.password = "";
             console.log(response);
-            window.localStorage.setItem("token", response.data["token"]);
+            window.localStorage.setItem("token", response.data.content);
             this.getMe();
             (this.$store.state.isAuth = true),
               this.$router.push({

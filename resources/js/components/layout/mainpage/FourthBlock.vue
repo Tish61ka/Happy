@@ -5,7 +5,7 @@
       <Carousel :items-to-show="3" :wrap-around="true">
         <Slide v-for="slide in reviews" :key="slide">
           <div class="carousel__item">
-              <img :src="getPhoto()" alt="">
+            <img :src="getPhoto()" alt="" />
             <h2>{{ slide.name }}</h2>
             <p>
               {{ slide.content }}
@@ -153,11 +153,7 @@ export default defineComponent({
   data() {
     return {
       reviews: [],
-        photos: [
-            '/img/strawberryball.png',
-            '/img/bananaball.png',
-            '/img/mintball.png',
-        ],
+      photos: ["/img/strawberryball.png", "/img/bananaball.png", "/img/mintball.png"],
     };
   },
   mounted() {
@@ -166,16 +162,16 @@ export default defineComponent({
   methods: {
     allReviews() {
       axios.get("/api/all/reviews").then((res) => {
-        this.reviews = res.data.data;
+        this.reviews = res.data.content;
         console.log(this.reviews);
       });
     },
-      getPhoto(){
-          let i = this.photos.length;
-          let index =Math.floor(Math.random() * (i - 0 + 1) + 0);
-          console.log(index);
-          return this.photos[index];
-      }
+    getPhoto() {
+      let i = this.photos.length;
+      let index = Math.floor(Math.random() * (i - 0 + 1) + 0);
+      console.log(index);
+      return this.photos[index];
+    },
   },
 });
 </script>

@@ -8,6 +8,7 @@
       <UserAdmin v-if="this.$route.fullPath === '/adminusers'"></UserAdmin>
       <ReviewAdmin v-if="this.$route.fullPath === '/adminreviews'"></ReviewAdmin>
       <ProductAdmin v-if="this.$route.fullPath === '/adminproducts'"></ProductAdmin>
+      <OrdersAdmin v-if="this.$route.fullPath === '/adminorders'"></OrdersAdmin>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@ import HomeAdmin from "./layout/adminpage/HomeAdmin.vue";
 import UserAdmin from "./layout/adminpage/UserAdmin.vue";
 import ReviewAdmin from "./layout/adminpage/ReviewAdmin.vue";
 import ProductAdmin from "./layout/adminpage/ProductAdmin.vue";
+import OrdersAdmin from "./layout/adminpage/OrdersAdmin.vue";
 
 export default {
   data() {
@@ -31,6 +33,7 @@ export default {
     UserAdmin,
     ReviewAdmin,
     ProductAdmin,
+    OrdersAdmin,
   },
   mounted() {},
 };

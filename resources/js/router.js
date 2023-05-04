@@ -79,6 +79,11 @@ export default createRouter({
             component: Admin,
         },
         {
+            path: "/adminorders",
+            name: "OrdersAdmin",
+            component: Admin,
+        },
+        {
             path: "/catalog/:page",
             name: "catalog",
             component: Catalog,

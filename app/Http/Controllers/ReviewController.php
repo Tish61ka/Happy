@@ -12,7 +12,11 @@ class ReviewController extends Controller
 {
     public function all()
     {
-        return ReviewResource::collection(Review::all());
+        // return ReviewResource::collection(Review::all())
+        return response()->json([
+            'message' => 'Все отзывы',
+            'content' => ReviewResource::collection(Review::all()),
+        ]);
     }
     public function create(Request $request)
     {

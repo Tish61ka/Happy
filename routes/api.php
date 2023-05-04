@@ -27,9 +27,16 @@ Route::post('/signUp', [AuthController::class, 'signUp']);
 Route::post('/signIn', [SignInController::class, 'signIn']);
 // Авторизация
 Route::middleware('user')->group(function () {
-    Route::get('/me', [SignInController::class, 'me']);
+  Route::get('/me', [SignInController::class, 'me']);
   Route::get('/logout', [SignInController::class, 'logout']);
 
+  Route::middleware('admin')->group(function () {
+    // Пользователи
+    Route::get('/users', [UserController::class, 'all']);
+    // Route::get('/users/{id}', [UserController::class, 'show']);
+
+    Route::get('/reviews', [ReviewController::class, 'all']);
+  });
   // Редактирование данных о доставке
   Route::patch('/me/delivery', [UserEditController::class, 'delivery']);
   // Редактирование данных
@@ -79,9 +86,7 @@ Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 Route::post('/create/review/', [ReviewController::class, 'create']);
 Route::get('/all/reviews', [ReviewController::class, 'all']);
 
-// Пользователи
-//Route::get('/users', [UserController::class, 'all']);
-//Route::get('/users/{id}', [UserController::class, 'show']);
+
 
 Route::get('/cart/all/{id}', [CartController::class, 'all']);
 Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy']);

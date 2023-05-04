@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
   {
     return response()->json([
       'message' => 'Все пол-ли',
-      'content' => User::all()
+      'content' => User::all()->where('id', '!=', Auth::guard('sanctum')->user()->id)
     ]);
   }
   public function delivery(DeliveryRequest $request): \Illuminate\Http\JsonResponse

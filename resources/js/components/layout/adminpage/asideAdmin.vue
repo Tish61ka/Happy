@@ -104,7 +104,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'UserAdmin' }">
+        <router-link :to="{ name: 'OrdersAdmin' }">
           <span class="icon-cart">
             <svg
               width="37"
@@ -169,25 +169,28 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {};
   },
-    methods: {
-      logout(){
-        axios.get('/api/logout',{
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(r => {
-            localStorage.removeItem('token');``
-            this.$router.push({
-                name: 'Index'
-            })
+  methods: {
+    logout() {
+      axios
+        .get("/api/logout", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         })
-      }
+        .then((r) => {
+          localStorage.removeItem("token");
+          ``;
+          this.$router.push({
+            name: "Index",
+          });
+        });
     },
+  },
   mounted() {},
 };
 </script>

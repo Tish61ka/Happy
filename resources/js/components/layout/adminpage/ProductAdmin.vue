@@ -20,17 +20,17 @@
   <div class="details">
     <div class="recentOrders">
       <div>
-        <!-- <div class="item">
+        <div class="item" v-for="product in products" :key="product">
           <div>
-            <img src="/img/strawberry.png" alt="No Ethernet" />
+            <img :src="product.image" alt="No Ethernet" />
           </div>
-          <h2>Клубничное мороженное с вафельным стаканчиком</h2>
+          <h2>{{ product.title }}</h2>
           <div>
             <button>
               Редактировать
               <img src="/img/edit.png" alt="No Ethernet" />
             </button>
-            <p>300 р</p>
+            <p>{{ product.price }} р</p>
           </div>
           <svg
             width="37"
@@ -44,8 +44,8 @@
               fill="#F93A3A"
             />
           </svg>
-        </div> -->
-        <form class="item-v2 no-edit">
+        </div>
+        <!-- <form class="item-v2 no-edit">
           <div>
             <img src="/img/strawberry.png" alt="No Ethernet" />
             <input type="file" />
@@ -116,7 +116,7 @@
               fill="#F93A3A"
             />
           </svg>
-        </form>
+        </form> -->
       </div>
     </div>
     <!--right-->
@@ -124,6 +124,32 @@
       <div class="cardHeader">
         <h2>Добавление товара</h2>
       </div>
+      <form id="app-cover">
+        <div>
+          <input type="file" v-on:change="handleFileUpload()" ref="file" required />
+          <p>Выберите файл</p>
+        </div>
+        <input type="text" placeholder="Введите название" required v-model="title" />
+        <input type="text" placeholder="Введите цену" required v-model="price" />
+        <select name="" id="">
+          <option value=""></option>
+        </select>
+        <textarea
+          cols="30"
+          rows="10"
+          required
+          placeholder="Введите описание"
+          v-model="discription"
+        ></textarea>
+        <textarea
+          cols="30"
+          rows="10"
+          required
+          placeholder="Введите состав"
+          v-model="structure"
+        ></textarea>
+        <button type="submit">Добавить +</button>
+      </form>
     </div>
   </div>
 </template>
@@ -134,6 +160,12 @@ export default {
   data() {
     return {
       products: [],
+      title: "",
+      price: "",
+      discription: "",
+      structure: "",
+      currentItem: null,
+      toppings: ["Caramel", "Peanut butter", "Sundae", "Oreos"],
     };
   },
   mounted() {
@@ -173,7 +205,7 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .main {
   position: absolute;
   width: calc(100% - 300px);
@@ -235,7 +267,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.details .recentOrders .item-v2 {
+/*.details .recentOrders .item-v2 {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -385,7 +417,7 @@ export default {
 .details .recentOrders .item-v2.no-edit > div:nth-child(4) input {
   display: none;
 }
-/*
+*/
 .details .recentOrders .item {
   position: relative;
   display: flex;
@@ -455,12 +487,13 @@ export default {
   font-style: normal;
   font-weight: 400;
   font-size: 25px;
-}*/
+}
 
 .cardHeader {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .cardHeader h2 {
@@ -471,11 +504,106 @@ export default {
 
 .recentCustomers {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 500px;
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   background: white;
+}
+.recentCustomers form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
+}
+.recentCustomers form > div:first-child {
+  position: relative;
+  width: 232px;
+  height: 244px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ededed;
+  border-radius: 25px;
+  margin-bottom: 15px;
+}
+.recentCustomers form input[type="file"] {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+  background: transparent;
+}
+.recentCustomers form > div:first-child p {
+  position: absolute;
+  width: auto;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: #9c96a9;
+}
+.recentCustomers form input[type="text"] {
+  width: 100%;
+  height: 49px;
+  border: 1px solid #000000;
+  padding-left: 13px;
+  border-radius: 9px;
+  outline: none;
+  background: transparent;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  color: black;
+  margin-bottom: 15px;
+}
+.recentCustomers form input[type="text"]::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  color: #9c96a9;
+}
+.recentCustomers form textarea {
+  resize: none;
+  width: 100%;
+  height: 98px;
+  border: 1px solid #000000;
+  padding-left: 13px;
+  padding-top: 10px;
+  border-radius: 9px;
+  outline: none;
+  background: transparent;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  color: black;
+  margin-bottom: 15px;
+}
+.recentCustomers form textarea::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  color: #9c96a9;
+}
+.recentCustomers form button {
+  background: transparent;
+  border: 1px solid #000000;
+  border-radius: 7px;
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
 }
 
 /* adaptive */
