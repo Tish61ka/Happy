@@ -42,7 +42,7 @@ class CartController extends Controller
         'content' => new CartResource($cart)
       ]);
     } else {
-      $count += $cartItem->count;
+      $count = $cartItem->count + 1;
       $cartItem->update([
         'count' => $count,
       ]);
@@ -53,7 +53,7 @@ class CartController extends Controller
       ]);
     }
   }
-  public function MinusCart(Request $request)
+  public function MinusCart(CartRequest $request)
   {
     $product = Product::find($request->input('product_id'));
     $user = User::find($request->user_id);
@@ -61,16 +61,12 @@ class CartController extends Controller
       ->where('user_id', $user->id)->first();
 
     $count = $request->input('count');
-    dd($user->user_id);
-    if ($cartItem->count >= 1) {
+    if ($cartItem->count == 1) {
+      $cartItem->delete();
     } else {
       $count = $cartItem->count - 1;
       $cartItem->update([
         'count' => $count,
-      ]);
-      return response()->json([
-        'message' => 'Товар обновлен в корзине',
-        'content' => new CartResource($cartItem)
       ]);
     }
   }
