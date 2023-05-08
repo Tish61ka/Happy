@@ -29,6 +29,7 @@ class CartController extends Controller
     $cartItem = Cart::where('product_id', $request->input('product_id'))
       ->where('user_id', $user->id)->first();
 
+    $count = $request->input('count');
     if (!$cartItem) {
       $cart = Cart::create([
         'product_id' => $request->input('product_id'),
@@ -41,10 +42,32 @@ class CartController extends Controller
         'content' => new CartResource($cart)
       ]);
     } else {
+      $count += $cartItem->count;
       $cartItem->update([
-        'count' => $request->input('count')
+        'count' => $count,
       ]);
 
+      return response()->json([
+        'message' => 'Товар обновлен в корзине',
+        'content' => new CartResource($cartItem)
+      ]);
+    }
+  }
+  public function MinusCart(Request $request)
+  {
+    $product = Product::find($request->input('product_id'));
+    $user = User::find($request->user_id);
+    $cartItem = Cart::where('product_id', $request->input('product_id'))
+      ->where('user_id', $user->id)->first();
+
+    $count = $request->input('count');
+    dd($user->user_id);
+    if ($cartItem->count >= 1) {
+    } else {
+      $count = $cartItem->count - 1;
+      $cartItem->update([
+        'count' => $count,
+      ]);
       return response()->json([
         'message' => 'Товар обновлен в корзине',
         'content' => new CartResource($cartItem)

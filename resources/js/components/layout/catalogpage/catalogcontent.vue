@@ -242,6 +242,7 @@
       <p class="clear-filter" @click="clear_sort()">Очистить фильтр</p>
       <input type="search" v-model="search" />
     </div>
+    <Loader v-if="load == true"></Loader>
     <div class="catalog-product all">
       <div v-for="product in products" :key="product" class="card-item">
         <div class="border-img">
@@ -271,7 +272,9 @@
           <h3>{{ product.title }}</h3>
         </router-link>
         <div class="bot-flex-card">
-          <button v-if="id_user" @click="AddToCart(product.id)">Добавить +</button>
+          <button v-if="id_user" @click.prevent="AddToCart(product.id)">
+            Добавить +
+          </button>
           <div class="flex-cost">
             <p>{{ product.price }}p</p>
             <p>100 g</p>
@@ -292,10 +295,17 @@
       ></router-link>
     </div>
   </section>
+  <!-- <transition mode="out-in"> -->
+  <div class="alert" v-show="alert == true">
+    <div @click="alert = false">X</div>
+    <p>{{ message }}</p>
+  </div>
+  <!-- </transition> -->
 </template>
 
 <script>
 import axios from "axios";
+import Loader from "../../Loader.vue";
 export default {
   data() {
     return {
@@ -315,8 +325,13 @@ export default {
       sort_on: [],
       price: [],
       search: "",
+      alert: false,
+      message: "",
       ih: null,
     };
+  },
+  components: {
+    Loader,
   },
   mounted() {
     this.getFilms();
@@ -459,12 +474,24 @@ export default {
       });
     },
     AddToCart(product_id) {
-      axios.post("/api/add/to/cart", {
-        _method: "PATCH",
-        product_id: product_id,
-        user_id: this.id_user,
-        count: this.count,
-      });
+      axios
+        .post("/api/add/to/cart", {
+          _method: "PATCH",
+          product_id: product_id,
+          user_id: this.id_user,
+          count: this.count,
+        })
+        .then((res) => {
+          this.accessMessage(res.data.content.product.title);
+        });
+    },
+    accessMessage(name) {
+      console.log(name);
+      this.alert = true;
+      this.message = "Товар " + name + " добавлен в корзину";
+      // setTimeout(() => {
+      //   this.alert = false;
+      // }, 4000);
     },
     getFilms() {
       axios
@@ -505,7 +532,31 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+.alert {
+  position: absolute;
+  color: white;
+  background: #1d2023;
+  border: 2px solid #af3131;
+  margin-left: 74%;
+  margin-top: 35%;
+  font-family: "Comfortaa", serif;
+  top: 10px;
+  right: 10px;
+  p {
+    padding: 2vw 1vw;
+  }
+  .link {
+    color: #af3131;
+  }
+  div {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    color: #af3131;
+    cursor: pointer;
+  }
+}
 .filter {
   width: 250px;
 }

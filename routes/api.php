@@ -94,4 +94,5 @@ Route::post('/delivery/create', [UserController::class, 'delivery']);
 Route::get('/all/products', [ProductController::class, 'all']);
 Route::get('/catalog', [ProductController::class, 'catalog']);
 Route::patch('/add/to/cart', [CartController::class, 'store']);
+Route::patch('/minus/to/cart', [CartController::class, 'MinusCart']);
 Route::get('/alltypes', [TypeController::class, 'show']);
