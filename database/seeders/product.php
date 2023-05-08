@@ -26,6 +26,42 @@ class product extends Seeder
       'email' => 'danchik.kun@mail.ru',
       'role' => 1
     ]);
+    \App\Models\User::factory()->create([
+      'id' => 2,
+      'name' => 'Данилка',
+      'password' => Hash::make('123345654234'),
+      'tel' => '89673312786',
+      'address' => 'Кубанская 17',
+      'email' => 'danchik@mail.ru',
+      'role' => 0
+    ]);
+    \App\Models\User::factory()->create([
+      'id' => 3,
+      'name' => 'Руслан',
+      'password' => Hash::make('123345654234'),
+      'tel' => '89276625589',
+      'address' => 'Ильлинка',
+      'email' => 'ruslan@mail.ru',
+      'role' => 0
+    ]);
+    \App\Models\User::factory()->create([
+      'id' => 4,
+      'name' => 'Антошка',
+      'password' => Hash::make('123345654234'),
+      'tel' => '89029534311',
+      'address' => 'Где-то на десятке',
+      'email' => 'antoshka@mail.ru',
+      'role' => 0
+    ]);
+    \App\Models\User::factory()->create([
+      'id' => 5,
+      'name' => 'Саня',
+      'password' => Hash::make('123345654234'),
+      'tel' => '89886858415',
+      'address' => 'Где-то в Элисте',
+      'email' => 'sanya@mail.ru',
+      'role' => 0
+    ]);
     \App\Models\Type::factory()->create([
       'id' => 1,
       'type' => 'Клубничное',
@@ -157,6 +193,9 @@ class product extends Seeder
                       Сливки 10-20%:    250г',
       'type' => 8,
     ]);
-    Review::factory(4)->create();
+    Review::factory(4)->create([
+      'name' => 'Данилка Куничкин',
+      'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
+    ]);
   }
 }

@@ -19,6 +19,7 @@
   <!--Bot-->
   <div class="details">
     <div class="recentOrders">
+      <Loader v-if="load == true"></Loader>
       <div>
         <div class="item" v-for="product in products" :key="product">
           <div>
@@ -33,7 +34,7 @@
             <p>{{ product.price }} р</p>
           </div>
           <svg
-          @click.prevent="deleteProduct(product.id)"
+            @click.prevent="deleteProduct(product.id)"
             width="37"
             height="37"
             viewBox="0 0 37 37"
@@ -127,14 +128,16 @@
       </div>
       <form id="app-cover">
         <div>
-          <img :src="img" alt="">
-          <input type="file" v-on:change="handleFileUpload()" ref="file" required />
+          <img :src="img" alt="" />
+          <input type="file" v-on:change="handleFileUpload()" ref="file" />
           <p>Выберите файл</p>
         </div>
         <input type="text" placeholder="Введите название" required v-model="title" />
         <input type="text" placeholder="Введите цену" required v-model="price" />
         <select name="" id="">
-          <option v-for="type in types" :key="type" :value="type.type">{{type.type}}</option>
+          <option v-for="type in types" :key="type" :value="type.type">
+            {{ type.type }}
+          </option>
         </select>
         <textarea
           cols="30"
@@ -159,6 +162,7 @@
 
 <script>
 import axios from "axios";
+import Loader from "../../Loader.vue";
 export default {
   data() {
     return {
@@ -168,11 +172,15 @@ export default {
       price: "",
       discription: "",
       structure: "",
-      img: '',
+      img: "",
       show: false,
       currentItem: null,
+      load: true,
       toppings: ["Caramel", "Peanut butter", "Sundae", "Oreos"],
     };
+  },
+  components: {
+    Loader,
   },
   mounted() {
     let toggle = document.querySelector(".toggle");
@@ -197,36 +205,36 @@ export default {
     this.allTypes();
   },
   methods: {
-    allTypes(){
-      axios.get('/api/alltypes').then(res => {
+    allTypes() {
+      axios.get("/api/alltypes").then((res) => {
         // console.log(res.data);
-        this.types = res.data
-      })
+        this.types = res.data;
+      });
     },
     allProducts() {
       axios.get(`/api/all/products`).then((res) => {
+        this.load = false;
         this.products = res.data.content;
       });
     },
-    editProduct(id){
-      axios.get(`/api/product/${id}`).then(res => {
-        console.log(res.data.content);
-        this.show = true
-        this.img = ''
-        this.img = res.data.content.image
-        this.title = res.data.content.title
-        this.price = res.data.content.price
-        this.discription = res.data.content.description
-        this.structure = res.data.content.structure
-      })
+    editProduct(id) {
+      axios.get(`/api/product/${id}`).then((res) => {
+        this.show = true;
+        this.img = "";
+        this.img = res.data.content.image;
+        this.title = res.data.content.title;
+        this.price = res.data.content.price;
+        this.discription = res.data.content.description;
+        this.structure = res.data.content.structure;
+      });
     },
-    saveEdit(){
-      this.show = false
-        this.img = ''
-        this.title = ''
-        this.price = ''
-        this.discription = ''
-        this.structure = ''
+    saveEdit() {
+      this.show = false;
+      this.img = "";
+      this.title = "";
+      this.price = "";
+      this.discription = "";
+      this.structure = "";
     },
     GoEdit() {
       document.querySelector(".item-v2").classList.remove("no-edit");
@@ -234,10 +242,26 @@ export default {
     GoBehind() {
       document.querySelector(".item-v2").classList.add("no-edit");
     },
-    deleteProduct(id){
-      axios.delete(`/api/product/${id}`).then(res => {
-        this.allProducts()
-      })
+    deleteProduct(id) {
+      axios.delete(`/api/product/${id}`).then((res) => {
+        this.allProducts();
+      });
+    },
+  },
+  updated() {
+    if (
+      document
+        .querySelector(".recentCustomers form > div:first-child img")
+        .getAttribute("src") != ""
+    ) {
+      document.querySelector(".recentCustomers form > div:first-child p").style.display =
+        "none";
+      document
+        .querySelector(".recentCustomers form input[type='file']")
+        .setAttribute("disabled", "");
+    } else {
+      document.querySelector(".recentCustomers form > div:first-child p").style.display =
+        "block";
     }
   },
 };
@@ -305,157 +329,6 @@ export default {
   flex-wrap: wrap;
 }
 
-/*.details .recentOrders .item-v2 {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 360px;
-  padding: 25px 30px;
-  background: #ffffff;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-.details .recentOrders .item-v2 svg {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-.details .recentOrders .item-v2 > div:first-child {
-  position: relative;
-  width: 232px;
-  height: 244px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ededed;
-  border-radius: 25px;
-  margin-bottom: 15px;
-}
-.details .recentOrders .item-v2 > div:first-child img {
-  display: none;
-  width: 55%;
-}
-.details .recentOrders .item-v2 input[type="file"] {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  background: transparent;
-}
-.details .recentOrders .item-v2 > div:first-child p {
-  position: absolute;
-  width: auto;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  color: #9c96a9;
-}
-.details .recentOrders .item-v2 > input {
-  width: 90%;
-  height: 50px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 17px;
-  color: #9c96a9;
-  margin-bottom: 25px;
-  background: #ffffff;
-  border: 1px solid #000000;
-  border-radius: 9px;
-  padding-left: 15px;
-  padding-right: 5px;
-  outline: none;
-}
-.details .recentOrders .item-v2 > div:nth-child(4) > div p {
-  display: none;
-}
-.details .recentOrders .item-v2 > h2 {
-  display: none;
-  width: 90%;
-  height: 40px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 17px;
-  text-align: center;
-  margin-bottom: 25px;
-}
-.details .recentOrders .item-v2 > div:nth-child(4) {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-.details .recentOrders .item-v2 > div:nth-child(4) button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 11px;
-  background: transparent;
-  border: 1px solid #000000;
-  border-radius: 7px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 17px;
-  cursor: pointer;
-}
-.details .recentOrders .item-v2 > div:nth-child(4) button:first-child {
-  display: none;
-}
-.details .recentOrders .item-v2 > div:nth-child(4) button img {
-  margin-left: 8px;
-}
-.details .recentOrders .item-v2 > div:nth-child(4) input {
-  width: 60px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  padding: 6px 13px;
-  background: #ffffff;
-  border: 1px solid #000000;
-  border-radius: 8px;
-}
-
-.details .recentOrders .item-v2.no-edit > div:first-child img {
-  display: block;
-}
-.details .recentOrders .item-v2.no-edit input[type="file"] {
-  display: none;
-}
-.details .recentOrders .item-v2.no-edit > div:first-child p {
-  display: none;
-}
-.details .recentOrders .item-v2.no-edit > input {
-  display: none;
-}
-.details .recentOrders .item-v2.no-edit > div:nth-child(4) > div {
-  display: flex;
-  flex-direction: row;
-}
-.details .recentOrders .item-v2.no-edit > div:nth-child(4) > div p {
-  display: block;
-}
-.details .recentOrders .item-v2.no-edit > h2 {
-  display: block;
-}
-.details .recentOrders .item-v2.no-edit > div:nth-child(4) button:first-child {
-  display: block;
-}
-.details .recentOrders .item-v2.no-edit > div:nth-child(4) button:nth-child(2) {
-  display: none;
-}
-.details .recentOrders .item-v2.no-edit > div:nth-child(4) input {
-  display: none;
-}
-*/
 .details .recentOrders .item {
   position: relative;
   display: flex;
@@ -569,6 +442,11 @@ export default {
   border-radius: 25px;
   margin-bottom: 15px;
 }
+.recentCustomers form > div:first-child img {
+  position: absolute;
+  width: 50%;
+  z-index: 3;
+}
 .recentCustomers form input[type="file"] {
   width: 100%;
   height: 100%;
@@ -584,6 +462,7 @@ export default {
   font-weight: 400;
   font-size: 18px;
   color: #9c96a9;
+  z-index: 2;
 }
 .recentCustomers form input[type="text"] {
   width: 100%;

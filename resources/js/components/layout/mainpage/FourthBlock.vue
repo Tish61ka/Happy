@@ -5,7 +5,8 @@
       <Carousel :items-to-show="3" :wrap-around="true">
         <Slide v-for="slide in reviews" :key="slide">
           <div class="carousel__item">
-            <img :src="getPhoto()" alt="" />
+            <!-- <img src="/img/strawberryball.png" alt="No Ethernet" /> -->
+            <div></div>
             <h2>{{ slide.name }}</h2>
             <p>
               {{ slide.content }}
@@ -15,122 +16,10 @@
             </p>
           </div>
         </Slide>
-
         <template #addons>
           <Navigation />
         </template>
       </Carousel>
-      <!-- <div id="carousel" class="carousel">
-        <button class="arrow prev">
-          <svg
-            width="41"
-            height="24"
-            viewBox="0 0 41 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.939339 10.9393C0.353554 11.5251 0.353554 12.4749 0.939339 13.0607L10.4853 22.6066C11.0711 23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97919 12.6066 1.3934C12.0208 0.807611 11.0711 0.807611 10.4853 1.3934L0.939339 10.9393ZM41 10.5L2 10.5V13.5L41 13.5V10.5Z"
-              fill="black"
-            />
-          </svg>
-        </button>
-        <div class="gallery">
-          <ul>
-            <li>
-              <div>
-                <div></div>
-                <h2>Руслан Кромеев</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div></div>
-                <h2>Руслан Кромеев</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div></div>
-                <h2>Руслан Кромеев</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div></div>
-                <h2>Руслан Кромеев</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div></div>
-                <h2>Руслан Кромеев</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div></div>
-                <h2>Руслан Кромеев</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div></div>
-                <h2>Руслан Кромеев</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <button class="arrow next">
-          <svg
-            width="41"
-            height="24"
-            viewBox="0 0 41 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.939339 10.9393C0.353554 11.5251 0.353554 12.4749 0.939339 13.0607L10.4853 22.6066C11.0711 23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97919 12.6066 1.3934C12.0208 0.807611 11.0711 0.807611 10.4853 1.3934L0.939339 10.9393ZM41 10.5L2 10.5V13.5L41 13.5V10.5Z"
-              fill="black"
-            />
-          </svg>
-        </button>
-      </div> -->
     </div>
   </section>
 </template>
@@ -154,6 +43,7 @@ export default defineComponent({
     return {
       reviews: [],
       photos: ["/img/strawberryball.png", "/img/bananaball.png", "/img/mintball.png"],
+      selectedImage: null,
     };
   },
   mounted() {
@@ -166,12 +56,16 @@ export default defineComponent({
         console.log(this.reviews);
       });
     },
-    getPhoto() {
-      let i = this.photos.length;
-      let index = Math.floor(Math.random() * (i - 0 + 1) + 0);
-      console.log(index);
-      return this.photos[index];
+    getPhoto(items) {
+      // let i = this.photos.length;
+      // let index = Math.floor(Math.random() * i);
+      // console.log(index);
+      // return this.photos[index];
+      return items[Math.random(0, items.length)];
     },
+  },
+  created() {
+    this.selectedImage = this.getPhoto(this.photos);
   },
 });
 </script>
@@ -223,10 +117,10 @@ export default defineComponent({
 }
 
 .carousel__item div {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  /*background-image: url("/img/test.jpg");*/
+  background-image: url("/img/strawberryball.png");
   background-size: cover;
   background-position: center;
 }
@@ -245,7 +139,7 @@ export default defineComponent({
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 131%;
   letter-spacing: 0.14em;
   text-align: center;

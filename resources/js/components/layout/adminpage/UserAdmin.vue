@@ -22,6 +22,8 @@
       <div class="cardHeader">
         <h2>Список пользователей</h2>
       </div>
+
+      <Loader v-if="load == true"></Loader>
       <table>
         <thead>
           <tr>
@@ -50,11 +52,16 @@
 
 <script>
 import axios from "axios";
+import Loader from "../../Loader.vue";
 export default {
   data() {
     return {
       users: [],
+      load: true,
     };
+  },
+  components: {
+    Loader,
   },
   mounted() {
     this.allUsers();
@@ -85,6 +92,7 @@ export default {
           },
         })
         .then((res) => {
+          this.load = false;
           this.users = res.data.content;
         });
     },

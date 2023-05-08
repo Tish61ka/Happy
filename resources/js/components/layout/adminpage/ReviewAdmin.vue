@@ -19,6 +19,7 @@
   <!--Bot-->
   <div class="details">
     <div class="recentOrders">
+      <Loader v-if="load == true"></Loader>
       <div class="review-content">
         <!--Каждый отзыв отдельно от сюда-->
         <div v-for="review in reviews" :key="review">
@@ -42,11 +43,16 @@
 
 <script>
 import axios from "axios";
+import Loader from "../../Loader.vue";
 export default {
   data() {
     return {
       reviews: [],
+      load: true,
     };
+  },
+  components: {
+    Loader,
   },
   mounted() {
     this.allReviews();
@@ -77,6 +83,7 @@ export default {
           },
         })
         .then((res) => {
+          this.load = false;
           this.reviews = res.data.content;
         });
     },

@@ -6,7 +6,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      height: 70vh;
+      height: 80vh;
     "
   >
     <div class="fulfilling-bouncing-circle-spinner">

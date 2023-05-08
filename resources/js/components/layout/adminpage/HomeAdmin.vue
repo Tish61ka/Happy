@@ -182,8 +182,22 @@
       <div class="cardHeader">
         <h2>Список пользователей</h2>
       </div>
+      <Loader v-if="load == true"></Loader>
       <table>
-        <tr>
+        <tr v-for="user in users" :key="user">
+          <td width="60px">
+            <div class="imgBx">
+              <img src="img/strawberryball.png" alt="No Ethernet" />
+            </div>
+          </td>
+          <td>
+            <h4>
+              {{ user.name }}<br />
+              <span>{{ user.email }}</span>
+            </h4>
+          </td>
+        </tr>
+        <!-- <tr>
           <td width="60px">
             <div class="imgBx">
               <img src="img/test.jpg" alt="No Ethernet" />
@@ -273,20 +287,7 @@
               <span>yuriitish@mail.ru</span>
             </h4>
           </td>
-        </tr>
-        <tr>
-          <td width="60px">
-            <div class="imgBx">
-              <img src="img/test.jpg" alt="No Ethernet" />
-            </div>
-          </td>
-          <td>
-            <h4>
-              Юрий Тишков<br />
-              <span>yuriitish@mail.ru</span>
-            </h4>
-          </td>
-        </tr>
+        </tr> -->
       </table>
     </div>
   </div>
@@ -294,11 +295,17 @@
 
 <script>
 import axios from "axios";
+import Loader from "../../Loader.vue";
 export default {
   data() {
     return {
       products: [],
+      users: [],
+      load: true,
     };
+  },
+  components: {
+    Loader,
   },
   mounted() {
     let toggle = document.querySelector(".toggle");
@@ -320,12 +327,25 @@ export default {
     time_is_widget.init({ Moscow_z71d: {} });
 
     this.allProducts();
+    this.Users();
   },
   methods: {
     allProducts() {
       axios.get(`/api/all/products`).then((res) => {
         this.products = res.data.content;
       });
+    },
+    Users() {
+      axios
+        .get(`/api/users`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          this.load = false;
+          this.users = res.data.content;
+        });
     },
   },
 };

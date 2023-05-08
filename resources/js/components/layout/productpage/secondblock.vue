@@ -75,6 +75,7 @@ export default {
   height: 55px;
   margin-bottom: 20px;
   border: 2px solid #b09cd7;
+  background: transparent;
   border-radius: 15px;
   padding-left: 20px;
   outline: none;
@@ -92,6 +93,7 @@ export default {
   width: 100%;
   height: 115px;
   border: 2px solid #b09cd7;
+  background: transparent;
   border-radius: 15px;
   padding-top: 15px;
   padding-left: 20px;
