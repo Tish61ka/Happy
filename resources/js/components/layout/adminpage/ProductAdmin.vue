@@ -26,13 +26,14 @@
           </div>
           <h2>{{ product.title }}</h2>
           <div>
-            <button>
+            <button @click="editProduct(product.id)">
               Редактировать
               <img src="/img/edit.png" alt="No Ethernet" />
             </button>
             <p>{{ product.price }} р</p>
           </div>
           <svg
+          @click.prevent="deleteProduct(product.id)"
             width="37"
             height="37"
             viewBox="0 0 37 37"
@@ -126,13 +127,14 @@
       </div>
       <form id="app-cover">
         <div>
+          <img :src="img" alt="">
           <input type="file" v-on:change="handleFileUpload()" ref="file" required />
           <p>Выберите файл</p>
         </div>
         <input type="text" placeholder="Введите название" required v-model="title" />
         <input type="text" placeholder="Введите цену" required v-model="price" />
         <select name="" id="">
-          <option value=""></option>
+          <option v-for="type in types" :key="type" :value="type.type">{{type.type}}</option>
         </select>
         <textarea
           cols="30"
@@ -148,7 +150,8 @@
           placeholder="Введите состав"
           v-model="structure"
         ></textarea>
-        <button type="submit">Добавить +</button>
+        <button v-if="show == false">Добавить +</button>
+        <button v-else>Редактировать +</button>
       </form>
     </div>
   </div>
@@ -160,10 +163,13 @@ export default {
   data() {
     return {
       products: [],
+      types: [],
       title: "",
       price: "",
       discription: "",
       structure: "",
+      img: '',
+      show: false,
       currentItem: null,
       toppings: ["Caramel", "Peanut butter", "Sundae", "Oreos"],
     };
@@ -188,12 +194,39 @@ export default {
     time_is_widget.init({ Moscow_z71d: {} });
 
     this.allProducts();
+    this.allTypes();
   },
   methods: {
+    allTypes(){
+      axios.get('/api/alltypes').then(res => {
+        // console.log(res.data);
+        this.types = res.data
+      })
+    },
     allProducts() {
       axios.get(`/api/all/products`).then((res) => {
         this.products = res.data.content;
       });
+    },
+    editProduct(id){
+      axios.get(`/api/product/${id}`).then(res => {
+        console.log(res.data.content);
+        this.show = true
+        this.img = ''
+        this.img = res.data.content.image
+        this.title = res.data.content.title
+        this.price = res.data.content.price
+        this.discription = res.data.content.description
+        this.structure = res.data.content.structure
+      })
+    },
+    saveEdit(){
+      this.show = false
+        this.img = ''
+        this.title = ''
+        this.price = ''
+        this.discription = ''
+        this.structure = ''
     },
     GoEdit() {
       document.querySelector(".item-v2").classList.remove("no-edit");
@@ -201,6 +234,11 @@ export default {
     GoBehind() {
       document.querySelector(".item-v2").classList.add("no-edit");
     },
+    deleteProduct(id){
+      axios.delete(`/api/product/${id}`).then(res => {
+        this.allProducts()
+      })
+    }
   },
 };
 </script>
