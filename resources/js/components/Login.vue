@@ -245,6 +245,13 @@ export default {
   font-size: 16px;
   line-height: 18px;
 }
+/*
+.login form input[type="password"]::-ms-reveal {
+  background: black;
+  color: #fff;
+}
+*/
+
 .login form input::placeholder {
   color: #ffffff;
 }

@@ -14,33 +14,134 @@
       </svg>
     </div>
   </div>
-
-  <h1 class="h1-top">Пользователи</h1>
+  <h1 class="h1">Мои заказы</h1>
   <!--Bot-->
   <div class="details">
     <div class="recentOrders">
       <div class="cardHeader">
-        <h2>Список пользователей</h2>
+        <h2>Список заказов</h2>
       </div>
       <table>
         <thead>
           <tr>
-            <td>ФИО</td>
-            <td>Почта</td>
-            <td>Телефон</td>
-            <td>Действия</td>
+            <td>Название</td>
+            <td>Количество</td>
+            <td>Стоимость</td>
+            <td>Статус</td>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user">
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.tel }}</td>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
             <td>
-              <button>Разбанить</button>
-              <button>Забанить</button>
-              <button>Удалить</button>
+              <div id="clicking-1" @click="OpenSelect(1)">
+                <!--${id}}}-->
+                <ul>
+                  <li>В обработке</li>
+                  <li>Готовится</li>
+                  <li>Доставлен</li>
+                  <li>Отменен</li>
+                </ul>
+                <svg
+                  width="22"
+                  height="12"
+                  viewBox="0 0 22 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.6055 0L11.8533 1.21777L1.2467 11.5688L-0.00113258 10.351L10.6055 0Z"
+                    fill="black"
+                  />
+                  <path
+                    d="M9.35763 1.21777L10.6055 0L21.2121 10.351L19.9642 11.5688L9.35763 1.21777Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
             </td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>
+              <div>
+                <ul>
+                  <li>В обработке</li>
+                  <li>Готовится</li>
+                  <li>Доставлен</li>
+                  <li>Отменен</li>
+                </ul>
+                <svg
+                  width="22"
+                  height="12"
+                  viewBox="0 0 22 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.6055 0L11.8533 1.21777L1.2467 11.5688L-0.00113258 10.351L10.6055 0Z"
+                    fill="black"
+                  />
+                  <path
+                    d="M9.35763 1.21777L10.6055 0L21.2121 10.351L19.9642 11.5688L9.35763 1.21777Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>
+              <select v-model="status">
+                <option value="treatment" selected>В обработке</option>
+                <option value="ready">Готовится</option>
+                <option value="delevired">Доставлен</option>
+                <option value="canceled">Отменен</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>В обработке</td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>В обработке</td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>В обработке</td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>В обработке</td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>В обработке</td>
+          </tr>
+          <tr>
+            <td>Заказ №32</td>
+            <td>1</td>
+            <td>330</td>
+            <td>В обработке</td>
           </tr>
         </tbody>
       </table>
@@ -49,15 +150,14 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
-      users: [],
+      i: true,
+      status: "treatment",
     };
   },
   mounted() {
-    this.allUsers();
     let toggle = document.querySelector(".toggle");
     let navigationCart = document.querySelector(".navigation-cart");
     let main = document.querySelector(".main");
@@ -74,19 +174,16 @@ export default {
       this.classList.add("hovered");
     }
     list.forEach((item) => item.addEventListener("click", activeLink));
-    time_is_widget.init({ Moscow_z71d: {} });
   },
   methods: {
-    allUsers() {
-      axios
-        .get(`/api/users`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          this.users = res.data.content;
-        });
+    OpenSelect(id) {
+      if (this.i == true) {
+        document.getElementById(`clicking-${id}`).classList.add("click");
+        this.i = false;
+      } else {
+        document.getElementById(`clicking-${id}`).classList.remove("click");
+        this.i = true;
+      }
     },
   },
 };
@@ -119,15 +216,16 @@ export default {
   width: 50px;
   cursor: pointer;
 }
-.h1-top {
-  width: 100%;
-  text-align: center;
+
+.h1 {
   font-family: "Comfortaa";
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
+  transform: translate(40%);
   margin-bottom: 30px;
 }
+
 .details {
   position: relative;
   width: 100%;
@@ -187,7 +285,20 @@ export default {
   font-weight: 400;
   font-size: 20px;
 }
+.details table tbody td:last-child select {
+  outline: none;
+  border: 1px solid #000000;
+  border-radius: 17px;
+  background: #ffffff;
+  z-index: 6;
+  padding: 0 5px;
 
+  height: 40px;
+}
+.details table tbody td:last-child select option {
+  border: 1px solid #000000;
+  outline: none;
+}
 .details .recentOrders table tr {
   color: black;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -205,31 +316,9 @@ export default {
 .details .recentOrders table td:nth-child(3) {
   text-align: center;
 }
-.details .recentOrders table td:last-child button {
-  width: 131px;
-  height: 28px;
-  border-radius: 12px;
-  border: none;
-  font-family: "Comfortaa";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 13px;
-  text-align: center;
-  color: black;
-  margin-right: 9px;
-  cursor: pointer;
-}
-.details .recentOrders table td:last-child button:first-child {
-  background: rgba(71, 188, 90, 0.5);
-}
-.details .recentOrders table td:last-child button:nth-child(2) {
-  background: rgba(245, 123, 71, 0.5);
-}
-.details .recentOrders table td:last-child button:last-child {
-  background: rgba(249, 58, 58, 0.5);
-}
+
 .details .recentOrders table td:last-child {
-  float: right;
+  text-align-last: right;
 }
 
 .recentCustomers {
