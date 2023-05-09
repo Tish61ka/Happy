@@ -28,16 +28,16 @@
             <td>Количество</td>
             <td>Стоимость</td>
             <td>Статус</td>
+            <td>Действия</td>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>Заказ №32</td>
             <td>1</td>
             <td>330</td>
             <td>
               <div id="clicking-1" @click="OpenSelect(1)">
-                <!--${id}}}-->
                 <ul>
                   <li>В обработке</li>
                   <li>Готовится</li>
@@ -93,21 +93,23 @@
                 </svg>
               </div>
             </td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
+          </tr> -->
+          <tr v-for="order in orders" :key="order">
+            <td>Заказ №{{ order.id }}</td>
+            <td>{{ order.products }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.status }}</td>
             <td>
               <select v-model="status">
-                <option value="treatment" selected>В обработке</option>
-                <option value="ready">Готовится</option>
-                <option value="delevired">Доставлен</option>
-                <option value="canceled">Отменен</option>
+                <option value="В обработке" selected>В обработке</option>
+                <option value="Готовится">Готовится</option>
+                <option value="Доставлен">Доставлен</option>
+                <option value="Отменен">Отменен</option>
               </select>
+              <button @click="ChangeStatus(order.id)">Сохранить</button>
             </td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>Заказ №32</td>
             <td>1</td>
             <td>330</td>
@@ -142,7 +144,7 @@
             <td>1</td>
             <td>330</td>
             <td>В обработке</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -150,14 +152,18 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       i: true,
-      status: "treatment",
+      status: "В обработке",
+      user_id: localStorage.getItem("id_user"),
+      orders: [],
     };
   },
   mounted() {
+    this.AllOrder();
     let toggle = document.querySelector(".toggle");
     let navigationCart = document.querySelector(".navigation-cart");
     let main = document.querySelector(".main");
@@ -168,7 +174,9 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
+    let list = document.querySelectorAll(
+      ".navigation-cart li:not(:first-child)"
+    );
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -184,6 +192,17 @@ export default {
         document.getElementById(`clicking-${id}`).classList.remove("click");
         this.i = true;
       }
+    },
+    AllOrder() {
+      axios.post("/api/orders", { user_id: this.user_id }).then((res) => {
+        this.orders = res.data.content;
+      });
+    },
+    ChangeStatus(id) {
+      axios.post(`/api/orders/${id}`, { status: this.status }).then((res) => {
+        console.log(res);
+        this.AllOrder();
+      });
     },
   },
 };

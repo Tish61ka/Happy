@@ -50,17 +50,14 @@ Route::middleware('user')->group(function () {
 
   // ------------------------------------------------------------------------
   // Оформление заказа
-  Route::post('/order', [OrderController::class, 'store']);
   // Число завершенных заказов заказов
   Route::get('/orders/done', [OrderController::class, 'countDone']);
   // Число заказов в обработке
   Route::get('/orders/process', [OrderController::class, 'countProcess']);
   // Все заказы пол-ля
-  Route::get('/orders', [OrderController::class, 'all']);
   // Просмотреть заказ
   Route::get('/orders/{id}', [OrderController::class, 'index']);
   // Изменение статус заказа ЧТО-ТО НЕ ТАК
-  Route::patch('/orders/{id}', [OrderController::class, 'update']);
   // ------------------------------------------------------------------------
   // ------------------------------------------------------------------------
   // Все отзывы определенного продукта
@@ -87,6 +84,9 @@ Route::post('/create/review/', [ReviewController::class, 'create']);
 Route::get('/all/reviews', [ReviewController::class, 'all']);
 
 
+Route::post('/order', [OrderController::class, 'store']);
+Route::post('/orders', [OrderController::class, 'all']);
+Route::post('/orders/{id}', [OrderController::class, 'update']);
 
 Route::get('/cart/all/{id}', [CartController::class, 'all']);
 Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy']);

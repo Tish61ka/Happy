@@ -13,19 +13,18 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function all(): \Illuminate\Http\JsonResponse
+    public function all(Request $request): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
         return response()->json([
-           'message' => 'Все заказы',
-           'content' => OrderResource::collection(Order::all()
-                ->where('user_id', $user->id))
+            'message' => 'Все заказы',
+            'content' => OrderResource::collection(Order::all()
+                ->where('user_id', $request->input('user_id')))
         ]);
     }
     public function index($id): \Illuminate\Http\JsonResponse
     {
         $order = Order::find($id);
-        if(!$order){
+        if (!$order) {
             return response()->json([
                 'message' => 'Заказа не обнаружено'
             ], 200);
@@ -56,12 +55,11 @@ class OrderController extends Controller
                 ->where('status', 'В обработке'))->count()
         ]);
     }
-    public function store(): \Illuminate\Http\JsonResponse
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::guard('sanctum')->user();
-        $myCart = CartResource::collection(Cart::all()->where('user_id', $user->id));
+        $myCart = CartResource::collection(Cart::all()->where('user_id', $request->input('user_id')));
 
-        if($myCart->count() == 0){
+        if ($myCart->count() == 0) {
             return response()->json([
                 'message' => 'Корзина пуста',
             ], 422);
@@ -69,7 +67,7 @@ class OrderController extends Controller
             $arr = [];
             $price = 0;
 
-            foreach ($myCart as $item){
+            foreach ($myCart as $item) {
                 $arr[] = [
                     'product_id' => $item->product_id,
                     'count' => $item->count
@@ -83,7 +81,7 @@ class OrderController extends Controller
 
             $order = Order::create([
                 'products' => json_encode($arr),
-                'user_id' => $user->id,
+                'user_id' => $request->input('user_id'),
                 'total_price' => $price,
                 'status' => 'В обработке'
             ]);
@@ -97,12 +95,12 @@ class OrderController extends Controller
     public function update(OrderEditRequest $request, $id): \Illuminate\Http\JsonResponse
     {
         $order = Order::find($id);
-        if(!$order){
+        if (!$order) {
             return response()->json([
                 'message' => 'Заказ не найден'
             ], 404);
         }
-        $order->update([
+        Order::where('id', $id)->update([
             'status' => $request->input('status')
         ]);
 
@@ -114,7 +112,7 @@ class OrderController extends Controller
     public function destroy($id): \Illuminate\Http\JsonResponse
     {
         $order = Order::find($id);
-        if(!$order){
+        if (!$order) {
             return response()->json([
                 'message' => 'Заказ не найден'
             ]);
