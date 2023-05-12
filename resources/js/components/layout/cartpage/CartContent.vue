@@ -168,9 +168,11 @@ export default {
         });
     },
     CreateOrder() {
-      axios.post("/api/order", { user_id: this.user_id }).then((res) => {
-        this.AllCart();
-      });
+      axios
+        .post("/api/order", { user_id: this.user_id, summ: this.itogo })
+        .then((res) => {
+          this.AllCart();
+        });
     },
   },
 };

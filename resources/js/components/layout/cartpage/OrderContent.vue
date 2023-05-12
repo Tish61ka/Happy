@@ -35,20 +35,18 @@
         <tbody>
           <tr v-for="order in orders" :key="order">
             <td>Заказ №{{ order.id }}</td>
-            <td v-for="product in order.products" :key="product">
-              {{ product.count }}
-            </td>
+            <td>{{ order.total_count }}</td>
             <td>{{ order.price }}</td>
             <td>{{ order.status }}</td>
             <td>
               <label for="touch"><span>Посмотреть детали заказа</span></label>
               <input type="checkbox" id="touch" />
-              <ul class="slide">
-                <li>{{ order.products.title }}</li>
-                <li>Lorem Ipsum</li>
-                <li>Lorem Ipsum</li>
-                <li>Lorem Ipsum</li>
-              </ul>
+              <li v-for="product in order.products" :key="product">
+                {{ product.id_product.title }}
+                <p>{{ product.count }} кол-во</p>
+                <p>{{ product.id_product.price }} руб</p>
+              </li>
+              <ul class="slide"></ul>
             </td>
           </tr>
           <!-- <tr class="slide">
@@ -85,7 +83,9 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
+    let list = document.querySelectorAll(
+      ".navigation-cart li:not(:first-child)"
+    );
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -95,18 +95,9 @@ export default {
   },
   methods: {
     AllOrder() {
-      let i = 0;
       axios.post("/api/orders", { user_id: this.user_id }).then((res) => {
         this.orders = res.data.content;
-        this.orders.forEach((item) => {
-          item.products = JSON.parse(item.products);
-          this.product = item.products;
-          console.log(this.product.reduce((sum, current) => sum + current, 0));
-          //   this.product.forEach((i) => {
-          //     console.log(i.count);
-          //     this.count += i.count;
-          //   });
-        });
+        console.log(this.orders);
       });
     },
   },
@@ -252,7 +243,7 @@ span {
 }
 
 #touch:checked + .slide {
-  height: 100px;
+  height: 300px;
   max-height: auto;
 }
 .recentCustomers {

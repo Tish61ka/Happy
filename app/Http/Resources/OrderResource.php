@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\ProductOrder;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,10 +20,11 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'products' => $this->products,
+            'products' => ProductOrderResource::collection(ProductOrder::all()->where('id_order', $this->id)),
             'user' => new UserResource($this->user),
             'price' => $this->total_price,
             'status' => $this->status,
+            'total_count' => $this->total_count,
         ];
     }
 }

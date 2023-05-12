@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductOrder extends Model
 {
     use HasFactory;
+
     protected $guarded = false;
 
-    public function types()
+    public function products()
     {
-        return $this->belongsTo(Type::class, 'type');
+        return $this->hasMany(Menu::class);
     }
 
-    public function product_order()
+    public function order()
     {
-        return $this->belongsTo(ProductOrder::class, 'id');
+        return $this->hasMany(Order::class);
     }
 }

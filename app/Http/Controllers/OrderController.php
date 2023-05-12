@@ -8,6 +8,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,42 +56,32 @@ class OrderController extends Controller
                 ->where('status', 'В обработке'))->count()
         ]);
     }
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store(Request $request)
     {
-        $myCart = CartResource::collection(Cart::all()->where('user_id', $request->input('user_id')));
+        $mycart = Cart::where('user_id', $request->input('user_id'))->get();
 
-        if ($myCart->count() == 0) {
-            return response()->json([
-                'message' => 'Корзина пуста',
-            ], 422);
-        } else {
-            $arr = [];
-            $price = 0;
+        $count = 0;
+        for ($i = 0; $i < count($mycart); $i++) {
+            $count += $mycart[$i]['count'];
+        }
+        Order::create([
+            'user_id' => $request->input('user_id'),
+            'total_price' => $request->input('summ'),
+            'status' => 'В обработке',
+            'total_count' => $count
+        ]);
 
-            foreach ($myCart as $item) {
-                $arr[] = [
-                    'product_id' => $item->product_id,
-                    'count' => $item->count
-                ];
+        $myorder = Order::select('id')->where('user_id', $request->input('user_id'))->get()->last();
 
-                $product = Product::find($item->product_id);
-                $price += ($product->price * $item->count);
-
-                $item->delete();
-            }
-
-            $order = Order::create([
-                'products' => json_encode($arr),
-                'user_id' => $request->input('user_id'),
-                'total_price' => $price,
-                'status' => 'В обработке'
-            ]);
-
-            return response()->json([
-                'message' => 'Заказ оформлен',
-                'content' => $order
+        for ($i = 0; $i < count($mycart); $i++) {
+            ProductOrder::create([
+                'id_order' => $myorder->id,
+                'id_product' => $mycart[$i]['product_id'],
+                'count' => $mycart[$i]['count']
             ]);
         }
+
+        Cart::where('user_id', $request->input('user_id'))->delete();
     }
     public function update(OrderEditRequest $request, $id): \Illuminate\Http\JsonResponse
     {
