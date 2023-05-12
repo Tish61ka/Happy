@@ -210,35 +210,6 @@
           />
         </svg>
       </div>
-      <!-- <div class="filter-1">
-        <p>Вафля:</p>
-        <p>Итальянские вафли</p>
-        <svg
-          width="13"
-          height="15"
-          viewBox="0 0 13 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect
-            x="1.73828"
-            y="0.175781"
-            width="17"
-            height="2"
-            rx="1"
-            transform="rotate(50 1.73828 0.175781)"
-            fill="black"
-          />
-          <rect
-            y="13.4902"
-            width="17"
-            height="2"
-            rx="1"
-            transform="rotate(-50 0 13.4902)"
-            fill="black"
-          />
-        </svg>
-      </div> -->
       <p class="clear-filter" @click="clear_sort()">Очистить фильтр</p>
       <input type="search" v-model="search" />
     </div>
