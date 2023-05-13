@@ -73,7 +73,7 @@
               class="custom-checkbox"
               type="checkbox"
               :id="'color-' + type.id"
-              :name="'name-' + type.id"
+              :name="type.type"
               value="indigo"
             />
             <label :for="'color-' + type.id">{{ type.type }}</label>
@@ -184,7 +184,7 @@
         <p>Вкус:</p>
         <p>{{ sort }}</p>
         <svg
-          @click="sort_on.splice(index, 1)"
+          @click="sort_on.splice(index, 1), clearcheck(sort)"
           width="13"
           height="15"
           viewBox="0 0 13 15"
@@ -422,6 +422,23 @@ export default {
     },
   },
   methods: {
+    clearcheck(name) {
+      let arr = document.querySelectorAll(`.taste .custom-checkbox`);
+      for (let i = 0; i < this.types.length; i++) {
+        if (name == arr[i].name) {
+          arr[i].checked = false;
+          console.log("le");
+        }
+        console.log();
+      }
+      for (let j = 0; j <= this.types.length; j++) {}
+
+      // if (name == document.querySelector(".custom-checkbox").getAttribute("name")) {
+      //   document.querySelector(".custom-checkbox").checked = false;
+      // }
+
+      // console.log(document.querySelector(".custom-checkbox").getAttribute(`${name}`));
+    },
     clear_sort() {
       this.search = "";
       this.minPrice = this.min;

@@ -41,12 +41,14 @@
             <td>
               <label for="touch"><span>Посмотреть детали заказа</span></label>
               <input type="checkbox" id="touch" />
-              <li v-for="product in order.products" :key="product">
-                {{ product.id_product.title }}
-                <p>{{ product.count }} кол-во</p>
-                <p>{{ product.id_product.price }} руб</p>
-              </li>
-              <ul class="slide"></ul>
+
+              <ul class="slide">
+                <li v-for="product in order.products" :key="product">
+                  {{ product.id_product.title }}
+                  <p>{{ product.count }} кол-во</p>
+                  <p>{{ product.id_product.price }} руб</p>
+                </li>
+              </ul>
             </td>
           </tr>
           <!-- <tr class="slide">
@@ -83,9 +85,7 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(
-      ".navigation-cart li:not(:first-child)"
-    );
+    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -243,7 +243,7 @@ span {
 }
 
 #touch:checked + .slide {
-  height: 300px;
+  height: 500px;
   max-height: auto;
 }
 .recentCustomers {
