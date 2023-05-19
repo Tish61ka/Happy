@@ -134,8 +134,8 @@
         </div>
         <input type="text" placeholder="Введите название" required v-model="title" />
         <input type="text" placeholder="Введите цену" required v-model="price" />
-        <select name="" id="">
-          <option v-for="type in types" :key="type" :value="type.type">
+        <select v-model="type" name="" id="">
+          <option v-for="type in types" :key="type"  :value="type.id">
             {{ type.type }}
           </option>
         </select>
@@ -153,7 +153,7 @@
           placeholder="Введите состав"
           v-model="structure"
         ></textarea>
-        <button v-if="show == false">Добавить +</button>
+        <button v-if="show == false" @click.prevent="createProduct()">Добавить +</button>
         <button v-else>Редактировать +</button>
       </form>
     </div>
@@ -168,6 +168,7 @@ export default {
     return {
       products: [],
       types: [],
+      type: 1,
       title: "",
       price: "",
       discription: "",
@@ -227,6 +228,31 @@ export default {
         this.discription = res.data.content.description;
         this.structure = res.data.content.structure;
       });
+    },
+    createProduct() {
+      let formData = new FormData();
+      formData.append("image", this.img);
+      formData.append("title", this.title);
+      formData.append("price", this.price);
+      formData.append("discription", this.discription);
+      formData.append("structure", this.structure);
+      formData.append("type", this.type);
+      axios
+        .post("/api/product", formData, {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          (this.title = ""),
+            (this.price = ""),
+            (this.discription = ""),
+          this.img = "";
+          this.allProducts();
+        });
+    },
+    handleFileUpload() {
+      this.img = this.$refs.file.files[0];
     },
     saveEdit() {
       this.show = false;

@@ -23,10 +23,11 @@ class StoreRequest extends FormRequest
   {
     return [
       'title' => ['required'],
-      'description' => ['required'],
+      'discription' => ['required'],
       'price' => ['required', 'numeric'],
       'structure' => ['required'],
-      'image' => ['required']
+      'image' => ['required'],
+      'type'
     ];
   }
 }

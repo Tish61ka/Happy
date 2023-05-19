@@ -42,14 +42,17 @@ class ProductController extends Controller
   }
   public function store(StoreRequest $request): \Illuminate\Http\JsonResponse
   {
+    // dd($request->all());
     $file = $request->file('image');
-    $path = Storage::disk('public')->put('products', $file);
+    $file->move(public_path('img'), $file->getClientOriginalName());
+    $path = '/img/' . $file->getClientOriginalName();
 
     $product = Product::create([
       'title' => $request->input('title'),
-      'description' => $request->input('description'),
+      'description' => $request->input('discription'),
       'price' => $request->input('price'),
       'structure' => $request->input('structure'),
+      'type' => $request->input('type'),
       'image' => $path
     ]);
 

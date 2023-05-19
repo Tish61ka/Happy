@@ -84,7 +84,7 @@
         <h1 class="cart-empty">Корзина пуста!</h1>
       </div>
       <div class="all-cost" v-if="products.length != 0">
-        <button>Очистить все</button>
+        <button @click="DestroyAll()">Очистить все</button>
         <button @click="CreateOrder()">Оформить заказ</button>
         <p>Итоговая сумма: {{ itogo }} руб</p>
       </div>
@@ -174,6 +174,11 @@ export default {
           this.AllCart();
         });
     },
+    DestroyAll() {
+      axios.post("/api/cart/destroyall", { user_id: this.user_id }).then(res => {
+        this.AllCart();
+      });
+    }
   },
 };
 </script>

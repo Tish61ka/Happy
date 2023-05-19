@@ -70,6 +70,10 @@ class CartController extends Controller
       ]);
     }
   }
+  public function destroyAll(Request $request)
+  {
+    Cart::where('user_id', $request->input('user_id'))->delete();
+  }
   public function destroy($id): \Illuminate\Http\JsonResponse
   {
     $cart = Cart::find($id);

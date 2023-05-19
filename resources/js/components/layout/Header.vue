@@ -200,6 +200,7 @@ export default {
             (this.email = ""),
             (this.message = "");
           document.querySelector(".modal-info").classList.add("closes");
+          this.$router.push({ name: "Cart" });
         });
     },
     hello() {

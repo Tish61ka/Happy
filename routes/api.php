@@ -90,6 +90,7 @@ Route::post('/orders/{id}', [OrderController::class, 'update']);
 
 Route::get('/cart/all/{id}', [CartController::class, 'all']);
 Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy']);
+Route::post('/cart/destroyall', [CartController::class, 'destroyAll']);
 Route::post('/delivery/create', [UserController::class, 'delivery']);
 Route::get('/all/products', [ProductController::class, 'all']);
 Route::get('/catalog', [ProductController::class, 'catalog']);
