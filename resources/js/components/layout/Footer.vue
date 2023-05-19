@@ -1,9 +1,7 @@
 <template>
   <footer id="footer">
-    <div>
-      <router-link :to="{ name: 'Index' }"
-        >Политика конфедициальности</router-link
-      >
+    <div class="container">
+      <router-link :to="{ name: 'Index' }">Политика конфедициальности</router-link>
       <p>Оставить заявку</p>
       <p>О компании</p>
       <router-link :to="{ name: 'Index' }">
@@ -27,10 +25,8 @@
           />
         </svg>
       </router-link>
-      <router-link :to="{ name: 'Login' }"
-        >Авторизация для администратора</router-link
-      >
-      <router-link :to="{ name: 'Index' }">Партнёры</router-link>
+      <router-link :to="{ name: 'Login' }">Авторизация для администратора</router-link>
+      <router-link :to="{ name: 'Index' }">Дрставка и оплата</router-link>
       <router-link :to="{ name: 'Index' }">Каталог</router-link>
     </div>
   </footer>
@@ -52,7 +48,6 @@ footer {
   z-index: 2;
 }
 footer div {
-  width: 1560px;
   height: 90%;
   margin: 0 auto;
   padding-top: 25px;
@@ -70,5 +65,20 @@ footer div p {
   line-height: 16px;
   color: white;
   cursor: pointer;
+}
+@media screen and (max-width: 1450px) {
+  footer div a,
+  footer div p {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 1050px) {
+  footer div {
+    justify-content: center;
+  }
+  footer div a:not(:nth-child(4)),
+  footer div p {
+    display: none;
+  }
 }
 </style>

@@ -120,4 +120,50 @@ export default defineComponent({
   top: 0;
   width: 200px;
 }
+@media screen and (max-width: 1600px) {
+  .left-back {
+    width: 110px;
+    top: 30px;
+  }
+  .right-back {
+    width: 150px;
+  }
+  .about-us-slider h2 {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .active-big-img {
+    width: 300px;
+    height: 320px;
+  }
+}
+@media screen and (max-width: 1230px) {
+  .left-back,
+  .right-back {
+    display: none;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .active-p {
+    margin-left: 20px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .active-big-img {
+    width: 200px;
+    height: 210px;
+  }
+  .active-p {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .active-p {
+    display: none;
+  }
+}
 </style>

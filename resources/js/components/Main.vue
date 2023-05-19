@@ -1,6 +1,6 @@
 <template>
   <Header
-    v-show="
+    v-if="
       this.$route.path != '/login' &&
       this.$route.path != '/cart' &&
       this.$route.path != '/order' &&

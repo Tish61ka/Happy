@@ -60,12 +60,42 @@
     .container {
       width: 1560px;
       margin: 0 auto;
-      padding-top: 25px;
     }
 
-    @media screen and (min-width: 1200px) and (max-width: 1590px) {
+    @media screen and (max-width: 1600px) {
+
       .container {
-        width: 1200px;
+        max-width: 1400px;
+      }
+    }
+
+    @media screen and (max-width: 1450px) {
+
+      .container {
+        max-width: 1000px;
+      }
+    }
+
+    @media screen and (max-width: 1050px) {
+
+      .container {
+        max-width: 700px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        max-width: 600px;
+      }
+
+      header {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 650px) {
+      .container {
+        max-width: 400px;
       }
     }
 

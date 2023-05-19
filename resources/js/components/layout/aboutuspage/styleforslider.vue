@@ -13,7 +13,7 @@ export default {
     background-color: aqua;
 } */
 .carousel__track li {
-  width: 300px;
+  width: 140px;
 }
 .active-big-img {
   width: 370px;
@@ -28,5 +28,15 @@ export default {
   font-size: 24px;
   line-height: 131%;
   text-align: left;
+}
+@media screen and (max-width: 1050px) {
+  .carousel:last-child .carousel__viewport {
+    display: none;
+  }
+}
+@media screen and (max-width: 650px) {
+  .carousel__item {
+    justify-content: center;
+  }
 }
 </style>
