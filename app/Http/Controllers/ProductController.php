@@ -61,31 +61,34 @@ class ProductController extends Controller
       'content' => new ProductResource($product)
     ], 200);
   }
-  public function update(UpdateRequest $request, $id): \Illuminate\Http\JsonResponse
+  public function update(Request $request, $id)
   {
-    $product = Product::find($id);
-    $file = $request->file('image');
-    $path = '';
-
-    if (!$product) {
-      return response()->json([
-        'message' => 'Товара не существует'
+    if ($request->input('type') == "[object Object]") {
+      Product::where('id', $id)->update([
+        'title' => $request->input('title'),
+        'price' => $request->input('price'),
+        'structure' => $request->input('structure'),
+        'description' => $request->input('discription')
+      ]);
+    } else {
+      Product::where('id', $id)->update([
+        'title' => $request->input('title'),
+        'price' => $request->input('price'),
+        'structure' => $request->input('structure'),
+        'description' => $request->input('discription'),
+        'type' => $request->input('type')
       ]);
     }
-    if ($file) {
-      Storage::disk('public')->delete($product->image);
-      $path = Storage::disk('public')->put('products', $file);
-      $product->image = $path;
-      $product->save();
-    }
-    $product->update($request->all());
 
-    return response()->json([
-      'content' => [
-        'content' => new ProductResource($product),
-        'message' => 'Данные обновлены'
-      ]
-    ], 200);
+    $file = $request->file('image');
+
+    if ($file != null) {
+      $file->move(public_path('img'), $file->getClientOriginalName());
+      $path = '/img/' . $file->getClientOriginalName();
+      Product::where('id', $id)->update([
+        'image' => $path
+      ]);
+    }
   }
   public function destroy($id): \Illuminate\Http\JsonResponse
   {

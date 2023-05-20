@@ -76,7 +76,7 @@ Route::middleware('user')->group(function () {
 Route::get('/products', [ProductController::class, 'all']);
 Route::get('/product/{id}', [ProductController::class, 'index']);
 Route::post('/product', [ProductController::class, 'store']);
-Route::patch('/product/{id}', [ProductController::class, 'update']);
+Route::post('/product/{id}', [ProductController::class, 'update']);
 Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 
 

@@ -132,10 +132,20 @@
           <input type="file" v-on:change="handleFileUpload()" ref="file" />
           <p>Выберите файл</p>
         </div>
-        <input type="text" placeholder="Введите название" required v-model="title" />
-        <input type="text" placeholder="Введите цену" required v-model="price" />
+        <input
+          type="text"
+          placeholder="Введите название"
+          required
+          v-model="title"
+        />
+        <input
+          type="text"
+          placeholder="Введите цену"
+          required
+          v-model="price"
+        />
         <select v-model="type" name="" id="">
-          <option v-for="type in types" :key="type"  :value="type.id">
+          <option v-for="type in types" :key="type" :value="type.id">
             {{ type.type }}
           </option>
         </select>
@@ -153,8 +163,10 @@
           placeholder="Введите состав"
           v-model="structure"
         ></textarea>
-        <button v-if="show == false" @click.prevent="createProduct()">Добавить +</button>
-        <button v-else>Редактировать +</button>
+        <button v-if="show == false" @click.prevent="createProduct()">
+          Добавить +
+        </button>
+        <button v-else @click.prevent="saveEdit()">Редактировать +</button>
       </form>
     </div>
   </div>
@@ -177,6 +189,7 @@ export default {
       show: false,
       currentItem: null,
       load: true,
+      id_product: "",
       toppings: ["Caramel", "Peanut butter", "Sundae", "Oreos"],
     };
   },
@@ -194,7 +207,9 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
+    let list = document.querySelectorAll(
+      ".navigation-cart li:not(:first-child)"
+    );
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -225,9 +240,35 @@ export default {
         this.img = res.data.content.image;
         this.title = res.data.content.title;
         this.price = res.data.content.price;
+        this.type = res.data.content.type;
         this.discription = res.data.content.description;
         this.structure = res.data.content.structure;
+        this.id_product = res.data.content.id;
       });
+    },
+    saveEdit() {
+      let formData = new FormData();
+      formData.append("image", this.img);
+      formData.append("title", this.title);
+      formData.append("price", this.price);
+      formData.append("discription", this.discription);
+      formData.append("structure", this.structure);
+      formData.append("type", this.type);
+      axios
+        .post(`/api/product/${this.id_product}`, formData, {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          (this.title = ""),
+            (this.price = ""),
+            (this.discription = ""),
+            (this.img = "");
+          this.structure = "";
+          this.type = "";
+          this.allProducts();
+        });
     },
     createProduct() {
       let formData = new FormData();
@@ -247,20 +288,12 @@ export default {
           (this.title = ""),
             (this.price = ""),
             (this.discription = ""),
-          this.img = "";
+            (this.img = "");
           this.allProducts();
         });
     },
     handleFileUpload() {
       this.img = this.$refs.file.files[0];
-    },
-    saveEdit() {
-      this.show = false;
-      this.img = "";
-      this.title = "";
-      this.price = "";
-      this.discription = "";
-      this.structure = "";
     },
     GoEdit() {
       document.querySelector(".item-v2").classList.remove("no-edit");
@@ -280,14 +313,16 @@ export default {
         .querySelector(".recentCustomers form > div:first-child img")
         .getAttribute("src") != ""
     ) {
-      document.querySelector(".recentCustomers form > div:first-child p").style.display =
-        "none";
+      document.querySelector(
+        ".recentCustomers form > div:first-child p"
+      ).style.display = "none";
       document
         .querySelector(".recentCustomers form input[type='file']")
         .setAttribute("disabled", "");
     } else {
-      document.querySelector(".recentCustomers form > div:first-child p").style.display =
-        "block";
+      document.querySelector(
+        ".recentCustomers form > div:first-child p"
+      ).style.display = "block";
     }
   },
 };
