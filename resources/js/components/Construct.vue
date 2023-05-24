@@ -56,6 +56,7 @@
         </div>
         <button>Добавить в корзину</button>
       </div>
+      <img :src="image" alt="" />
     </section>
   </div>
 </template>
@@ -70,6 +71,8 @@ export default {
       waferArr: [],
       showDanger: false,
       messageDanger: "",
+      childWafer: "",
+      image: "",
     };
   },
   mounted() {
@@ -337,6 +340,52 @@ export default {
     //     ".created-ice-cream > div div img:first-child"
     //   ).style.marginRight = -17 + "px";
     // }
+    this.childWafer = document.querySelector(".field").childElementCount;
+    // if (this.childWafer > 1)
+    // console.log(document.querySelector(".field> img").getAttribute("src"));
+    function mergeImages() {
+      const img1 = new Image();
+      const img2 = new Image();
+      const img3 = new Image();
+      const img4 = new Image();
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      img1.onload = function () {
+        canvas.width = img1.width * 2;
+        canvas.height = img1.height * 2;
+        ctx.drawImage(img1, 0, 0);
+        img2.onload = function () {
+          ctx.drawImage(img2, img1.width, 0);
+          img3.onload = function () {
+            ctx.drawImage(img3, 0, img1.height);
+            img4.onload = function () {
+              ctx.drawImage(img4, img1.width, img1.height);
+              const mergedImage = canvas.toDataURL("image/png");
+              this.image = mergedImage;
+            };
+            if (this.childWafer <= 1) {
+            } else {
+              img4.src = document.querySelector(".field> img").getAttribute("src");
+            }
+          };
+          if (this.childWafer <= 1) {
+          } else {
+            img3.src = document.querySelector(".field> img").getAttribute("src");
+          }
+        };
+        if (this.childWafer <= 1) {
+        } else {
+          img2.src = document.querySelector(".field> img").getAttribute("src");
+        }
+      };
+      if (this.childWafer <= 1) {
+      } else {
+        img1.src = document.querySelector(".field> img").getAttribute("src");
+      }
+    }
+    mergeImages();
   },
 };
 </script>
