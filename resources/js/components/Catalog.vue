@@ -137,4 +137,14 @@ export default {
   display: flex;
   flex-direction: row;
 }
+@media screen and (max-width: 1600px) {
+  .content-cat {
+    margin-top: 60px;
+  }
+}
+@media screen and (max-width: 769px) {
+  .content-cat {
+    margin-top: 30px;
+  }
+}
 </style>

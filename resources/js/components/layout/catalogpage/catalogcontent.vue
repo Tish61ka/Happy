@@ -1,5 +1,6 @@
 <template>
   <aside class="filter">
+    <span @click="OpenFilter(false)">+</span>
     <h1>Фильтр</h1>
     <div class="cost">
       <h2>Цена, ₽</h2>
@@ -82,7 +83,7 @@
       </div>
     </div>
     <div class="wafer">
-      <div class="dropdown">
+      <div class="dropdown closed">
         <div>
           <h2 class="icon">Вафля</h2>
           <span
@@ -179,6 +180,7 @@
     </p>
     <h1>Каталог</h1>
     <p class="shown">Показано {{ products.length }}</p>
+    <span @click="OpenFilter(true)">Фильтры</span>
     <div class="active-filter">
       <div class="filter-1" v-for="sort in sort_on" :key="sort">
         <p>Вкус:</p>
@@ -211,7 +213,7 @@
         </svg>
       </div>
       <p class="clear-filter" @click="clear_sort()">Очистить фильтр</p>
-      <input type="search" v-model="search" />
+      <!-- <input type="search" v-model="search" /> -->
     </div>
     <Loader v-if="load == true"></Loader>
     <div class="catalog-product all">
@@ -299,6 +301,7 @@ export default {
       alert: false,
       message: "",
       ih: null,
+      open: false,
     };
   },
   components: {
@@ -422,6 +425,17 @@ export default {
     },
   },
   methods: {
+    OpenFilter(j) {
+      this.open = j;
+      if (this.open == true) {
+        document.querySelector(".filter").style.display = "flex";
+        document.querySelector("html").style.overflow = "hidden";
+      } else {
+        document.querySelector(".filter").style.display = "none";
+
+        document.querySelector("html").style.overflow = "scroll";
+      }
+    },
     clearcheck(name) {
       let arr = document.querySelectorAll(`.taste .custom-checkbox`);
       for (let i = 0; i < this.types.length; i++) {
@@ -522,27 +536,29 @@ export default {
 
 <style lang="scss" scoped>
 .alert {
-  position: absolute;
+  position: fixed;
   color: white;
-  background: #1d2023;
-  border: 2px solid #af3131;
+  background: #ece4fe;
+  border: 1px solid #6a4ba7;
   margin-left: 74%;
   margin-top: 35%;
   font-family: "Comfortaa", serif;
-  top: 10px;
+  bottom: 50px;
   right: 10px;
+  border-radius: 10px;
   p {
     padding: 2vw 1vw;
+    color: black;
   }
   .link {
-    color: #af3131;
+    color: black;
   }
   div {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
-    color: #af3131;
     cursor: pointer;
+    color: black;
   }
 }
 .filter {
@@ -1045,5 +1061,91 @@ export default {
 .pagination-page a:not(:first-child, :last-child).router-link-active {
   background: #ece4fe;
   border: 1px solid #b09cd7;
+}
+.catalog-content span {
+  display: none;
+}
+.filter > span {
+  display: none;
+}
+@media screen and (max-width: 1600px) {
+  .catalog-content {
+    margin-left: 50px;
+    width: 90%;
+  }
+  .card-item {
+    width: 350px;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .catalog-product {
+    justify-content: center;
+    align-items: center;
+  }
+  .catalog-content {
+    margin-left: 50px;
+    width: 60%;
+  }
+}
+@media screen and (max-width: 769px) {
+  .filter {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: white;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    overflow-y: scroll;
+  }
+  .filter h1 {
+    width: 100%;
+    padding-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .cost {
+    width: 90%;
+  }
+  .catalog-content {
+    margin-left: 0px;
+    width: 100%;
+  }
+  .catalog-content h1 {
+    font-size: 28px;
+    text-align: center;
+  }
+  .pagination {
+    text-align: center;
+  }
+  .shown {
+    text-align: center;
+  }
+  .catalog-content span {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 18px;
+  }
+  .filter > span {
+    position: absolute;
+    display: block;
+    top: 15px;
+    right: 15px;
+    color: #b09cd7;
+    font-size: 60px;
+    transform: rotate(45deg);
+  }
+}
+@media screen and (max-width: 450px) {
+  .pagination {
+    display: none;
+  }
 }
 </style>
