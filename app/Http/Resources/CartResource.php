@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\CustomProduct;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -21,7 +22,8 @@ class CartResource extends JsonResource
             'id' => $this->id,
             'count' => $this->count,
             'user' => new UserResource($this->user),
-            'product' => new ProductResource($this->product)
+            'product' => new ProductResource($this->product),
+            'custom' => CustomProduct::find($this->custom_id)
         ];
     }
 }

@@ -115,7 +115,9 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
+    let list = document.querySelectorAll(
+      ".navigation-cart li:not(:first-child)"
+    );
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -127,11 +129,11 @@ export default {
     AllCart() {
       axios.get(`/api/cart/all/${this.user_id}`).then((res) => {
         this.products = res.data.content;
-        console.log(this.products);
         this.itogo = 0;
         console.log(this.products);
         for (let index = 0; index < this.products.length; index++) {
-          this.itogo += this.products[index].count * this.products[index].product.price;
+          this.itogo +=
+            this.products[index].count * this.products[index].product.price;
         }
         this.load = false;
       });
@@ -173,9 +175,11 @@ export default {
         });
     },
     DestroyAll() {
-      axios.post("/api/cart/destroyall", { user_id: this.user_id }).then((res) => {
-        this.AllCart();
-      });
+      axios
+        .post("/api/cart/destroyall", { user_id: this.user_id })
+        .then((res) => {
+          this.AllCart();
+        });
     },
   },
 };
@@ -201,7 +205,8 @@ export default {
   left: 0;
   border-radius: 50%;
   border: calc(60px * 0.03) solid var(--second-bg-color);
-  animation: fulfilling-bouncing-circle-spinner-orbit-animation infinite 4000ms ease;
+  animation: fulfilling-bouncing-circle-spinner-orbit-animation infinite 4000ms
+    ease;
 }
 .fulfilling-bouncing-circle-spinner .circle {
   height: 60px;
@@ -211,7 +216,8 @@ export default {
   border-radius: 50%;
   position: relative;
   border: calc(60px * 0.1) solid var(--second-bg-color);
-  animation: fulfilling-bouncing-circle-spinner-circle-animation infinite 4000ms ease;
+  animation: fulfilling-bouncing-circle-spinner-circle-animation infinite 4000ms
+    ease;
   transform: rotate(0deg) scale(1);
 }
 @keyframes fulfilling-bouncing-circle-spinner-animation {
