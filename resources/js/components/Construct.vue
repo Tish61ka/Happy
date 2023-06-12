@@ -5,7 +5,11 @@
       <div class="taste-create">
         <h2>Вкусы</h2>
         <div>
-          <div class="item-clicking" v-for="(taste, index) in taste_arr" :key="index">
+          <div
+            class="item-clicking"
+            v-for="(taste, index) in taste_arr"
+            :key="index"
+          >
             <p>{{ taste.name }}</p>
             <button @click.prevent="PlusTaste(index, taste.name)">+</button>
             <div>{{ taste.count }}</div>
@@ -28,7 +32,8 @@
     <section class="main-content">
       <p class="pagination">
         <router-link :to="{ name: 'Index' }"> Home </router-link> /
-        <router-link :to="{ name: 'Catalog' }"> Catalog </router-link>/ Constructor
+        <router-link :to="{ name: 'Catalog' }"> Catalog </router-link>/
+        Constructor
       </p>
       <div class="h1-danger">
         <h1>Создай свое мороженное</h1>
@@ -54,7 +59,7 @@
             alt="No Ethernet"
           />
         </div>
-        <button>Добавить в корзину</button>
+        <button @click="CreateCustom()">Добавить в корзину</button>
       </div>
       <img :src="image" alt="" />
     </section>
@@ -62,6 +67,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -81,6 +87,17 @@ export default {
     this.wafer_arr = this.waferFunc();
   },
   methods: {
+    CreateCustom() {
+      axios
+        .post("/api/create/custom", {
+          ball: this.tasteBallArr,
+          wafer: this.waferArr,
+          user_id: localStorage.getItem(`id_user`),
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    },
     tasteFunc() {
       let taste = [
         {

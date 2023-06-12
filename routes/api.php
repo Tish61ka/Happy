@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
@@ -86,6 +87,8 @@ Route::delete('/delete/review/{id}', [ReviewController::class, 'destroy']);
 
 Route::post('/create/review/', [ReviewController::class, 'create']);
 Route::get('/all/reviews', [ReviewController::class, 'all']);
+
+Route::post('/create/custom', [CustomProductController::class, 'create']);
 
 
 Route::post('/order', [OrderController::class, 'store']);
