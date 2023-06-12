@@ -26,4 +26,9 @@ class ReviewController extends Controller
             'content' => $request->input('content'),
         ]);
     }
+
+    public function destroy($id)
+    {
+        Review::where('id', $id)->delete();
+    }
 }

@@ -28,7 +28,7 @@
               <p>Комментарий оставил пользователь:</p>
               <h2>{{ review.name }}</h2>
             </div>
-            <button>Удалить</button>
+            <button @click="DeleteReview(review.id)">Удалить</button>
           </div>
           <div>
             <p>
@@ -66,7 +66,9 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
+    let list = document.querySelectorAll(
+      ".navigation-cart li:not(:first-child)"
+    );
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -75,6 +77,11 @@ export default {
     time_is_widget.init({ Moscow_z71d: {} });
   },
   methods: {
+    DeleteReview(id) {
+      axios.delete(`/api/delete/review/${id}`).then((res) => {
+        this.allReviews();
+      });
+    },
     allReviews() {
       axios
         .get(`/api/reviews`, {

@@ -41,7 +41,7 @@
             <td>
               <button>Разбанить</button>
               <button>Забанить</button>
-              <button>Удалить</button>
+              <button @click="DeleteUser(user.id)">Удалить</button>
             </td>
           </tr>
         </tbody>
@@ -75,7 +75,9 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
+    let list = document.querySelectorAll(
+      ".navigation-cart li:not(:first-child)"
+    );
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -84,6 +86,11 @@ export default {
     time_is_widget.init({ Moscow_z71d: {} });
   },
   methods: {
+    DeleteUser(id) {
+      axios.delete(`/api/delete/user/${id}`).then((res) => {
+        this.allUsers();
+      });
+    },
     allUsers() {
       axios
         .get(`/api/users`, {

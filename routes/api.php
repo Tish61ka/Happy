@@ -79,6 +79,10 @@ Route::post('/product', [ProductController::class, 'store']);
 Route::post('/product/{id}', [ProductController::class, 'update']);
 Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 
+Route::delete('/delete/user/{id}', [UserController::class, 'destroy']);
+
+Route::delete('/delete/review/{id}', [ReviewController::class, 'destroy']);
+
 
 Route::post('/create/review/', [ReviewController::class, 'create']);
 Route::get('/all/reviews', [ReviewController::class, 'all']);
