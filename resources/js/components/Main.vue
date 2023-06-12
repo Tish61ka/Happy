@@ -48,7 +48,7 @@ export default {
       if (this.$route.path != "/") {
         document.getElementById("footer").style.background = "#D2BEFF";
       } else {
-        document.getElementById("footer").style.background = "#FF95D7";
+        document.getElementById("footer").style.background = "#D2BEFF";
       }
     },
   },

@@ -39,23 +39,30 @@
             <td>{{ order.price }}</td>
             <td>{{ order.status }}</td>
             <td>
-              <label for="touch"><span>Посмотреть детали заказа</span></label>
-              <input type="checkbox" id="touch" />
+              <label @click="openOrderFunc('elem-' + order.id)"
+                ><span>Посмотреть детали заказа</span></label
+              >
 
-              <ul class="slide">
+              <!-- <ul class="slide">
                 <li v-for="product in order.products" :key="product">
                   {{ product.id_product.title }}
                   <p>{{ product.count }} кол-во</p>
                   <p>{{ product.id_product.price }} руб</p>
                 </li>
-              </ul>
+              </ul> -->
+              <div :id="'elem-' + order.id" style="display: none">
+                <div v-for="product in order.products" :key="product">
+                  <p>{{ product.id_product.title }}</p>
+                  <p>{{ product.count }} кол-во</p>
+                  <p>{{ product.id_product.price }} руб</p>
+                </div>
+              </div>
             </td>
           </tr>
-          <!-- <tr class="slide">
-            <td>Lorem Ipsum</td>
-            <td>Lorem Ipsum</td>
-            <td>Lorem Ipsum</td>
-            <td>Lorem Ipsum</td>
+          <!-- <tr v-for="product in order.products" :key="product">
+            <td>{{ product.id_product.title }}</td>
+            <td>{{ product.count }} кол-во</td>
+            <td>{{ product.id_product.price }} руб</td>
           </tr> -->
         </tbody>
       </table>
@@ -72,6 +79,7 @@ export default {
       orders: [],
       product: [],
       count: 0,
+      openOrder: false,
     };
   },
   mounted() {
@@ -97,8 +105,14 @@ export default {
     AllOrder() {
       axios.post("/api/orders", { user_id: this.user_id }).then((res) => {
         this.orders = res.data.content;
-        console.log(this.orders);
       });
+    },
+    openOrderFunc(id) {
+      if (document.getElementById(`${id}`).style.display == "none") {
+        document.getElementById(`${id}`).style.display = "block";
+      } else {
+        document.getElementById(`${id}`).style.display = "none";
+      }
     },
   },
 };
@@ -202,10 +216,10 @@ export default {
 }
 
 .details .recentOrders table tr {
+  position: relative;
   color: black;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .details .recentOrders table tr:last-child {
   border-bottom: none;
 }
@@ -222,6 +236,20 @@ export default {
 
 .details .recentOrders table td:last-child {
   text-align-last: right;
+}
+.details .recentOrders table td:last-child > div {
+  position: relative;
+  left: 0px;
+  top: 20px;
+}
+.details .recentOrders table td:last-child > div div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.details .recentOrders table td:last-child > div div p:nth-child(2) {
+  text-align: center;
 }
 span {
   background: transparent;

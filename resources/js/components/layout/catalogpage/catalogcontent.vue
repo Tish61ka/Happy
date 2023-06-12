@@ -562,6 +562,7 @@ export default {
   }
 }
 .filter {
+  display: block;
   width: 250px;
 }
 .filter h1 {

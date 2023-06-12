@@ -85,32 +85,29 @@ export default {
   margin-top: -150px;
   margin-left: 100px;
 }
-@media screen and (min-width: 1200px) and (max-width: 1590px) {
-  .preview {
-    height: 480px;
-    width: 100vw;
-    margin-bottom: 50px;
-  }
-  .content-in-review div h1 {
-    width: 460px;
-    font-size: 150px;
-  }
-  .content-in-review div h2 {
-    width: 460px;
-    font-size: 100px;
-    margin-top: 40px;
-  }
-  .content-in-review div button {
-    width: 350px;
-    height: 60px;
-    font-size: 18px;
-    margin-top: 40px;
-    margin-left: 60px;
-  }
+@media screen and (max-width: 1850px) {
   .content-in-review div:last-child img {
-    width: 800px;
-    height: 700px;
-    margin-top: -100px;
+    display: none;
   }
+  .content-in-review {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .content-in-review div {
+    margin-top: 0 !important;
+  }
+}
+@media screen and (max-width: 1600px) {
+}
+@media screen and (max-width: 1450px) {
+}
+@media screen and (max-width: 1230px) {
+}
+@media screen and (max-width: 1050px) {
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 650px) {
 }
 </style>
