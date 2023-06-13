@@ -32,69 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>
-              <div id="clicking-1" @click="OpenSelect(1)">
-                <ul>
-                  <li>В обработке</li>
-                  <li>Готовится</li>
-                  <li>Доставлен</li>
-                  <li>Отменен</li>
-                </ul>
-                <svg
-                  width="22"
-                  height="12"
-                  viewBox="0 0 22 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10.6055 0L11.8533 1.21777L1.2467 11.5688L-0.00113258 10.351L10.6055 0Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M9.35763 1.21777L10.6055 0L21.2121 10.351L19.9642 11.5688L9.35763 1.21777Z"
-                    fill="black"
-                  />
-                </svg>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>
-              <div>
-                <ul>
-                  <li>В обработке</li>
-                  <li>Готовится</li>
-                  <li>Доставлен</li>
-                  <li>Отменен</li>
-                </ul>
-                <svg
-                  width="22"
-                  height="12"
-                  viewBox="0 0 22 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10.6055 0L11.8533 1.21777L1.2467 11.5688L-0.00113258 10.351L10.6055 0Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M9.35763 1.21777L10.6055 0L21.2121 10.351L19.9642 11.5688L9.35763 1.21777Z"
-                    fill="black"
-                  />
-                </svg>
-              </div>
-            </td>
-          </tr> -->
-          <tr v-for="order in orders" :key="order">
+          <tr v-for="(order, index) in orders" :key="order">
             <td>Заказ №{{ order.id }}</td>
             <td>
               <ul>
@@ -110,7 +48,7 @@
             <td>{{ order.price }}</td>
             <td>{{ order.status }}</td>
             <td>
-              <select v-model="status">
+              <select v-model="status[index]">
                 <option value="В обработке" selected>В обработке</option>
                 <option value="Готовится">Готовится</option>
                 <option value="Доставлен">Доставлен</option>
@@ -119,42 +57,6 @@
               <button @click="ChangeStatus(order.id)">Сохранить</button>
             </td>
           </tr>
-          <!-- <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr> -->
         </tbody>
       </table>
     </div>
@@ -167,7 +69,7 @@ export default {
   data() {
     return {
       i: true,
-      status: "В обработке",
+      status: [],
       user_id: localStorage.getItem("id_user"),
       orders: [],
     };
@@ -204,10 +106,13 @@ export default {
     AllOrder() {
       axios.post("/api/orders", { user_id: this.user_id }).then((res) => {
         this.orders = res.data.content;
+        this.orders.forEach((order, index) => {
+          this.status[index] = order.status;
+        });
       });
     },
     ChangeStatus(id) {
-      axios.post(`/api/orders/${id}`, { status: this.status }).then((res) => {
+      axios.post(`/api/orders/${id}`, { status: this.status[id - 1] }).then((res) => {
         console.log(res);
         this.AllOrder();
       });

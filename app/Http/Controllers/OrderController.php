@@ -14,6 +14,20 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    public function allAdmin()
+    {
+        return response()->json([
+            'message' => 'Все заказы',
+            'content' => OrderResource::collection(Order::all())
+        ]);
+    }
+    public function countOrders()
+    {
+        return response()->json([
+            'message' => 'Кол-во заказов',
+            'content' => Order::all()->last()->id,
+        ]);
+    }
     public function all(Request $request): \Illuminate\Http\JsonResponse
     {
         return response()->json([

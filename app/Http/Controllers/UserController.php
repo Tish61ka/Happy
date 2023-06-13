@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+  public function countUsers()
+  {
+    return response()->json([
+      'message' => 'Кол-во пол-ей',
+      'content' => User::all()->count(),
+    ]);
+  }
   public function all(): \Illuminate\Http\JsonResponse
   {
     return response()->json([

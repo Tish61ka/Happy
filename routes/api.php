@@ -34,6 +34,7 @@ Route::middleware('user')->group(function () {
   Route::middleware('admin')->group(function () {
     // Пользователи
     Route::get('/users', [UserController::class, 'all']);
+    Route::get('/admin/users/count', [UserController::class, 'countUsers']);
     // Route::get('/users/{id}', [UserController::class, 'show']);
 
     Route::get('/reviews', [ReviewController::class, 'all']);
@@ -79,6 +80,7 @@ Route::get('/product/{id}', [ProductController::class, 'index']);
 Route::post('/product', [ProductController::class, 'store']);
 Route::post('/product/{id}', [ProductController::class, 'update']);
 Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+Route::get('/admin/orders/count', [OrderController::class, 'countOrders']);
 
 Route::delete('/delete/user/{id}', [UserController::class, 'destroy']);
 
@@ -93,6 +95,7 @@ Route::post('/create/custom', [CustomProductController::class, 'create']);
 
 Route::post('/order', [OrderController::class, 'store']);
 Route::post('/orders', [OrderController::class, 'all']);
+Route::get('/admin/orders', [OrderController::class, 'allAdmin']);
 Route::post('/orders/{id}', [OrderController::class, 'update']);
 
 Route::get('/cart/all/{id}', [CartController::class, 'all']);

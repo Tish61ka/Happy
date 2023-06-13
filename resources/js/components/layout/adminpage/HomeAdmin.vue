@@ -38,7 +38,7 @@
     </div>
     <div class="card">
       <div>
-        <div class="numbers">85</div>
+        <div class="numbers">{{ usersCount }}</div>
         <div class="cardName">Пользователей</div>
       </div>
       <div class="iconBx">
@@ -58,7 +58,7 @@
     </div>
     <div class="card">
       <div>
-        <div class="numbers">115</div>
+        <div class="numbers">{{ ordersCount }}</div>
         <div class="cardName">Заказов за все время</div>
       </div>
       <div class="iconBx">
@@ -120,59 +120,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
-          </tr>
-          <tr>
-            <td>Заказ №32</td>
-            <td>1</td>
-            <td>330</td>
-            <td>В обработке</td>
+          <tr v-for="order in orders" :key="order">
+            <td>Заказ №{{ order.id }}</td>
+            <td>{{ order.total_count }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.status }}</td>
           </tr>
         </tbody>
       </table>
@@ -301,6 +253,9 @@ export default {
     return {
       products: [],
       users: [],
+      usersCount: 0,
+      orders: [],
+      ordersCount: 0,
       load: true,
     };
   },
@@ -327,6 +282,7 @@ export default {
     time_is_widget.init({ Moscow_z71d: {} });
 
     this.allProducts();
+    this.AllOrder();
     this.Users();
   },
   methods: {
@@ -334,6 +290,12 @@ export default {
       axios.get(`/api/all/products`).then((res) => {
         this.products = res.data.content;
       });
+    },
+    AllOrder() {
+      axios.get("/api/admin/orders").then((res) => {
+        this.orders = res.data.content;
+      });
+      this.countOrder();
     },
     Users() {
       axios
@@ -345,7 +307,24 @@ export default {
         .then((res) => {
           this.load = false;
           this.users = res.data.content;
+          this.countUsers();
         });
+    },
+    countUsers() {
+      axios
+        .get("/api/admin/users/count", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => {
+          this.usersCount = response.data.content;
+        });
+    },
+    countOrder() {
+      axios.get("/api/admin/orders/count").then((response) => {
+        this.ordersCount = response.data.content;
+      });
     },
   },
 };

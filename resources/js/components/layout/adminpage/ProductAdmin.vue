@@ -132,18 +132,8 @@
           <input type="file" v-on:change="handleFileUpload()" ref="file" />
           <p>Выберите файл</p>
         </div>
-        <input
-          type="text"
-          placeholder="Введите название"
-          required
-          v-model="title"
-        />
-        <input
-          type="text"
-          placeholder="Введите цену"
-          required
-          v-model="price"
-        />
+        <input type="text" placeholder="Введите название" required v-model="title" />
+        <input type="text" placeholder="Введите цену" required v-model="price" />
         <select v-model="type" name="" id="">
           <option v-for="type in types" :key="type" :value="type.id">
             {{ type.type }}
@@ -163,9 +153,7 @@
           placeholder="Введите состав"
           v-model="structure"
         ></textarea>
-        <button v-if="show == false" @click.prevent="createProduct()">
-          Добавить +
-        </button>
+        <button v-if="show == false" @click.prevent="createProduct()">Добавить +</button>
         <button v-else @click.prevent="saveEdit()">Редактировать +</button>
       </form>
     </div>
@@ -207,9 +195,7 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(
-      ".navigation-cart li:not(:first-child)"
-    );
+    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
@@ -240,7 +226,7 @@ export default {
         this.img = res.data.content.image;
         this.title = res.data.content.title;
         this.price = res.data.content.price;
-        this.type = res.data.content.type;
+        this.type = res.data.content.type.id;
         this.discription = res.data.content.description;
         this.structure = res.data.content.structure;
         this.id_product = res.data.content.id;
@@ -261,10 +247,7 @@ export default {
           },
         })
         .then((res) => {
-          (this.title = ""),
-            (this.price = ""),
-            (this.discription = ""),
-            (this.img = "");
+          (this.title = ""), (this.price = ""), (this.discription = ""), (this.img = "");
           this.structure = "";
           this.type = "";
           this.allProducts();
@@ -285,10 +268,7 @@ export default {
           },
         })
         .then((res) => {
-          (this.title = ""),
-            (this.price = ""),
-            (this.discription = ""),
-            (this.img = "");
+          (this.title = ""), (this.price = ""), (this.discription = ""), (this.img = "");
           this.allProducts();
         });
     },
@@ -313,16 +293,14 @@ export default {
         .querySelector(".recentCustomers form > div:first-child img")
         .getAttribute("src") != ""
     ) {
-      document.querySelector(
-        ".recentCustomers form > div:first-child p"
-      ).style.display = "none";
+      document.querySelector(".recentCustomers form > div:first-child p").style.display =
+        "none";
       document
         .querySelector(".recentCustomers form input[type='file']")
         .setAttribute("disabled", "");
     } else {
-      document.querySelector(
-        ".recentCustomers form > div:first-child p"
-      ).style.display = "block";
+      document.querySelector(".recentCustomers form > div:first-child p").style.display =
+        "block";
     }
   },
 };
