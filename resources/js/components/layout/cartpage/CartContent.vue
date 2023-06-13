@@ -48,11 +48,19 @@
           <tr v-for="product in products" :key="product">
             <td class="img-td">
               <div>
-                <img :src="product.product.image" alt="No Ethernet" />
+                <img v-if="product.product != null" :src="product.product.image" alt="No Ethernet" />
+                <div v-if="product.product == null">
+                  <!-- Морожка -->
+                  <img :src="product.custom.ball1">
+                  <img :src="product.custom.ball2">
+                  <img :src="product.custom.ball3">
+                  <!-- --------- -->
+                  <img :src="product.custom.wafer">
+                </div>
               </div>
             </td>
-            <td>{{ product.product.title }}</td>
-            <td class="count-td">
+            <td>{{ product.product != null ? product.product.title : product.custom.title }}</td>
+            <td v-if="product.product != null" class="count-td">
               <div>
                 <button
                   @click="
@@ -73,7 +81,30 @@
                 </button>
               </div>
             </td>
-            <td>{{ product.product.price * product.count }}</td>
+            <!-- для custom -->
+            <td v-if="product.custom != null" class="count-td">
+              <div>
+                <button
+                  @click="
+                    product.count++;
+                    AddToCart(product.custom.id, product.count);
+                  "
+                >
+                  +
+                </button>
+                <p>{{ product.count }}</p>
+                <button
+                  @click="
+                    product.count > 1 ? product.count-- : (product.count += 0);
+                    MinusCart(product.custom.id, product.count);
+                  "
+                >
+                  -
+                </button>
+              </div>
+            </td>
+            <td v-if="product.custom != null">{{ product.custom.price * product.count }}</td>
+            <td v-if="product.product != null">{{ product.product.price * product.count }}</td>
             <td class="btn-td">
               <button @click="DestroyProduct(product.id)">Убрать</button>
             </td>
@@ -130,7 +161,11 @@ export default {
         this.itogo = 0;
         console.log(this.products);
         for (let index = 0; index < this.products.length; index++) {
-          this.itogo += this.products[index].count * this.products[index].product.price;
+          if(this.products[index].product != null){
+            this.itogo += this.products[index].count * this.products[index].product.price;
+          } else {
+            this.itogo += this.products[index].count * this.products[index].custom.price;
+          }
         }
         this.load = false;
       });

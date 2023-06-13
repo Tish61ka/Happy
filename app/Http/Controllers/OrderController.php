@@ -74,11 +74,20 @@ class OrderController extends Controller
         $myorder = Order::select('id')->where('user_id', $request->input('user_id'))->get()->last();
 
         for ($i = 0; $i < count($mycart); $i++) {
-            ProductOrder::create([
-                'id_order' => $myorder->id,
-                'id_product' => $mycart[$i]['product_id'],
-                'count' => $mycart[$i]['count']
-            ]);
+            if($mycart[$i]['product_id'] != null){
+                ProductOrder::create([
+                    'id_order' => $myorder->id,
+                    'id_product' => $mycart[$i]['product_id'],
+                    'count' => $mycart[$i]['count']
+                ]);
+            } else {
+                ProductOrder::create([
+                    'id_order' => $myorder->id,
+                    'id_product' => $mycart[$i]['custom_id'],
+                    'count' => $mycart[$i]['count']
+                ]);
+            }
+            
         }
 
         Cart::where('user_id', $request->input('user_id'))->delete();
