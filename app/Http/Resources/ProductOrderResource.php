@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\CustomProduct;
 use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,6 +18,7 @@ class ProductOrderResource extends JsonResource
     {
         return [
             'id_product' => Product::find($this->id_product),
+            'id_product_custom' => CustomProduct::find($this->id_product_custom),
             'id_order' => $this->id_order,
             'count' => $this->count
         ];

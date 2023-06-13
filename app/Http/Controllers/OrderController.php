@@ -59,7 +59,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $mycart = Cart::where('user_id', $request->input('user_id'))->get();
-
         $count = 0;
         for ($i = 0; $i < count($mycart); $i++) {
             $count += $mycart[$i]['count'];
@@ -74,20 +73,21 @@ class OrderController extends Controller
         $myorder = Order::select('id')->where('user_id', $request->input('user_id'))->get()->last();
 
         for ($i = 0; $i < count($mycart); $i++) {
-            if($mycart[$i]['product_id'] != null){
+            if ($mycart[$i]['product_id'] != null) {
                 ProductOrder::create([
                     'id_order' => $myorder->id,
                     'id_product' => $mycart[$i]['product_id'],
+                    'id_product_custom' => null,
                     'count' => $mycart[$i]['count']
                 ]);
             } else {
                 ProductOrder::create([
                     'id_order' => $myorder->id,
-                    'id_product' => $mycart[$i]['custom_id'],
+                    'id_product_custom' => $mycart[$i]['custom_id'],
+                    'id_product' => null,
                     'count' => $mycart[$i]['count']
                 ]);
             }
-            
         }
 
         Cart::where('user_id', $request->input('user_id'))->delete();

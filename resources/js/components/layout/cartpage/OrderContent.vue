@@ -52,9 +52,22 @@
               </ul> -->
               <div :id="'elem-' + order.id" style="display: none">
                 <div v-for="product in order.products" :key="product">
-                  <p>{{ product.id_product.title }}</p>
+                  <p>
+                    {{
+                      product.id_product != null
+                        ? product.id_product.title
+                        : product.id_product_custom.title
+                    }}
+                  </p>
                   <p>{{ product.count }} кол-во</p>
-                  <p>{{ product.id_product.price }} руб</p>
+                  <p>
+                    {{
+                      product.id_product != null
+                        ? product.id_product.price
+                        : product.id_product_custom.price
+                    }}
+                    руб
+                  </p>
                 </div>
               </div>
             </td>

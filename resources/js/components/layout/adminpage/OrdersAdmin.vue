@@ -96,7 +96,17 @@
           </tr> -->
           <tr v-for="order in orders" :key="order">
             <td>Заказ №{{ order.id }}</td>
-            <td>{{ order.products }}</td>
+            <td>
+              <ul>
+                <li v-for="product in order.products">
+                  {{
+                    product.id_product != null
+                      ? product.id_product.title
+                      : product.id_product_custom.title
+                  }}
+                </li>
+              </ul>
+            </td>
             <td>{{ order.price }}</td>
             <td>{{ order.status }}</td>
             <td>
@@ -174,9 +184,7 @@ export default {
     };
 
     //
-    let list = document.querySelectorAll(
-      ".navigation-cart li:not(:first-child)"
-    );
+    let list = document.querySelectorAll(".navigation-cart li:not(:first-child)");
     function activeLink() {
       list.forEach((item) => item.classList.remove("hovered"));
       this.classList.add("hovered");
