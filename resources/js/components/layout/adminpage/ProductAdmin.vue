@@ -397,7 +397,8 @@ export default {
   margin-bottom: 15px;
 }
 .details .recentOrders .item > div:first-child img {
-  width: 55%;
+  width: 140%;
+  object-fit: cover;
 }
 .details .recentOrders .item h2 {
   font-family: "Roboto";

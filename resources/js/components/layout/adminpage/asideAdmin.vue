@@ -65,7 +65,7 @@
           <span class="title-cart"> Панель данных</span>
         </router-link>
       </li>
-      <li>
+      <!-- <li>
         <router-link :to="{ name: 'UserAdmin' }">
           <span class="icon-cart">
             <svg
@@ -83,7 +83,7 @@
           </span>
           <span class="title-cart">Пользователи</span>
         </router-link>
-      </li>
+      </li> -->
       <li>
         <router-link :to="{ name: 'ReviewAdmin' }">
           <span class="icon-cart">

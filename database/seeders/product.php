@@ -95,10 +95,10 @@ class product extends Seeder
       'type' => 'Ореховое',
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Клубничное мороженое в вафельным стаканчиком',
+      'title' => 'Клубничное мороженое в вафельном стаканчике',
       'price' => 300,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/strawberry.png',
+      'image' => '/img/strawberrylight.png',
       'structure' => 'Клубника:    300г
                       Сахар:    80г
                       Кукурузный крахмал:    20г
@@ -106,10 +106,21 @@ class product extends Seeder
       'type' => 1,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Банановое мороженое в вафельным стаканчиком',
+      'title' => 'Клубничное мороженое в шоколадном стаканчике',
+      'price' => 300,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/strawberrydark.png',
+      'structure' => 'Клубника:    300г
+                      Сахар:    80г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 1,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Банановое мороженое в вафельном стаканчике',
       'price' => 200,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/yellowicecream.png',
+      'image' => '/img/bananalight.png',
       'structure' => 'Бананы:    100г
                       Сахар:    80г
                       Кукурузный крахмал:    20г
@@ -117,10 +128,21 @@ class product extends Seeder
       'type' => 5,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Фисташковое мороженое с вафельным стаканчиком',
+      'title' => 'Банановое мороженое в шоколадном стаканчике',
+      'price' => 200,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/bananadark.png',
+      'structure' => 'Бананы:    100г
+                      Сахар:    80г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 5,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Фисташковое мороженое в вафельном стаканчике',
       'price' => 350,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/pistachioicecream.png',
+      'image' => '/img/phisthiolight.png',
       'structure' => 'Фисташки:    100г
                       Сахар:    80г
                       Кукурузный крахмал:    20г
@@ -128,10 +150,21 @@ class product extends Seeder
       'type' => 2,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Ванильное мороженое с вафельным стаканчиком',
+      'title' => 'Фисташковое мороженое в шоколадном стаканчике',
       'price' => 350,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/vanilicecream.png',
+      'image' => '/img/phistachiodark.png',
+      'structure' => 'Фисташки:    100г
+                      Сахар:    80г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 2,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Ванильное мороженое в вафельном стаканчике',
+      'price' => 350,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/vanillight.png',
       'structure' => 'Цельное молоко:    100мл
                       Сахар:    80г
                       Кукурузный крахмал:    20г
@@ -139,10 +172,21 @@ class product extends Seeder
       'type' => 3,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Шоколадное мороженое с вафельным стаканчиком',
+      'title' => 'Ванильное мороженое в шоколадном стаканчике',
       'price' => 350,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/chocolateicecream 3.png',
+      'image' => '/img/vanildark.png',
+      'structure' => 'Цельное молоко:    100мл
+                      Сахар:    80г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 3,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Шоколадное мороженое в вафельном стаканчике',
+      'price' => 350,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/chocolatelight.png',
       'structure' => 'Шоколад:    50гр
                       Сахар:    80г
                       Кукурузный крахмал:    20г
@@ -150,10 +194,21 @@ class product extends Seeder
       'type' => 4,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Банановое мороженое с вафельным стаканчиком',
+      'title' => 'Шоколадное мороженое в шоколадном стаканчике',
       'price' => 350,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/bananaicecream2 1.png',
+      'image' => '/img/chocolatedark.png',
+      'structure' => 'Шоколад:    50гр
+                      Сахар:    80г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 4,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Банановое мороженое в вафельном стаканчике',
+      'price' => 350,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/bananalight.png',
       'structure' => 'Бананы:    150гр
                       Сахар:    50г
                       Кукурузный крахмал:    20г
@@ -161,10 +216,21 @@ class product extends Seeder
       'type' => 5,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Мятное мороженое с вафельным стаканчиком',
+      'title' => 'Банановое мороженое в шоколадном стаканчике',
+      'price' => 350,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/bananadark.png',
+      'structure' => 'Бананы:    150гр
+                      Сахар:    50г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 5,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Мятное мороженое в вафельном стаканчике',
       'price' => 450,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/minticecream.png',
+      'image' => '/img/mintlight.png',
       'structure' => 'Мята:    20гр
                       Сахар:    80г
                       Кукурузный крахмал:    20г
@@ -172,10 +238,21 @@ class product extends Seeder
       'type' => 6,
     ]);
     \App\Models\Product::factory()->create([
-      'title' => 'Карамельное мороженое с пластиковым стаканчиком',
+      'title' => 'Мятное мороженое в шоколадном стаканчике',
+      'price' => 450,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/mintdark.png',
+      'structure' => 'Мята:    20гр
+                      Сахар:    80г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 6,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Карамельное мороженое в шоколадном стаканчике',
       'price' => 250,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/caramelicecream.png',
+      'image' => '/img/carameldark.png',
       'structure' => 'Карамель:    20гр
                       Сахар:    80г
                       Кукурузный крахмал:    20г
@@ -186,7 +263,18 @@ class product extends Seeder
       'title' => 'Мороженое с маслом ореха пекан в вафельном стаканчике',
       'price' => 400,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-      'image' => '/img/walnuticecream.png',
+      'image' => '/img/nutslight.png',
+      'structure' => 'Орези пекан:    50гр
+                      Сахар:    80г
+                      Кукурузный крахмал:    20г
+                      Сливки 10-20%:    250г',
+      'type' => 8,
+    ]);
+    \App\Models\Product::factory()->create([
+      'title' => 'Мороженое с маслом ореха пекан в шоколадном стаканчике',
+      'price' => 400,
+      'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+      'image' => '/img/nutsdark.png',
       'structure' => 'Орези пекан:    50гр
                       Сахар:    80г
                       Кукурузный крахмал:    20г

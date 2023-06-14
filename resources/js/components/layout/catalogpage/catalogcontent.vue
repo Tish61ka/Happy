@@ -977,7 +977,8 @@ export default {
   margin-bottom: 15px;
 }
 .card-item img {
-  width: 40%;
+  width: 140%;
+  object-fit: cover;
 }
 .card-item h3 {
   width: 250px;

@@ -48,18 +48,26 @@
           <tr v-for="product in products" :key="product">
             <td class="img-td">
               <div>
-                <img v-if="product.product != null" :src="product.product.image" alt="No Ethernet" />
+                <img
+                  v-if="product.product != null"
+                  :src="product.product.image"
+                  alt="No Ethernet"
+                />
                 <div v-if="product.product == null">
                   <!-- Морожка -->
-                  <img :src="product.custom.ball1">
-                  <img :src="product.custom.ball2">
-                  <img :src="product.custom.ball3">
-                  <!-- --------- -->
-                  <img :src="product.custom.wafer">
+                  <div>
+                    <img :src="product.custom.ball3" />
+                    <img :src="product.custom.ball2" />
+                    <img :src="product.custom.ball1" />
+                    <!-- --------- -->
+                    <img :src="product.custom.wafer" />
+                  </div>
                 </div>
               </div>
             </td>
-            <td>{{ product.product != null ? product.product.title : product.custom.title }}</td>
+            <td>
+              {{ product.product != null ? product.product.title : product.custom.title }}
+            </td>
             <td v-if="product.product != null" class="count-td">
               <div>
                 <button
@@ -103,8 +111,12 @@
                 </button>
               </div>
             </td>
-            <td v-if="product.custom != null">{{ product.custom.price * product.count }}</td>
-            <td v-if="product.product != null">{{ product.product.price * product.count }}</td>
+            <td v-if="product.custom != null">
+              {{ product.custom.price * product.count }}
+            </td>
+            <td v-if="product.product != null">
+              {{ product.product.price * product.count }}
+            </td>
             <td class="btn-td">
               <button @click="DestroyProduct(product.id)">Убрать</button>
             </td>
@@ -161,7 +173,7 @@ export default {
         this.itogo = 0;
         console.log(this.products);
         for (let index = 0; index < this.products.length; index++) {
-          if(this.products[index].product != null){
+          if (this.products[index].product != null) {
             this.itogo += this.products[index].count * this.products[index].product.price;
           } else {
             this.itogo += this.products[index].count * this.products[index].custom.price;
@@ -407,7 +419,7 @@ export default {
 .details .recentOrders table thead td:last-child {
   text-align-last: right;
 }
-.img-td div {
+.img-td > div {
   width: 120px;
   padding: 3px 19px;
   border: 2px solid #ededed;
@@ -415,6 +427,7 @@ export default {
 }
 .img-td div img {
   width: 75px;
+  object-fit: cover;
 }
 .count-td div {
   display: flex;

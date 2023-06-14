@@ -79,6 +79,9 @@
           </tr> -->
         </tbody>
       </table>
+      <div v-if="orders.length == 0">
+        <h1 class="cart-empty">Заказов нет!</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -140,7 +143,10 @@ export default {
   background-color: white;
   transition: 500ms;
 }
-
+.cart-empty {
+  transform: translate(40%);
+  margin-top: 150px;
+}
 .main.active {
   width: calc(100% - 80px);
   left: 80px;
