@@ -1,7 +1,7 @@
 <template>
   <footer id="footer">
     <div class="container">
-      <router-link :to="{ name: 'Index' }">Политика конфедициальности</router-link>
+      <a href="politica.html">Политика конфедициальности</a>
       <p>Оставить заявку</p>
       <p>О компании</p>
       <router-link :to="{ name: 'Index' }">

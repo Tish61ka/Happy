@@ -76,19 +76,19 @@ use api;
         <form>
           <div>
             <label for="">Имя:</label>
-            <input type="text" v-model="name" />
+            <input type="text" v-model="name" placeholder="Иван" />
           </div>
           <div>
             <label for="">Адрес:</label>
-            <input type="text" v-model="address" />
+            <input type="text" v-model="address" placeholder="Астрахань Камчасткая 15" />
           </div>
           <div>
             <label for="">Телефон:</label>
-            <input type="text" v-model="tel" />
+            <input type="text" v-model="tel" maxlength="11" placeholder="89990002211" />
           </div>
           <div>
             <label for="">Почта:</label>
-            <input type="text" v-model="email" />
+            <input type="text" v-model="email" placeholder="mail@mail.ru" />
           </div>
           <p>
             Информацию о доставке вы можете прочитать на странице
