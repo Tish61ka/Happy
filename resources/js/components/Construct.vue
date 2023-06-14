@@ -5,11 +5,7 @@
       <div class="taste-create">
         <h2>Вкусы</h2>
         <div>
-          <div
-            class="item-clicking"
-            v-for="(taste, index) in taste_arr"
-            :key="index"
-          >
+          <div class="item-clicking" v-for="(taste, index) in taste_arr" :key="index">
             <p>{{ taste.name }}</p>
             <button @click.prevent="PlusTaste(index, taste.name)">+</button>
             <div>{{ taste.count }}</div>
@@ -32,8 +28,7 @@
     <section class="main-content">
       <p class="pagination">
         <router-link :to="{ name: 'Index' }"> Home </router-link> /
-        <router-link :to="{ name: 'Catalog' }"> Catalog </router-link>/
-        Constructor
+        <router-link :to="{ name: 'Catalog' }"> Catalog </router-link>/ Constructor
       </p>
       <div class="h1-danger">
         <h1>Создай свое мороженное</h1>
@@ -59,7 +54,7 @@
             alt="No Ethernet"
           />
         </div>
-        <button @click="CreateCustom()">Добавить в корзину</button>
+        <button v-if="user_id" @click="CreateCustom()">Добавить в корзину</button>
       </div>
       <img :src="image" alt="" />
     </section>
@@ -71,6 +66,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      user_id: localStorage.getItem("id_user"),
       taste_arr: [],
       wafer_arr: [],
       tasteBallArr: [],
@@ -95,7 +91,14 @@ export default {
           user_id: localStorage.getItem(`id_user`),
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
+          this.tasteBallArr = [];
+          this.waferArr = [];
+          this.messageDanger = "Мороженое добавлено в корзину!";
+          this.showDanger = true;
+          setTimeout(() => {
+            this.showDanger = false;
+          }, 3500);
         });
     },
     tasteFunc() {
