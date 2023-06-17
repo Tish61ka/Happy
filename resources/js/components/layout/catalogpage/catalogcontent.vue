@@ -901,8 +901,10 @@ export default {
   margin-left: 2px;
 }
 .active-filter {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 25px;
 }
@@ -914,6 +916,7 @@ export default {
   background: #ece4fe;
   border-radius: 11px;
   margin-right: 25px;
+  margin-bottom: 20px;
 }
 .filter-1 p:first-child {
   font-family: "Comfortaa";
@@ -1029,7 +1032,7 @@ export default {
   color: #ababab;
 }
 .pagination-page {
-  width: 330px;
+  width: 400px;
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -47,7 +47,7 @@
             </td>
             <td>{{ order.price }}</td>
             <td>{{ order.status }}</td>
-            <td>
+            <td v-if="order.status != 'Доставлен' && order.status != 'Отменен'">
               <select v-model="status[index]">
                 <option value="В обработке" selected>В обработке</option>
                 <option value="Готовится">Готовится</option>
@@ -55,6 +55,9 @@
                 <option value="Отменен">Отменен</option>
               </select>
               <button @click="ChangeStatus(order.id)">Сохранить</button>
+            </td>
+            <td v-else>
+              {{ order.status }}
             </td>
           </tr>
         </tbody>

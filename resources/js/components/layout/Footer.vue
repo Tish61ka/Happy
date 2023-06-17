@@ -1,9 +1,10 @@
 <template>
   <footer id="footer">
     <div class="container">
-      <a href="politica.html">Политика конфедициальности</a>
-      <p>Оставить заявку</p>
-      <p>О компании</p>
+      <a href="politica.html" target="_blank">Политика конфедициальности</a>
+      <a href="#goreview"
+        ><router-link :to="{ name: 'Index' }">Обратная связь</router-link></a
+      ><router-link :to="{ name: 'AboutUs' }">О компании</router-link>
       <router-link :to="{ name: 'Index' }">
         <svg
           width="108"
@@ -26,8 +27,10 @@
         </svg>
       </router-link>
       <router-link :to="{ name: 'Login' }">Авторизация для администратора</router-link>
-      <router-link :to="{ name: 'Index' }">Дрставка и оплата</router-link>
-      <router-link :to="{ name: 'Index' }">Каталог</router-link>
+      <router-link :to="{ name: 'Delivery' }" target="_blank">
+        Доставка и оплата</router-link
+      >
+      <router-link :to="{ name: 'Catalog' }">Каталог</router-link>
     </div>
   </footer>
 </template>
@@ -36,6 +39,20 @@
 export default {
   setup() {
     return {};
+  },
+  mounted() {
+    const anchors = document.querySelectorAll('a[href*="#"]');
+    for (let anchor of anchors) {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        let blockID = anchor.getAttribute("href").substr(1);
+        blockID = blockID.toString();
+        document.getElementById(blockID).scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+    }
   },
 };
 </script>

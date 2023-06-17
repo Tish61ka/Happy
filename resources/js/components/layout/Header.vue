@@ -102,10 +102,28 @@ use api;
             <input type="text" v-model="email" placeholder="mail@mail.ru" required />
           </div>
           <p>
-            Информацию о доставке вы можете прочитать на странице
-            <router-link :to="{ name: 'Admin' }">“Доставка и оплата”</router-link>
+            <span>
+              <input
+                class="custom-checkbox"
+                type="checkbox"
+                id="color-100"
+                name="color-100"
+                value="redd"
+              />
+              <label for="color-100"></label>
+            </span>
+            Нажимая эту кнопку вы соглашаетесь с
+            <a href="politica.html" target="_blank">политкой конфидециальности</a>
           </p>
-          <button @click.prevent="this.deliveryCreate()">Подтвердить данные</button>
+          <p>
+            Информацию о доставке вы можете прочитать на странице
+            <router-link :to="{ name: 'Delivery' }" target="_blank">
+              “Доставка и оплата”</router-link
+            >
+          </p>
+          <button @click.prevent="this.deliveryCreate()" type="submit">
+            Подтвердить данные
+          </button>
           {{ message }}
         </form>
       </div>
@@ -405,8 +423,73 @@ header > div:first-child > div > button {
   font-size: 17px;
   color: #5c5c5c;
   margin-top: 10px;
-  margin-bottom: 60px;
+  margin-bottom: 10px;
 }
+.modal-info > div form p {
+  display: flex;
+  align-items: center;
+  white-space: pre;
+}
+.modal-info > div form p span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.custom-checkbox + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* создание в label псевдоэлемента before со следующими стилями */
+.custom-checkbox + label::before {
+  content: "";
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 2px solid black;
+  border-radius: 0.25em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили при наведении курсора на checkbox */
+.custom-checkbox:not(:disabled):not(:checked) + label:hover::before {
+  border-color: #b09cd7;
+}
+
+/* стили для активного чекбокса (при нажатии на него) */
+.custom-checkbox:not(:disabled):active + label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.custom-checkbox:focus:not(:checked) + label::before {
+  border-color: #80bdff;
+}
+
+/* стили для чекбокса, находящегося в состоянии checked */
+.custom-checkbox:checked + label::before {
+  border-color: black;
+  background-color: #b09cd7;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+/* стили для чекбокса, находящегося в состоянии disabled */
+.custom-checkbox:disabled + label::before {
+  background-color: #e9ecef;
+}
+
 .modal-info > div form p a {
   color: #6a4ba7;
 }
