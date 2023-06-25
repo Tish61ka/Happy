@@ -99,8 +99,8 @@ export default {
   border-radius: 25px;
 }
 .main-info > div:first-child img {
-  width: 70%;
-  height: 80%;
+  width: 180%;
+  object-fit: cover;
 }
 .main-info > div:last-child {
   display: flex;

@@ -21,27 +21,40 @@
     </div>
     <div>
       <form>
-        <input type="text" placeholder="Введите имя" required />
-        <input type="text" placeholder="Введите email" required />
+        <input type="text" placeholder="Введите имя" required v-model="name" />
+        <input type="text" placeholder="Введите email" required v-model="email" />
         <textarea
-          name=""
-          id=""
+          v-model="content"
           cols="30"
           rows="10"
           placeholder="Введите коментарий"
           required
           maxlength="170"
         ></textarea>
-        <button type="submit">Отправить</button>
+        <button type="button" @click="createReview">Отправить</button>
       </form>
     </div>
   </section>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  setup() {
-    return {};
+  data() {
+    return {
+      email: "",
+      name: "",
+      content: "",
+    };
+  },
+  methods: {
+    createReview() {
+      axios.get(`/api/all/products`).then((res) => {
+        this.name = "";
+        this.email = "";
+        this.content = "";
+      });
+    },
   },
 };
 </script>

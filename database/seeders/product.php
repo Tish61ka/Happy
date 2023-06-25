@@ -264,7 +264,7 @@ class product extends Seeder
       'price' => 400,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
       'image' => '/img/nutslight.png',
-      'structure' => 'Орези пекан:    50гр
+      'structure' => 'Орехи пекан:    50гр
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
@@ -275,7 +275,7 @@ class product extends Seeder
       'price' => 400,
       'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
       'image' => '/img/nutsdark.png',
-      'structure' => 'Орези пекан:    50гр
+      'structure' => 'Орехи пекан:    50гр
                       Сахар:    80г
                       Кукурузный крахмал:    20г
                       Сливки 10-20%:    250г',
